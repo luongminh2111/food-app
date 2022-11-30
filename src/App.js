@@ -9,14 +9,20 @@ import {
 
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
+import Register from "./pages/register/Register";
+import ForgetPassword from "./pages/register/ForgetPassword";
+import ChangePassword from "./pages/register/ChangePassword";
 
 function App() {
   return (
     <Router>
       <React.Fragment>
         <Switch>
+          <Route exact path="/register" component={Register}></Route>
+          <Route exact path="/change-password" component={ChangePassword}></Route>
           <Route exact path="/login" component={Login}></Route>
-          <Route exact path="/home" component={Home}></Route>
+          <Route exact path="/forget-password" component={ForgetPassword}></Route>
+          <Route exact path="/" component={Home}></Route>
         </Switch>
       </React.Fragment>
     </Router>
