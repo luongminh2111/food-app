@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import { Button, TextField, Box } from "@mui/material";
 import "../../styles/_login.scss";
 import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
+import { useHistory } from "react-router-dom";
 
 
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
+
+  const handleGoToRegister = () => {
+    history.push('/register');
+  };
 
   return (
     <Box className="login-form">
@@ -35,7 +41,7 @@ function Login(props) {
       <Button variant="outlined" className="signin-btn">
         サインイン
       </Button>
-      <Button variant="text" className="signup-btn">
+      <Button variant="text" className="signup-btn" onClick={handleGoToRegister} >
         サインアップ
       </Button>
       </Box>
