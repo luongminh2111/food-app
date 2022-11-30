@@ -1,6 +1,8 @@
 import React from "react";
 import PersonIcon from "@mui/icons-material/Person";
-export default function header() {
+import { useHistory } from "react-router-dom";
+function Header() {
+  const history = useHistory();
   return (
     <div className="header">
       <div className="header__logo  ">
@@ -11,10 +13,10 @@ export default function header() {
           <span className="header__link-item--underline">日記</span>
         </li>
         <li className="header__link-item ">
-          <span className="">統計</span>
+          <span className="" on>統計</span>
         </li>
         <li className="header__link-item ">
-          <span className="">レシピ</span>
+          <span className="" onClick={()=> history.push("/recipe")}>レシピ</span>
         </li>
         <li className="header__link-item ">
           <span className="">フォーラム</span>
@@ -26,3 +28,4 @@ export default function header() {
     </div>
   );
 }
+export default Header;

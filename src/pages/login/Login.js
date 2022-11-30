@@ -10,6 +10,10 @@ function Login(props) {
   const [password, setPassword] = useState("");
   const history = useHistory();
 
+  const goHomePage = () => {
+    history.push('/');
+  };
+  
   const handleGoToRegister = () => {
     history.push('/register');
   };
@@ -17,7 +21,7 @@ function Login(props) {
   return (
     <Box className="login-form">
       <Box className="head">
-        <ArrowCircleLeftOutlinedIcon />
+        <ArrowCircleLeftOutlinedIcon onClick={goHomePage}/>
         <Box className="head_title">
           サインイン
         </Box>

@@ -12,6 +12,7 @@ import Home from "./pages/home/Home";
 import Register from "./pages/register/Register";
 import ForgetPassword from "./pages/register/ForgetPassword";
 import ChangePassword from "./pages/register/ChangePassword";
+import Recipe from "./pages/recipe";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/forget-password" component={ForgetPassword}></Route>
           <Route exact path="/" component={Home}></Route>
+          <Route exact path="/recipe" component={Recipe}></Route>
         </Switch>
       </React.Fragment>
     </Router>
