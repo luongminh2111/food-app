@@ -53,4 +53,26 @@
       cursor: pointer;
     }
   }
+  &__selecter {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  &__statistics {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-weight: 600;
+    &-title {
+      font-size: 32px;
+      width: 100%;
+      text-align: center;
+    }
+  }
+  &__input {
+    &-title {
+      margin-left: 10px;
+    }
+  }
 }

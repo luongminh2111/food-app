@@ -3,10 +3,10 @@ import PersonIcon from "@mui/icons-material/Person";
 export default function header() {
   return (
     <div className="header">
+      <div className="header__logo  ">
+        <span className=""> ロゴ</span>
+      </div>
       <ul className="header__link">
-        <li className="header__link-item  ">
-          <span className=""> ロゴ</span>
-        </li>
         <li className="header__link-item  ">
           <span className="header__link-item--underline">日記</span>
         </li>
@@ -19,10 +19,10 @@ export default function header() {
         <li className="header__link-item ">
           <span className="">フォーラム</span>
         </li>
-        <li className=" header__link-item header__icon ">
-          <PersonIcon />
-        </li>
       </ul>
+      <div className="  header__icon ">
+        <PersonIcon />
+      </div>
     </div>
   );
 }
