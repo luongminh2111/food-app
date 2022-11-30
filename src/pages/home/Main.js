@@ -15,13 +15,12 @@ import TextField from "@mui/material/TextField";
 
 export default function Main() {
   const [open, setOpen] = React.useState(false);
+  const [open1, setOpen1] = React.useState(false);
   const [values, setValues] = React.useState({
     weight: "",
-    weightRange: "",
     height: "",
     age: "",
   });
-  const [age, setAge] = React.useState("");
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -33,7 +32,13 @@ export default function Main() {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleClickOpen1 = () => {
+    setOpen1(true);
+  };
 
+  const handleClose1 = () => {
+    setOpen1(false);
+  };
   return (
     <div className="main">
       <div className="main__date">
@@ -44,7 +49,14 @@ export default function Main() {
       </div>
       <div className="main__parameter">
         <span>総カロリー：730カロリー</span>
-        <span>目標：1000カロリー</span>
+        <span>
+          目標：1000カロリー
+          <FontAwesomeIcon
+            icon={faPen}
+            className="main__parameter-icon"
+            onClick={handleClickOpen}
+          />
+        </span>
       </div>
       <ul className="main__form">
         <li className="main__form-item">
@@ -54,10 +66,10 @@ export default function Main() {
             <li className="main__desc">果物</li>
             <li className="main__desc">ご飯</li>
             <li className="main__icon">
-              <div className="main__icon-item" onClick={handleClickOpen}>
+              <div className="main__icon-item" onClick={handleClickOpen1}>
                 <FontAwesomeIcon icon={faPlus} />
               </div>
-              <div className="main__icon-item">
+              <div className="main__icon-item" onClick={handleClickOpen1}>
                 <FontAwesomeIcon icon={faPen} />
               </div>
             </li>
@@ -67,7 +79,7 @@ export default function Main() {
           <span className="main__title">昼ごはん：</span>
           <ul className="main__menu">
             <li className="main__icon">
-              <div className="main__icon-item" onClick={handleClickOpen}>
+              <div className="main__icon-item" onClick={handleClickOpen1}>
                 <FontAwesomeIcon icon={faPlus} />
               </div>
             </li>
@@ -77,7 +89,7 @@ export default function Main() {
           <span className="main__title">晩ごはん：</span>
           <ul className="main__menu">
             <li className="main__icon">
-              <div className="main__icon-item" onClick={handleClickOpen}>
+              <div className="main__icon-item" onClick={handleClickOpen1}>
                 <FontAwesomeIcon icon={faPlus} />
               </div>
             </li>
@@ -87,7 +99,7 @@ export default function Main() {
           <span className="main__title">他</span>
           <ul className="main__menu">
             <li className="main__icon">
-              <div className="main__icon-item" onClick={handleClickOpen}>
+              <div className="main__icon-item" onClick={handleClickOpen1}>
                 <FontAwesomeIcon icon={faPlus} />
               </div>
             </li>
@@ -172,6 +184,93 @@ export default function Main() {
         <DialogActions>
           <Button onClick={handleClose}>キャンセル</Button>
           <Button onClick={handleClose} autoFocus>
+            サーブ
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={open1} onClose={handleClose1}>
+        <DialogContent>
+          <div className="main__statistics main__statistics--column">
+            <div className="main__statistics-title">吸収量の目標を設定</div>
+            <div className="main__selecter">
+              <TextField
+                sx={{ m: 1, width: "25ch" }}
+                select
+                onChange={handleChange}
+              ></TextField>
+            </div>
+
+            <div className="main__selecter">
+              <TextField
+                sx={{ m: 1, width: "25ch" }}
+                select
+                onChange={handleChange}
+              ></TextField>
+            </div>
+
+            <div className="main__input main__input--flex">
+              <div>
+                <div className="main__input-title">カープ</div>
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                  <OutlinedInput
+                    id="outlined-adornment-weight"
+                    value={values.weight}
+                    onChange={handleChange("weight")}
+                    endAdornment={
+                      <InputAdornment position="end">kg</InputAdornment>
+                    }
+                    aria-describedby="outlined-weight-helper-text"
+                    inputProps={{
+                      "aria-label": "weight",
+                    }}
+                  />
+                </FormControl>
+              </div>
+            </div>
+            <div className="main__input main__input--flex">
+              <div>
+                <div className="main__input-title">プロテイン</div>
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                  <OutlinedInput
+                    id="outlined-adornment-weight"
+                    value={values.weight}
+                    onChange={handleChange("weight")}
+                    endAdornment={
+                      <InputAdornment position="end">kg</InputAdornment>
+                    }
+                    aria-describedby="outlined-weight-helper-text"
+                    inputProps={{
+                      "aria-label": "weight",
+                    }}
+                  />
+                </FormControl>
+              </div>
+            </div>
+            <div className="main__input main__input--flex">
+              <div>
+                <div className="main__input-title">ファット</div>
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                  <OutlinedInput
+                    id="outlined-adornment-weight"
+                    value={values.weight}
+                    onChange={handleChange("weight")}
+                    endAdornment={
+                      <InputAdornment position="end">kg</InputAdornment>
+                    }
+                    aria-describedby="outlined-weight-helper-text"
+                    inputProps={{
+                      "aria-label": "weight",
+                    }}
+                  />
+                </FormControl>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleClose1}>キャンセル</Button>
+          <Button onClick={handleClose1} autoFocus>
             サーブ
           </Button>
         </DialogActions>
