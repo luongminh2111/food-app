@@ -1,9 +1,9 @@
-.login-form {
+.register-form {
   color: #0F1824;
   width: 500px;
-  height: 400px;
+  height: 600px;
   margin: 0 auto;
-  padding-top: 150px;
+  padding-top: 100px;
 
   .head {
     display: flex;
@@ -29,6 +29,7 @@
   .form-input {
     width: 100%;
     margin-left: 40px;
+    margin-bottom: 10px;
 
     input {
       height: 25px;
@@ -39,10 +40,6 @@
       font-size: 20px;
       margin-bottom: 5px;
     }
-  }
-
-  .email {
-    margin-bottom: 15px;
   }
 
   .btn-forget {
@@ -57,14 +54,14 @@
     justify-content: center;
     margin-top: 20px;
 
-    .signin-btn {
+    .signup-btn {
       width: 150px;
       height: 30px;
       margin: 0 auto;
       font-size: 16px;
     }
 
-    .signup-btn {
+    .signin-btn {
       font-size: 14px;
       text-decoration: underline;
     }
