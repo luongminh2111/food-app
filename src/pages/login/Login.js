@@ -10,6 +10,10 @@ function Login(props) {
   const [password, setPassword] = useState("");
   const history = useHistory();
 
+  const goHomePage = () => {
+    history.push('/');
+  };
+  
   const handleGoToRegister = () => {
     history.push('/register');
   };
