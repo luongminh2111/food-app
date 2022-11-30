@@ -9,8 +9,9 @@ function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
-  const goHomePage = () => {
-    history.push('/');
+
+  const handleGoToRegister = () => {
+    history.push('/register');
   };
 
   return (
@@ -40,7 +41,7 @@ function Login(props) {
       <Button variant="outlined" className="signin-btn">
         サインイン
       </Button>
-      <Button variant="text" className="signup-btn">
+      <Button variant="text" className="signup-btn" onClick={handleGoToRegister} >
         サインアップ
       </Button>
       </Box>
