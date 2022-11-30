@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import { Button, TextField, Box } from "@mui/material";
 import "../../styles/_signup.scss";
 import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
+import { useHistory } from "react-router-dom";
 
 
 function Register(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
+
+  const goHomePage = () => {
+    history.push('/');
+  };
 
   return (
     <Box className="register-form">
       <Box className="head">
-        <ArrowCircleLeftOutlinedIcon />
+        <ArrowCircleLeftOutlinedIcon onClick={goHomePage} />
         <Box className="head_title">
           サインアップ
         </Box>
