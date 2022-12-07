@@ -1,0 +1,15 @@
+.MuiFormControl-root.MuiTextField-root.date__button {
+  background-color: $main-color;
+  border-radius: 15px;
+  width: 160px;
+  position: static;
+  & .MuiOutlinedInput-root {
+    position: static;
+  }
+  & .MuiInputBase-input {
+    color: white;
+  }
+  & .MuiButtonBase-root {
+    color: white;
+  }
+}
