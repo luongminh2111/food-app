@@ -8,6 +8,9 @@ import Date from "./component/Date_setting";
 export default function Main() {
   const [open, setOpen] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
+  const [cup, setCup] = React.useState("");
+  const [protein, setProtein] = React.useState("");
+  const [fat, setFat] = React.useState("");
   // const [values, setValues] = React.useState({
   //   weight: "",
   //   height: "",
@@ -23,6 +26,7 @@ export default function Main() {
 
   const handleClose = () => {
     setOpen(false);
+    setCup();
   };
   const handleClickOpen1 = () => {
     setOpen1(true);

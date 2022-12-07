@@ -29,10 +29,13 @@ export const Targetform = (props) => {
       value: "レコメンデーション",
     },
   ];
+
   const [mode, setMode] = React.useState("フリーモード");
   const [type, setType] = React.useState("マクロ");
   const [values, setValues] = useState({
-    weight: "",
+    cup: "",
+    protein: "",
+    fat: "",
   });
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -85,8 +88,8 @@ export const Targetform = (props) => {
               <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                 <OutlinedInput
                   id="outlined-adornment-weight"
-                  value={values.weight}
-                  onChange={handleChange("weight")}
+                  value={values.cup}
+                  onChange={handleChange("cup")}
                   endAdornment={
                     <InputAdornment position="end">kg</InputAdornment>
                   }
@@ -104,8 +107,8 @@ export const Targetform = (props) => {
               <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                 <OutlinedInput
                   id="outlined-adornment-weight"
-                  value={values.weight}
-                  onChange={handleChange("weight")}
+                  value={values.protein}
+                  onChange={handleChange("protein")}
                   endAdornment={
                     <InputAdornment position="end">kg</InputAdornment>
                   }
@@ -140,7 +143,9 @@ export const Targetform = (props) => {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={props.onclose} xs={{  }} >キャンセル</Button>
+        <Button onClick={props.onclose} xs={{}}>
+          キャンセル
+        </Button>
         <Button onClick={props.onclose} autoFocus>
           サーブ
         </Button>
