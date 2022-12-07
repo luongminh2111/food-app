@@ -8,7 +8,6 @@ export default function home() {
       <Header />
       <div className="container">
         <Main />
-        <Statistics />
       </div>
     </div>
   );

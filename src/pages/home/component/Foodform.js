@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -8,12 +9,29 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
+
+import MenuItem from "@mui/material/MenuItem";
+import { Select } from "@mui/material";
 export default function Foodform(props) {
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     weight: "",
-    height: "",
     age: "",
+    height: "",
   });
+  const modes = [
+    {
+      value: "フリーモード",
+    },
+    {
+      value: "レコメンデーション",
+    },
+  ];
+
+  const [mode, setMode] = React.useState("フリーモード");
+
+  const handleMode = (event) => {
+    setMode(event.target.value);
+  };
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -84,11 +102,18 @@ export default function Foodform(props) {
           <div className="main__input">
             <div className="main__input-title">運動強度</div>
             <div className="main__selecter">
-              <TextField
+              <Select
+                displayEmpty
+                value={mode}
                 sx={{ m: 1, width: "25ch" }}
-                select
-                onChange={handleChange}
-              ></TextField>
+                onChange={handleMode}
+              >
+                {modes.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.value}
+                  </MenuItem>
+                ))}
+              </Select>
             </div>
           </div>
           <div className="mmain__statistics-total">目標:2311カロリー</div>
@@ -104,6 +129,6 @@ export default function Foodform(props) {
   );
 }
 Foodform.propTypes = {
-  onclick: PropTypes.func,
+  onclick: PropTypes.bool,
   onclose: PropTypes.func,
 };

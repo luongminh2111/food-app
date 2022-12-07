@@ -8,9 +8,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
-import FormHelperText from "@mui/material/FormHelperText";
+
 import FormControl from "@mui/material/FormControl";
-import TextField from "@mui/material/TextField";
+
 import { Select } from "@mui/material";
 export const Targetform = (props) => {
   const modes = [
@@ -154,7 +154,7 @@ export const Targetform = (props) => {
   );
 };
 Targetform.propTypes = {
-  onclick: PropTypes.func,
+  onclick: PropTypes.bool,
   onclose: PropTypes.func,
 };
 export default Targetform;
