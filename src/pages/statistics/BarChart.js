@@ -3,7 +3,8 @@ import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { useState } from "react";
 import { UserData } from "./data";
-export default function BarChart(data) {
+
+function BarChart(data) {
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.date),
     datasets: [
@@ -31,3 +32,4 @@ export default function BarChart(data) {
     </div>
   );
 }
+export default BarChart;

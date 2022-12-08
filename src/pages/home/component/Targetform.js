@@ -12,7 +12,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import { Select } from "@mui/material";
-export const Targetform = (props) => {
+export const TargetForm = (props) => {
   const modes = [
     {
       value: "フリーモード",
@@ -148,8 +148,8 @@ export const Targetform = (props) => {
     </Dialog>
   );
 };
-Targetform.propTypes = {
+TargetForm.propTypes = {
   onclick: PropTypes.func,
   onclose: PropTypes.func,
 };
-export default Targetform;
+export default TargetForm;

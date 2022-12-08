@@ -8,7 +8,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
-export default function Foodform(props) {
+export default function FoodForm(props) {
   const [values, setValues] = React.useState({
     weight: "",
     height: "",
@@ -103,7 +103,7 @@ export default function Foodform(props) {
     </Dialog>
   );
 }
-Foodform.propTypes = {
+FoodForm.propTypes = {
   onclick: PropTypes.func,
   onclose: PropTypes.func,
 };
