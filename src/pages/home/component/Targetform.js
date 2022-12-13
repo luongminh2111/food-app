@@ -8,9 +8,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
-import FormHelperText from "@mui/material/FormHelperText";
+
 import FormControl from "@mui/material/FormControl";
-import TextField from "@mui/material/TextField";
+
 import { Select } from "@mui/material";
 export const TargetForm = (props) => {
   const modes = [
@@ -29,10 +29,13 @@ export const TargetForm = (props) => {
       value: "レコメンデーション",
     },
   ];
+
   const [mode, setMode] = React.useState("フリーモード");
   const [type, setType] = React.useState("マクロ");
   const [values, setValues] = useState({
-    weight: "",
+    cup: "",
+    protein: "",
+    fat: "",
   });
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -85,8 +88,8 @@ export const TargetForm = (props) => {
               <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                 <OutlinedInput
                   id="outlined-adornment-weight"
-                  value={values.weight}
-                  onChange={handleChange("weight")}
+                  value={values.cup}
+                  onChange={handleChange("cup")}
                   endAdornment={
                     <InputAdornment position="end">kg</InputAdornment>
                   }
@@ -104,8 +107,8 @@ export const TargetForm = (props) => {
               <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                 <OutlinedInput
                   id="outlined-adornment-weight"
-                  value={values.weight}
-                  onChange={handleChange("weight")}
+                  value={values.protein}
+                  onChange={handleChange("protein")}
                   endAdornment={
                     <InputAdornment position="end">kg</InputAdornment>
                   }
@@ -140,7 +143,9 @@ export const TargetForm = (props) => {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={props.onclose} xs={{  }} >キャンセル</Button>
+        <Button onClick={props.onclose} xs={{}}>
+          キャンセル
+        </Button>
         <Button onClick={props.onclose} autoFocus>
           サーブ
         </Button>
@@ -149,7 +154,7 @@ export const TargetForm = (props) => {
   );
 };
 TargetForm.propTypes = {
-  onclick: PropTypes.func,
+  onclick: PropTypes.bool,
   onclose: PropTypes.func,
 };
 export default TargetForm;

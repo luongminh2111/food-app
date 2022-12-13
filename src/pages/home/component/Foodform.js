@@ -1,109 +1,110 @@
 import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
-import TextField from "@mui/material/TextField";
-export default function FoodForm(props) {
-  const [values, setValues] = React.useState({
-    weight: "",
-    height: "",
-    age: "",
+import { Select } from "@mui/material";
+
+import { Menu } from "../data/Menu";
+export const FoodForm = (props) => {
+  const types = [
+    {
+      value: "マクロ",
+    },
+    {
+      value: "レコメンデーション",
+    },
+  ];
+
+  const [menu, setMenu] = React.useState(props.name ? props.name : "ご飯");
+  const [values, setValues] = useState({
+    quantity: props.quantity,
+    calo: props.calo,
   });
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
+  };
+  const handleMenu = (event) => {
+    setMenu(event.target.value);
   };
 
   return (
     <Dialog open={props.onclick} onClose={props.onclose}>
       <DialogContent>
-        <div className="main__statistics">
-          <div className="main__statistics-title">吸収量の目標を設定</div>
+        <div className="main__statistics main__statistics--column">
+          <div className="main__statistics-title">Add food</div>
           <div className="main__selecter">
-            <TextField
+            <Select
+              displayEmpty
+              value={menu}
               sx={{ m: 1, width: "25ch" }}
-              select
-              onChange={handleChange}
-            ></TextField>
+              onChange={handleMenu}
+            >
+              {Menu.map((option) => (
+                <MenuItem key={option.foodName} value={option.foodName}>
+                  {option.foodName}
+                </MenuItem>
+              ))}
+            </Select>
           </div>
 
-          <div className="main__selecter">
-            <TextField
-              sx={{ m: 1, width: "25ch" }}
-              select
-              onChange={handleChange}
-            ></TextField>
-          </div>
-          <div className="main__input">
-            <div className="main__input-title">体重</div>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-              <OutlinedInput
-                id="outlined-adornment-weight"
-                value={values.weight}
-                onChange={handleChange("weight")}
-                endAdornment={
-                  <InputAdornment position="end">kg</InputAdornment>
-                }
-                aria-describedby="outlined-weight-helper-text"
-                inputProps={{
-                  "aria-label": "weight",
-                }}
-              />
-            </FormControl>
-          </div>
-          <div className="main__input">
-            <div className="main__input-title">身長</div>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-              <OutlinedInput
-                id="outlined-adornment-height"
-                value={values.height}
-                onChange={handleChange("height")}
-                endAdornment={
-                  <InputAdornment position="end">cm</InputAdornment>
-                }
-              />
-            </FormControl>
-          </div>
-          <div className="main__input">
-            <div className="main__input-title">年</div>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-              <OutlinedInput
-                id="outlined-adornment-age"
-                value={values.age}
-                onChange={handleChange("age")}
-                endAdornment={
-                  <InputAdornment position="end">歳</InputAdornment>
-                }
-              />
-            </FormControl>
-          </div>
-          <div className="main__input">
-            <div className="main__input-title">運動強度</div>
-            <div className="main__selecter">
-              <TextField
-                sx={{ m: 1, width: "25ch" }}
-                select
-                onChange={handleChange}
-              ></TextField>
+          <div className="main__input main__input--flex">
+            <div>
+              <div className="main__input-title">quantity</div>
+              <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                <OutlinedInput
+                  id="outlined-adornment-weight"
+                  value={values.quantity}
+                  onChange={handleChange("quantity")}
+                  aria-describedby="outlined-weight-helper-text"
+                  inputProps={{
+                    "aria-label": "weight",
+                  }}
+                />
+              </FormControl>
             </div>
           </div>
-          <div className="mmain__statistics-total">目標:2311カロリー</div>
+          <div className="main__input main__input--flex">
+            <div>
+              <div className="main__input-title">calo</div>
+              <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                <OutlinedInput
+                  id="outlined-adornment-weight"
+                  value={values.calo}
+                  onChange={handleChange("calo")}
+                  aria-describedby="outlined-weight-helper-text"
+                  inputProps={{
+                    "aria-label": "weight",
+                  }}
+                />
+              </FormControl>
+            </div>
+          </div>
         </div>
       </DialogContent>
+
       <DialogActions>
-        <Button onClick={props.onclose}>キャンセル</Button>
+        <Button onClick={props.onclose} xs={{}}>
+          キャンセル
+        </Button>
         <Button onClick={props.onclose} autoFocus>
           サーブ
         </Button>
       </DialogActions>
     </Dialog>
   );
-}
-FoodForm.propTypes = {
-  onclick: PropTypes.func,
-  onclose: PropTypes.func,
 };
+FoodForm.propTypes = {
+  onclick: PropTypes.bool,
+  onclose: PropTypes.func,
+  name: PropTypes.string,
+  calo: PropTypes.number,
+  quantity: PropTypes.string,
+};
+export default FoodForm;

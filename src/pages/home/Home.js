@@ -4,7 +4,8 @@ import { faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
 import TargetForm from "./component/TargetForm";
 import FoodForm from "./component/FoodForm";
 import Date from "./component/DateSetting";
-
+import Header from "./Header";
+import Main from "./Main";
 function Home() {
   const [open, setOpen] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
@@ -23,69 +24,11 @@ function Home() {
     setOpen1(false);
   };
   return (
-    <div className="main">
-      <Date />
-      <div className="main__parameter">
-        <span>総カロリー：730カロリー</span>
-        <span>
-          目標：1000カロリー
-          <FontAwesomeIcon
-            icon={faPen}
-            className="main__parameter-icon"
-            onClick={handleClickOpen}
-          />
-        </span>
+    <div>
+      <Header />
+      <div className="container">
+        <Main />
       </div>
-      <ul className="main__form">
-        <li className="main__form-item">
-          <span className="main__title">朝ごはん：730カロリー</span>
-          <ul className="main__menu">
-            <li className="main__desc">卵</li>
-            <li className="main__desc">果物</li>
-            <li className="main__desc">ご飯</li>
-            <li className="main__icon">
-              <div className="main__icon-item" onClick={handleClickOpen1}>
-                <FontAwesomeIcon icon={faPlus} />
-              </div>
-              <div className="main__icon-item" onClick={handleClickOpen1}>
-                <FontAwesomeIcon icon={faPen} />
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li className="main__form-item">
-          <span className="main__title">昼ごはん：</span>
-          <ul className="main__menu">
-            <li className="main__icon">
-              <div className="main__icon-item" onClick={handleClickOpen1}>
-                <FontAwesomeIcon icon={faPlus} />
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li className="main__form-item">
-          <span className="main__title">晩ごはん：</span>
-          <ul className="main__menu">
-            <li className="main__icon">
-              <div className="main__icon-item" onClick={handleClickOpen1}>
-                <FontAwesomeIcon icon={faPlus} />
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li className="main__form-item">
-          <span className="main__title">他</span>
-          <ul className="main__menu">
-            <li className="main__icon">
-              <div className="main__icon-item" onClick={handleClickOpen1}>
-                <FontAwesomeIcon icon={faPlus} />
-              </div>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      <FoodForm onclick={open1} onclose={handleClose1} />
-      <TargetForm onclick={open} onclose={handleClose} />
     </div>
   );
 }
