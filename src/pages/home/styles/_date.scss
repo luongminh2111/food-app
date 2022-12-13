@@ -2,7 +2,7 @@
   background-color: $main-color;
   border-radius: 15px;
   width: 160px;
-  position: static;
+
   & .MuiOutlinedInput-root {
     position: static;
   }
@@ -12,4 +12,7 @@
   & .MuiButtonBase-root {
     color: white;
   }
+}
+.MuiTextField-root {
+  border: none;
 }

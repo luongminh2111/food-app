@@ -7,6 +7,7 @@ import SearchBar from "material-ui-search-bar";
 import "../../styles/_recipe.scss";
 import { faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
 import RecipeModal from "./RecipeModal";
+import Footer from "../home/Footer";
 
 function Recipe(props){
   const history = useHistory();
@@ -69,6 +70,7 @@ function Recipe(props){
             </Box>
           </Box>
         </Box>
+        <Footer />
     </Box>
   );
 }

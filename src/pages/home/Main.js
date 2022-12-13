@@ -1,9 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
-import Targetform from "./component/Targetform";
-import Foodform from "./component/Foodform";
-import Date from "./component/Date_setting";
+import Targetform from "./component/TargetForm";
+import Foodform from "./component/FoodForm";
+import Date from "./component/DateSetting";
 import { FoodData } from "./data/FoodData";
 import { useEffect } from "react";
 import FoodCard from "./component/FoodCard";
@@ -52,14 +52,68 @@ export default function Main() {
             カロリー
           </span>
           <ul className="main__menu">
-            {food.map((item, index) => (
-              <FoodCard
-                id={item.id}
-                FoodName={item.foodName}
-                quantity={item.quantity}
-                calo={item.calo}
-              />
-            ))}
+            {food.map((item, index) =>
+              item.type.indexOf("朝ごはん") >= 0 ? (
+                <FoodCard
+                  id={item.id}
+                  FoodName={item.foodName}
+                  quantity={item.quantity}
+                  calo={item.calo}
+                />
+              ) : (
+                <div className="main__none"></div>
+              )
+            )}
+            <li className="main__icon">
+              <div className="main__icon-item" onClick={handleClickOpen1}>
+                <FontAwesomeIcon icon={faPlus} />
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li className="main__form-item">
+          <span className="main__title">
+            昼ごはん: {food.reduce((total, item) => total + item.calo, 0)}
+            カロリー
+          </span>
+          <ul className="main__menu">
+            {food.map((item, index) =>
+              item.type.indexOf("昼ごはん") >= 0 ? (
+                <FoodCard
+                  id={item.id}
+                  FoodName={item.foodName}
+                  quantity={item.quantity}
+                  calo={item.calo}
+                />
+              ) : (
+                <div className="main__none"></div>
+              )
+            )}
+            <li className="main__icon">
+              <div className="main__icon-item" onClick={handleClickOpen1}>
+                <FontAwesomeIcon icon={faPlus} />
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li className="main__form-item">
+          <span className="main__title">
+            晩ごはん: {food.reduce((total, item) => total + item.calo, 0)}
+            カロリー
+          </span>
+          <ul className="main__menu">
+            {food.map((item, index) =>
+              item.type.indexOf("晩ごはん") >= 0 ? (
+                <FoodCard
+                  id={item.id}
+                  FoodName={item.foodName}
+                  quantity={item.quantity}
+                  calo={item.calo}
+                />
+              ) : (
+                <div className="main__none"></div>
+              )
+            )}
 
             <li className="main__icon">
               <div className="main__icon-item" onClick={handleClickOpen1}>
@@ -69,28 +123,24 @@ export default function Main() {
           </ul>
         </li>
         <li className="main__form-item">
-          <span className="main__title">昼ごはん：</span>
+          <span className="main__title">
+            他: {food.reduce((total, item) => total + item.calo, 0)}
+            カロリー
+          </span>
           <ul className="main__menu">
-            <li className="main__icon">
-              <div className="main__icon-item" onClick={handleClickOpen1}>
-                <FontAwesomeIcon icon={faPlus} />
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li className="main__form-item">
-          <span className="main__title">晩ごはん：</span>
-          <ul className="main__menu">
-            <li className="main__icon">
-              <div className="main__icon-item" onClick={handleClickOpen1}>
-                <FontAwesomeIcon icon={faPlus} />
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li className="main__form-item">
-          <span className="main__title">他</span>
-          <ul className="main__menu">
+            {food.map((item, index) =>
+              item.type.indexOf("他") >= 0 ? (
+                <FoodCard
+                  id={item.id}
+                  FoodName={item.foodName}
+                  quantity={item.quantity}
+                  calo={item.calo}
+                />
+              ) : (
+                <div className="main__none"></div>
+              )
+            )}
+
             <li className="main__icon">
               <div className="main__icon-item" onClick={handleClickOpen1}>
                 <FontAwesomeIcon icon={faPlus} />

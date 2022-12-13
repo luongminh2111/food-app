@@ -12,7 +12,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 
 import { Select } from "@mui/material";
-export const Targetform = (props) => {
+export const TargetForm = (props) => {
   const modes = [
     {
       value: "フリーモード",
@@ -153,8 +153,8 @@ export const Targetform = (props) => {
     </Dialog>
   );
 };
-Targetform.propTypes = {
+TargetForm.propTypes = {
   onclick: PropTypes.bool,
   onclose: PropTypes.func,
 };
-export default Targetform;
+export default TargetForm;

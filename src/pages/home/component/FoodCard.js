@@ -7,31 +7,57 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
-
+import { faPlus, faPen, faX } from "@fortawesome/free-solid-svg-icons";
+import FoodForm from "./FoodForm";
 const FoodCard = (props) => {
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardContent sx={{ display: "flex", justifyContent: "center" }}>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {props.FoodName}
-          </Typography>
-          <Typography gutterBottom variant="h5" component="div">
-            {props.quantity}
-          </Typography>
-          <Typography gutterBottom variant="h5" component="div">
-            {props.calo}カロリー
-          </Typography>
-        </CardContent>
+      <CardContent
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          fontFamily: ["Kosugi Maru", "M PLUS 1p"],
+        }}
+      >
+        <Typography gutterBottom variant="h5" component="div">
+          {props.FoodName}
+        </Typography>
+        <Typography gutterBottom variant="h5" component="div">
+          {props.quantity}
+        </Typography>
+        <Typography gutterBottom variant="h5" component="div">
+          {props.calo}カロリー
+        </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small" color="primary">
-          <div className="main__icon-item">
-            <FontAwesomeIcon icon={faPen} />
-          </div>
-        </Button>
+
+      <CardActions sx={{ display: "flex", justifyContent: "center" }}>
+        <FontAwesomeIcon
+          icon={faPen}
+          className="main__parameter-icon"
+          onClick={handleClickOpen}
+        />
+        <FontAwesomeIcon
+          icon={faX}
+          className="main__parameter-icon"
+          onClick={handleClickOpen}
+        />
       </CardActions>
+      <FoodForm
+        onclick={open}
+        onclose={handleClose}
+        name={props.FoodName}
+        quantity={props.quantity}
+        calo={props.calo}
+      />
     </Card>
   );
 };
