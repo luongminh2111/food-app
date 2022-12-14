@@ -7,14 +7,33 @@ import Date from "./component/DateSetting";
 import { FoodData } from "../../contains/FoodData";
 import { useEffect } from "react";
 import FoodCard from "./component/FoodCard";
+import _default from "react-bootstrap/esm/Accordion";
 export default function Main() {
   const [open, setOpen] = React.useState(false);
-  const [open1, setOpen1] = React.useState(false);
-  const [food, setFood] = React.useState(
-    FoodData.map((a) => {
-      return a;
-    })
-  );
+  const [openFoodForm, setOpenFoodForm] = React.useState(false);
+  const [Type, setType] = React.useState();
+  const [breakfast, setBreakfast] = React.useState([]);
+  const [lunch, setLunch] = React.useState([]);
+  const [dinner, setDinner] = React.useState([]);
+  const [other, setOther] = React.useState([]);
+  useEffect(() => {
+    let breakfast = FoodData.filter((a) => {
+      return a.type.indexOf("朝ごはん") >= 0;
+    });
+    let lunch = FoodData.filter((a) => {
+      return a.type.indexOf("昼ごはん") >= 0;
+    });
+    let dinner = FoodData.filter((a) => {
+      return a.type.indexOf("晩ごはん") >= 0;
+    });
+    let other = FoodData.filter((a) => {
+      return a.type.indexOf("他") >= 0;
+    });
+    setBreakfast(breakfast);
+    setLunch(lunch);
+    setDinner(dinner);
+    setOther(other);
+  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -23,12 +42,13 @@ export default function Main() {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleClickOpen1 = () => {
-    setOpen1(true);
+  const handleClickOpenFoodForm = (event) => {
+    setType(event.currentTarget.value);
+    setOpenFoodForm(true);
   };
 
-  const handleClose1 = () => {
-    setOpen1(false);
+  const handleCloseFoodForm = () => {
+    setOpenFoodForm(false);
   };
   return (
     <div className="main">
@@ -48,108 +68,111 @@ export default function Main() {
       <ul className="main__form">
         <li className="main__form-item">
           <span className="main__title">
-            朝ごはん: {food.reduce((total, item) => total + item.calo, 0)}
+            朝ごはん: {breakfast.reduce((total, item) => total + item.calo, 0)}
             カロリー
           </span>
           <ul className="main__menu">
-            {food.map((item, index) =>
-              item.type.indexOf("朝ごはん") >= 0 ? (
-                <FoodCard
-                  id={item.id}
-                  FoodName={item.foodName}
-                  quantity={item.quantity}
-                  calo={item.calo}
-                />
-              ) : (
-                <div className="main__none"></div>
-              )
-            )}
+            {breakfast.map((item, index) => (
+              <FoodCard
+                id={item.id}
+                FoodName={item.foodName}
+                quantity={item.quantity}
+                calo={item.calo}
+              />
+            ))}
             <li className="main__icon">
-              <div className="main__icon-item" onClick={handleClickOpen1}>
+              <button
+                className="main__icon-item"
+                value="朝ごはん"
+                onClick={handleClickOpenFoodForm}
+              >
                 <FontAwesomeIcon icon={faPlus} />
-              </div>
+              </button>
             </li>
           </ul>
         </li>
         <li className="main__form-item">
           <span className="main__title">
-            昼ごはん: {food.reduce((total, item) => total + item.calo, 0)}
+            昼ごはん: {lunch.reduce((total, item) => total + item.calo, 0)}
             カロリー
           </span>
           <ul className="main__menu">
-            {food.map((item, index) =>
-              item.type.indexOf("昼ごはん") >= 0 ? (
-                <FoodCard
-                  id={item.id}
-                  FoodName={item.foodName}
-                  quantity={item.quantity}
-                  calo={item.calo}
-                />
-              ) : (
-                <div className="main__none"></div>
-              )
-            )}
+            {lunch.map((item, index) => (
+              <FoodCard
+                id={item.id}
+                FoodName={item.foodName}
+                quantity={item.quantity}
+                calo={item.calo}
+              />
+            ))}
             <li className="main__icon">
-              <div className="main__icon-item" onClick={handleClickOpen1}>
+              <button
+                className="main__icon-item"
+                value="昼ごはん"
+                onClick={handleClickOpenFoodForm}
+              >
                 <FontAwesomeIcon icon={faPlus} />
-              </div>
+              </button>
             </li>
           </ul>
         </li>
         <li className="main__form-item">
           <span className="main__title">
-            晩ごはん: {food.reduce((total, item) => total + item.calo, 0)}
+            晩ごはん: {dinner.reduce((total, item) => total + item.calo, 0)}
             カロリー
           </span>
           <ul className="main__menu">
-            {food.map((item, index) =>
-              item.type.indexOf("晩ごはん") >= 0 ? (
-                <FoodCard
-                  id={item.id}
-                  FoodName={item.foodName}
-                  quantity={item.quantity}
-                  calo={item.calo}
-                />
-              ) : (
-                <div className="main__none"></div>
-              )
-            )}
+            {dinner.map((item, index) => (
+              <FoodCard
+                id={item.id}
+                FoodName={item.foodName}
+                quantity={item.quantity}
+                calo={item.calo}
+              />
+            ))}
+            <li className="main__icon">
+              <button
+                className="main__icon-item"
+                value="晩ごはん"
+                onClick={handleClickOpenFoodForm}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </li>
+          </ul>
+        </li>
+        <li className="main__form-item">
+          <span className="main__title">
+            他: {other.reduce((total, item) => total + item.calo, 0)}
+            カロリー
+          </span>
+          <ul className="main__menu">
+            {other.map((item, index) => (
+              <FoodCard
+                id={item.id}
+                FoodName={item.foodName}
+                quantity={item.quantity}
+                calo={item.calo}
+              />
+            ))}
 
             <li className="main__icon">
-              <div className="main__icon-item" onClick={handleClickOpen1}>
+              <button
+                className="main__icon-item"
+                value="他"
+                onClick={handleClickOpenFoodForm}
+              >
                 <FontAwesomeIcon icon={faPlus} />
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li className="main__form-item">
-          <span className="main__title">
-            他: {food.reduce((total, item) => total + item.calo, 0)}
-            カロリー
-          </span>
-          <ul className="main__menu">
-            {food.map((item, index) =>
-              item.type.indexOf("他") >= 0 ? (
-                <FoodCard
-                  id={item.id}
-                  FoodName={item.foodName}
-                  quantity={item.quantity}
-                  calo={item.calo}
-                />
-              ) : (
-                <div className="main__none"></div>
-              )
-            )}
-
-            <li className="main__icon">
-              <div className="main__icon-item" onClick={handleClickOpen1}>
-                <FontAwesomeIcon icon={faPlus} />
-              </div>
+              </button>
             </li>
           </ul>
         </li>
       </ul>
-      <Foodform onclick={open1} onclose={handleClose1} />
+      <Foodform
+        onclick={openFoodForm}
+        onclose={handleCloseFoodForm}
+        type={Type}
+      />
       <Targetform onclick={open} onclose={handleClose} />
     </div>
   );

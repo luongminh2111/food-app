@@ -7,22 +7,6 @@ import Date from "./component/DateSetting";
 import Header from "./Header";
 import Main from "./Main";
 function Home() {
-  const [open, setOpen] = React.useState(false);
-  const [open1, setOpen1] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleClickOpen1 = () => {
-    setOpen1(true);
-  };
-
-  const handleClose1 = () => {
-    setOpen1(false);
-  };
   return (
     <div>
       <Header />
