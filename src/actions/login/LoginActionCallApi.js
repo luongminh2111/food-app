@@ -1,9 +1,9 @@
 
-import { BASEURL } from "../../contains/common";
+import { BASE_URL } from "../../contains/common";
 
 export const login = (email, password) => (dispatch) => {
   const accessToken = window.localStorage.getItem('token')
-  fetch(`${BASEURL}/account/login?account=${email}&password=${password}`,
+  fetch(`${BASE_URL}/account/login?account=${email}&password=${password}`,
     {
       mode: 'cors',
       method: 'GET',
@@ -19,7 +19,7 @@ export const login = (email, password) => (dispatch) => {
 }
 export const register = (email, password) => (dispatch) => {
   console.log("kiem tra email :", email);
-  fetch(`${BASEURL}/account/register?account=${email}&password=${password}`,
+  fetch(`${BASE_URL}/account/register?account=${email}&password=${password}`,
     {
       mode: 'cors',
       method: 'GET',
@@ -30,8 +30,5 @@ export const register = (email, password) => (dispatch) => {
     })
     .then(res => {
       console.log("kiem tra res: ", res);
-      if(res?.message === 'SUCCESS'){
-        window.localStorage.setItem('token', res?.data?.token);
-      }
     });
 }

@@ -6,7 +6,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { ja } from "date-fns/locale";
 
 export default function DateSetting() {
-  const [value, setValue] = React.useState(null);
+  const [value, setValue] = React.useState(new Date());
 
   return (
     <LocalizationProvider locale={ja} dateAdapter={AdapterDateFns}>

@@ -4,7 +4,7 @@ import { faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
 import Targetform from "./component/TargetForm";
 import Foodform from "./component/FoodForm";
 import Date from "./component/DateSetting";
-import { FoodData } from "./data/FoodData";
+import { FoodData } from "../../contains/FoodData";
 import { useEffect } from "react";
 import FoodCard from "./component/FoodCard";
 export default function Main() {

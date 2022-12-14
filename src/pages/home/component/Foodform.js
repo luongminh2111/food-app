@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
@@ -10,9 +11,9 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import { Select } from "@mui/material";
-
-import { Menu } from "../data/Menu";
-export const FoodForm = (props) => {
+import { saveFoodItem } from "../../../actions/food/foodActionCallApi";
+import { Menu } from "../../../contains/Menu";
+function FoodForm(props){
   const types = [
     {
       value: "マクロ",
@@ -21,18 +22,29 @@ export const FoodForm = (props) => {
       value: "レコメンデーション",
     },
   ];
+  const dispatch = useDispatch();
+  const [menu, setMenu] = React.useState(props.name || "ご飯");
+  const [quantity, setQuantity] = useState(props.quantity || 0);
+  const [calo, setCalo] = useState(props.calo || 0);
 
-  const [menu, setMenu] = React.useState(props.name ? props.name : "ご飯");
-  const [values, setValues] = useState({
-    quantity: props.quantity,
-    calo: props.calo,
-  });
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const handleChangeQuantity = (event) => {
+      setQuantity(event.target.value);
   };
-  const handleMenu = (event) => {
+
+  const handleChangeCalo = (event) => {
+    setCalo(event.target.value);
+  };
+
+  const handleChangeMenu = (event) => {
     setMenu(event.target.value);
   };
+
+  const handleSaveFoodItem = () => {
+    const menuItem = {
+      menu, quantity, calo
+    }
+    dispatch(saveFoodItem(menuItem));
+  }
 
   return (
     <Dialog open={props.onclick} onClose={props.onclose}>
@@ -44,7 +56,7 @@ export const FoodForm = (props) => {
               displayEmpty
               value={menu}
               sx={{ m: 1, width: "25ch" }}
-              onChange={handleMenu}
+              onChange={handleChangeMenu}
             >
               {Menu.map((option) => (
                 <MenuItem key={option.foodName} value={option.foodName}>
@@ -60,8 +72,9 @@ export const FoodForm = (props) => {
               <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                 <OutlinedInput
                   id="outlined-adornment-weight"
-                  value={values.quantity}
-                  onChange={handleChange("quantity")}
+                  value={quantity}
+                  type="number"
+                  onChange={handleChangeQuantity}
                   aria-describedby="outlined-weight-helper-text"
                   inputProps={{
                     "aria-label": "weight",
@@ -76,8 +89,9 @@ export const FoodForm = (props) => {
               <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                 <OutlinedInput
                   id="outlined-adornment-weight"
-                  value={values.calo}
-                  onChange={handleChange("calo")}
+                  value={calo}
+                  type="number"
+                  onChange={handleChangeCalo}
                   aria-describedby="outlined-weight-helper-text"
                   inputProps={{
                     "aria-label": "weight",
@@ -93,7 +107,7 @@ export const FoodForm = (props) => {
         <Button onClick={props.onclose} xs={{}}>
           キャンセル
         </Button>
-        <Button onClick={props.onclose} autoFocus>
+        <Button onClick={handleSaveFoodItem} autoFocus>
           サーブ
         </Button>
       </DialogActions>
