@@ -13,7 +13,7 @@ import FormControl from "@mui/material/FormControl";
 import { Select } from "@mui/material";
 import { saveFoodItem } from "../../../actions/food/foodActionCallApi";
 import { Menu } from "../../../contains/Menu";
-function FoodForm(props){
+function FoodForm(props) {
   const types = [
     {
       value: "マクロ",
@@ -28,7 +28,7 @@ function FoodForm(props){
   const [calo, setCalo] = useState(props.calo || 0);
 
   const handleChangeQuantity = (event) => {
-      setQuantity(event.target.value);
+    setQuantity(event.target.value);
   };
 
   const handleChangeCalo = (event) => {
@@ -41,16 +41,18 @@ function FoodForm(props){
 
   const handleSaveFoodItem = () => {
     const menuItem = {
-      menu, quantity, calo
-    }
+      menu,
+      quantity,
+      calo,
+    };
     dispatch(saveFoodItem(menuItem));
-  }
+  };
 
   return (
     <Dialog open={props.onclick} onClose={props.onclose}>
       <DialogContent>
         <div className="main__statistics main__statistics--column">
-          <div className="main__statistics-title">Add food</div>
+          <div className="main__statistics-title">{props.type}</div>
           <div className="main__selecter">
             <Select
               displayEmpty
@@ -113,12 +115,13 @@ function FoodForm(props){
       </DialogActions>
     </Dialog>
   );
-};
+}
 FoodForm.propTypes = {
   onclick: PropTypes.bool,
   onclose: PropTypes.func,
   name: PropTypes.string,
   calo: PropTypes.number,
   quantity: PropTypes.string,
+  type: PropTypes.string,
 };
 export default FoodForm;

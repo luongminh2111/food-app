@@ -65,6 +65,6 @@ FoodCard.propTypes = {
   id: PropTypes.number.isRequired,
   FoodName: PropTypes.string.isRequired,
   quantity: PropTypes.string.isRequired,
-  calo: PropTypes.string.isRequired,
+  calo: PropTypes.number.isRequired,
 };
 export default FoodCard;
