@@ -1,5 +1,5 @@
 import { BASE_URL } from "../../contains/common";
-import { fetchFood } from "./foodAction";
+import { fetchFood, changePositionCallAPi } from "./foodAction";
 import axios from 'axios';
 export const getFilterFood = (date) => (dispatch)=> {
     axios.get(`${BASE_URL}/daybook/currentday?date=${date}`)
@@ -10,7 +10,6 @@ export const getFilterFood = (date) => (dispatch)=> {
 };
 
 export const saveFoodItem = (menuItem, onclose) => (dispatch) => {  
-  console.log("kiem tra type :", menuItem.type);
   let type;
   if(menuItem.type === '朝ごはん'){
     type = 'BREAK_FAST';
@@ -40,6 +39,7 @@ export const saveFoodItem = (menuItem, onclose) => (dispatch) => {
     .then(res => {
         if(res?.status === 200){
           getFilterFood(menuItem.date);
+          dispatch(changePositionCallAPi());
           onclose();
         }
     });

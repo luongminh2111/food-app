@@ -15,13 +15,14 @@ function Main() {
   const [Type, setType] = React.useState();
   const [other, setOther] = React.useState([]);
   const [dateSelect, setDateSelect] = React.useState((new Date().getTime()));
+  const positionCallApi = useSelector(state => state.food.positionCallApi);
   const breakFasts = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'BREAK_FAST')?.map(e => e.foodId) || [];
   const lunchs = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'LUNCH')?.map(e => e.foodId) || [];
   const dinners = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'DINNER')?.map(e =>e.foodId) || [];
   const listBreakFast = (Menu.filter(item => breakFasts?.includes(item.id)));
   const listLunch = (Menu.filter(item => lunchs?.includes(item.id)));
   const listDinner  = (Menu.filter(item => dinners?.includes(item.id)));
-  console.log(" kiem tra open :", openFoodForm);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getFilterFood((new Date()).getTime()));
@@ -29,7 +30,7 @@ function Main() {
 
   useEffect(() => {
     dispatch(getFilterFood(dateSelect));
-  }, [dateSelect]);
+  }, [dateSelect, positionCallApi]);
 
   const handleClickOpen = () => {
     setOpen(true);
