@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
@@ -13,13 +13,11 @@ import { Select } from "@mui/material";
 import { saveFoodItem } from "../../../actions/food/foodActionCallApi";
 import { Menu } from "../../../contains/Menu";
 function FoodForm(props) {
-  console.log("kiem tra prop  :", props);
   const { type, date, onclose } = props;
   const dispatch = useDispatch();
   const [food, setFood] = React.useState(Menu[0]);
   const [quantity, setQuantity] = useState(props.quantity || 0);
   const [calo, setCalo] = useState(props.calo || 0);
-
   const handleChangeQuantity = (event) => {
     const value = event.target.value;
     setQuantity(value);
