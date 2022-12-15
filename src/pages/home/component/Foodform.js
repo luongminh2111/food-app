@@ -8,42 +8,33 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import { Select } from "@mui/material";
 import { saveFoodItem } from "../../../actions/food/foodActionCallApi";
 import { Menu } from "../../../contains/Menu";
 function FoodForm(props) {
-  const types = [
-    {
-      value: "マクロ",
-    },
-    {
-      value: "レコメンデーション",
-    },
-  ];
+  const { type, date } = props;
   const dispatch = useDispatch();
-  const [menu, setMenu] = React.useState(props.name || "ご飯");
+  const [food, setFood] = React.useState(Menu[0]);
   const [quantity, setQuantity] = useState(props.quantity || 0);
   const [calo, setCalo] = useState(props.calo || 0);
 
   const handleChangeQuantity = (event) => {
-    setQuantity(event.target.value);
+    const value = event.target.value;
+    setQuantity(value);
+    setCalo(value * food.calo);
   };
 
-  const handleChangeCalo = (event) => {
-    setCalo(event.target.value);
-  };
-
-  const handleChangeMenu = (event) => {
-    setMenu(event.target.value);
+  const handleChangeFood = (e) => {
+    setFood(Menu.find(item => item.name === e.target.value));
   };
 
   const handleSaveFoodItem = () => {
     const menuItem = {
-      menu,
+      type,
+      food,
       quantity,
-      calo,
+      date,
     };
     dispatch(saveFoodItem(menuItem));
   };
@@ -52,17 +43,17 @@ function FoodForm(props) {
     <Dialog open={props.onclick} onClose={props.onclose}>
       <DialogContent>
         <div className="main__statistics main__statistics--column">
-          <div className="main__statistics-title">{props.type}</div>
+          <div className="main__statistics-title">{type}</div>
           <div className="main__selecter">
             <Select
               displayEmpty
-              value={menu}
+              value={food.name}
               sx={{ m: 1, width: "25ch" }}
-              onChange={handleChangeMenu}
+              onChange={handleChangeFood}
             >
               {Menu.map((option) => (
-                <MenuItem key={option.foodName} value={option.foodName}>
-                  {option.foodName}
+                <MenuItem key={option.id} value={option.name}>
+                  {option.name}
                 </MenuItem>
               ))}
             </Select>
@@ -70,7 +61,7 @@ function FoodForm(props) {
 
           <div className="main__input main__input--flex">
             <div>
-              <div className="main__input-title">quantity</div>
+              <div className="main__input-title">quantity(gram)</div>
               <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                 <OutlinedInput
                   id="outlined-adornment-weight"
@@ -93,8 +84,8 @@ function FoodForm(props) {
                   id="outlined-adornment-weight"
                   value={calo}
                   type="number"
-                  onChange={handleChangeCalo}
                   aria-describedby="outlined-weight-helper-text"
+                  disabled
                   inputProps={{
                     "aria-label": "weight",
                   }}

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-
+import store from './store/store';
 import {
   BrowserRouter as Router,
   withRouter,
@@ -14,23 +14,26 @@ import ForgetPassword from "./pages/register/ForgetPassword";
 import ChangePassword from "./pages/register/ChangePassword";
 import Recipe from "./pages/recipe";
 import Statistics from "./pages/statistics/Statistics";
+import { Provider } from "react-redux";
 
 function App() {
   return (
-    <Router>
-      <React.Fragment>
-        <Switch>
-          <Route exact path="/register" component={Register}></Route>
-          <Route exact path="/statistic" render={() => <Statistics />}></Route>
-          <Route exact path="/change-password" component={ChangePassword}></Route>
-          <Route exact path="/forgot-password" component={ChangePassword}></Route>
-          <Route exact path="/login" component={Login}></Route>
-          <Route exact path="/forget-password" component={ForgetPassword}></Route>
-          <Route exact path="/" render={() => <Main />}></Route>
-          <Route exact path="/recipe"  render={() => <Recipe />}></Route>
-        </Switch>
-      </React.Fragment>
-    </Router>
+    <Provider store={store} >
+      <Router>
+        <React.Fragment>
+          <Switch>
+            <Route exact path="/register" component={Register}></Route>
+            <Route exact path="/statistic" render={() => <Statistics />}></Route>
+            <Route exact path="/change-password" component={ChangePassword}></Route>
+            <Route exact path="/forgot-password" component={ChangePassword}></Route>
+            <Route exact path="/login" component={Login}></Route>
+            <Route exact path="/forget-password" component={ForgetPassword}></Route>
+            <Route exact path="/" render={() => <Main />}></Route>
+            <Route exact path="/recipe"  render={() => <Recipe />}></Route>
+          </Switch>
+        </React.Fragment>
+      </Router>
+    </Provider>
   );
 }
 

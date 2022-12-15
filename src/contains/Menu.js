@@ -1,9 +1,9 @@
 export const Menu = [
   {
     id: 1,
-    Name: "カツ丼",
+    name: "カツ丼",
     calo: 893,
-    quantity: 100,
+    gram: 100,
   },
   {
     id: 2,

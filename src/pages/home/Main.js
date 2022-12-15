@@ -1,39 +1,38 @@
-import React from "react";
+import React, {useState} from "react";
+import  { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
 import Targetform from "./component/TargetForm";
 import Foodform from "./component/FoodForm";
-import Date from "./component/DateSetting";
-import { FoodData } from "../../contains/FoodData";
+import { Menu } from "../../contains/Menu";
+import { fetchFood } from "../../actions/food/foodAction";
+import axios from 'axios';
+import DateSetting from "./component/DateSetting";
 import { useEffect } from "react";
 import FoodCard from "./component/FoodCard";
-import _default from "react-bootstrap/esm/Accordion";
-export default function Main() {
+import { getFilterFood } from "../../actions/food/foodActionCallApi";
+function Main() {
   const [open, setOpen] = React.useState(false);
   const [openFoodForm, setOpenFoodForm] = React.useState(false);
   const [Type, setType] = React.useState();
-  const [breakfast, setBreakfast] = React.useState([]);
-  const [lunch, setLunch] = React.useState([]);
-  const [dinner, setDinner] = React.useState([]);
   const [other, setOther] = React.useState([]);
+  const [dateSelect, setDateSelect] = React.useState((new Date().getTime()));
+  // const listFoods = useSelector(state => state.food?.listFoods);
+  const breakFasts = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'BREAKFAST')?.map(e => e.foodId) || [];
+  const lunchs = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'LUNCH')?.map(e => e.foodId) || [];
+  const dinners = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'DINNER')?.map(e =>e.foodId) || [];
+  const listBreakFast = (Menu.filter(item => breakFasts?.includes(item.id)));
+  const listLunch = (Menu.filter(item => lunchs?.includes(item.id)));
+  const listDinner  = (Menu.filter(item => dinners?.includes(item.id)));
+
+  const dispatch = useDispatch();
   useEffect(() => {
-    let breakfast = FoodData.filter((a) => {
-      return a.type.indexOf("朝ごはん") >= 0;
-    });
-    let lunch = FoodData.filter((a) => {
-      return a.type.indexOf("昼ごはん") >= 0;
-    });
-    let dinner = FoodData.filter((a) => {
-      return a.type.indexOf("晩ごはん") >= 0;
-    });
-    let other = FoodData.filter((a) => {
-      return a.type.indexOf("他") >= 0;
-    });
-    setBreakfast(breakfast);
-    setLunch(lunch);
-    setDinner(dinner);
-    setOther(other);
+    dispatch(getFilterFood((new Date()).getTime()));
   }, []);
+
+  useEffect(() => {
+    dispatch(getFilterFood(dateSelect));
+  }, [dateSelect]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -52,7 +51,7 @@ export default function Main() {
   };
   return (
     <div className="main">
-      <Date />
+      <DateSetting dateSelect={dateSelect} setDateSelect={setDateSelect}/>
 
       <div className="main__parameter">
         <span>総カロリー：730カロリー</span>
@@ -68,15 +67,15 @@ export default function Main() {
       <ul className="main__form">
         <li className="main__form-item">
           <span className="main__title">
-            朝ごはん: {breakfast.reduce((total, item) => total + item.calo, 0)}
+            朝ごはん: {listBreakFast.reduce((total, item) => total + item.calo, 0)}
             カロリー
           </span>
           <ul className="main__menu">
-            {breakfast.map((item, index) => (
+            {listBreakFast.map((item, index) => (
               <FoodCard
                 id={item.id}
-                FoodName={item.foodName}
-                quantity={item.quantity}
+                FoodName={item.name}
+                quantity={item.gram}
                 calo={item.calo}
               />
             ))}
@@ -93,15 +92,15 @@ export default function Main() {
         </li>
         <li className="main__form-item">
           <span className="main__title">
-            昼ごはん: {lunch.reduce((total, item) => total + item.calo, 0)}
+            昼ごはん: {listLunch.reduce((total, item) => total + item.calo, 0)}
             カロリー
           </span>
           <ul className="main__menu">
-            {lunch.map((item, index) => (
+            {listLunch.map((item, index) => (
               <FoodCard
                 id={item.id}
-                FoodName={item.foodName}
-                quantity={item.quantity}
+                FoodName={item.name}
+                quantity={item.gram}
                 calo={item.calo}
               />
             ))}
@@ -118,15 +117,15 @@ export default function Main() {
         </li>
         <li className="main__form-item">
           <span className="main__title">
-            晩ごはん: {dinner.reduce((total, item) => total + item.calo, 0)}
+            晩ごはん: {listDinner.reduce((total, item) => total + item.calo, 0)}
             カロリー
           </span>
           <ul className="main__menu">
-            {dinner.map((item, index) => (
+            {listDinner.map((item, index) => (
               <FoodCard
                 id={item.id}
-                FoodName={item.foodName}
-                quantity={item.quantity}
+                FoodName={item.name}
+                quantity={item.gram}
                 calo={item.calo}
               />
             ))}
@@ -172,8 +171,10 @@ export default function Main() {
         onclick={openFoodForm}
         onclose={handleCloseFoodForm}
         type={Type}
+        date={dateSelect}
       />
       <Targetform onclick={open} onclose={handleClose} />
     </div>
   );
 }
+export default Main;

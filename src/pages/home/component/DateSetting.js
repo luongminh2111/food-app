@@ -5,16 +5,16 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { ja } from "date-fns/locale";
 
-export default function DateSetting() {
-  const [value, setValue] = React.useState(new Date());
+function DateSetting(props) {
+  const {dateSelect, setDateSelect } = props;
 
   return (
     <LocalizationProvider locale={ja} dateAdapter={AdapterDateFns}>
       <DatePicker
         className="date__button"
-        value={value}
+        value={dateSelect}
         onChange={(newValue) => {
-          setValue(newValue);
+          setDateSelect(newValue.getTime());
         }}
         renderInput={(params) => (
           <TextField
@@ -28,3 +28,4 @@ export default function DateSetting() {
     </LocalizationProvider>
   );
 }
+export default DateSetting;
