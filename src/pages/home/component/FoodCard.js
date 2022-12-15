@@ -32,7 +32,7 @@ const FoodCard = (props) => {
           {props.FoodName}
         </Typography>
         <Typography gutterBottom variant="h5" component="div">
-          {props.quantity}
+          {props.quantity} gram
         </Typography>
         <Typography gutterBottom variant="h5" component="div">
           {props.calo}カロリー

@@ -13,7 +13,8 @@ import { Select } from "@mui/material";
 import { saveFoodItem } from "../../../actions/food/foodActionCallApi";
 import { Menu } from "../../../contains/Menu";
 function FoodForm(props) {
-  const { type, date } = props;
+  console.log("kiem tra prop  :", props);
+  const { type, date, onclose } = props;
   const dispatch = useDispatch();
   const [food, setFood] = React.useState(Menu[0]);
   const [quantity, setQuantity] = useState(props.quantity || 0);
@@ -36,7 +37,7 @@ function FoodForm(props) {
       quantity,
       date,
     };
-    dispatch(saveFoodItem(menuItem));
+    dispatch(saveFoodItem(menuItem, onclose));
   };
 
   return (
@@ -47,7 +48,7 @@ function FoodForm(props) {
           <div className="main__selecter">
             <Select
               displayEmpty
-              value={food.name}
+              value={props.name || food.name}
               sx={{ m: 1, width: "25ch" }}
               onChange={handleChangeFood}
             >
@@ -83,7 +84,6 @@ function FoodForm(props) {
                 <OutlinedInput
                   id="outlined-adornment-weight"
                   value={calo}
-                  type="number"
                   aria-describedby="outlined-weight-helper-text"
                   disabled
                   inputProps={{

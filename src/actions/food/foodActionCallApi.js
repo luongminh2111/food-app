@@ -9,23 +9,24 @@ export const getFilterFood = (date) => (dispatch)=> {
     .catch(error => console.log(error));
 };
 
-export const saveFoodItem = (menuItem) => (dispatch) => {  
+export const saveFoodItem = (menuItem, onclose) => (dispatch) => {  
+  console.log("kiem tra type :", menuItem.type);
   let type;
   if(menuItem.type === '朝ごはん'){
-    type = 'BREAKFAST';
+    type = 'BREAK_FAST';
   } else if(menuItem.type === '昼ごはん'){
     type = 'LUNCH';
   }
-  else if(menuItem.type === '晩ご飯'){
+  else if(menuItem.type === '晩ごはん'){
     type = 'DINNER';
   }
   const dataSave = {
     mealType: type,
     foodId: menuItem?.food?.id,
     amount: menuItem?.quantity,
-    date: menuItem.date.getTime()
+    date: menuItem.date
   }
-  console.log(" lay time : ", menuItem.date.getTime());
+  console.log("kiem tra ok  :", dataSave);
   fetch(`${BASE_URL}/daybook/save`,
     {
       mode: 'cors',
@@ -37,6 +38,9 @@ export const saveFoodItem = (menuItem) => (dispatch) => {
       },
     })
     .then(res => {
-      console.log("kiem tra res: ", res);
+        if(res?.status === 200){
+          getFilterFood(menuItem.date);
+          onclose();
+        }
     });
 }

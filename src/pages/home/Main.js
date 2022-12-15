@@ -5,8 +5,6 @@ import { faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
 import Targetform from "./component/TargetForm";
 import Foodform from "./component/FoodForm";
 import { Menu } from "../../contains/Menu";
-import { fetchFood } from "../../actions/food/foodAction";
-import axios from 'axios';
 import DateSetting from "./component/DateSetting";
 import { useEffect } from "react";
 import FoodCard from "./component/FoodCard";
@@ -17,14 +15,13 @@ function Main() {
   const [Type, setType] = React.useState();
   const [other, setOther] = React.useState([]);
   const [dateSelect, setDateSelect] = React.useState((new Date().getTime()));
-  // const listFoods = useSelector(state => state.food?.listFoods);
-  const breakFasts = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'BREAKFAST')?.map(e => e.foodId) || [];
+  const breakFasts = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'BREAK_FAST')?.map(e => e.foodId) || [];
   const lunchs = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'LUNCH')?.map(e => e.foodId) || [];
   const dinners = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'DINNER')?.map(e =>e.foodId) || [];
   const listBreakFast = (Menu.filter(item => breakFasts?.includes(item.id)));
   const listLunch = (Menu.filter(item => lunchs?.includes(item.id)));
   const listDinner  = (Menu.filter(item => dinners?.includes(item.id)));
-
+  console.log(" kiem tra open :", openFoodForm);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getFilterFood((new Date()).getTime()));
