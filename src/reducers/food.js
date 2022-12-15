@@ -1,6 +1,7 @@
 
 const initState = {
   listFoods: [],
+  positionCallApi: false,
 };
 
 const food = (state = initState, action) => {
@@ -10,6 +11,11 @@ const food = (state = initState, action) => {
       return {
         ...state,
         listFoods: action.data.data,
+      };
+      case 'POSITION_CALL_API':
+      return {
+        ...state,
+        positionCallApi: !state.positionCallApi,
       };
     default:
       return state;

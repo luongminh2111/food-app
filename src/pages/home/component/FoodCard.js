@@ -11,6 +11,7 @@ import { faPlus, faPen, faX } from "@fortawesome/free-solid-svg-icons";
 import FoodForm from "./FoodForm";
 const FoodCard = (props) => {
   const [open, setOpen] = React.useState(false);
+  console.log("kiem tra props card :", props)
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -32,7 +33,7 @@ const FoodCard = (props) => {
           {props.FoodName}
         </Typography>
         <Typography gutterBottom variant="h5" component="div">
-          {props.quantity}
+          {props.quantity * 100} gram
         </Typography>
         <Typography gutterBottom variant="h5" component="div">
           {props.calo}カロリー
@@ -55,6 +56,7 @@ const FoodCard = (props) => {
         onclick={open}
         onclose={handleClose}
         name={props.FoodName}
+        id={props.id}
         quantity={props.quantity}
         calo={props.calo}
       />
