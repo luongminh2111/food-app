@@ -13,7 +13,7 @@ import { saveFoodItem, updateFoodItem } from "../../../actions/food/foodActionCa
 import { Menu } from "../../../contains/Menu";
 function FoodForm(props) {
   const { type, date, onclose, update, item } = props;
-  console.log("kiem tra props form food:", props);
+  console.log("kiem tra item  form food:", item);
   const dispatch = useDispatch();
   const [food, setFood] = React.useState(Menu[0]);
   const [name, setName] = useState(item?.name || Menu[0].name);
@@ -63,7 +63,6 @@ function FoodForm(props) {
       quantity,
       date,
     };
-    console.log("kiem tra date truyen :", props.date);
     dispatch(saveFoodItem(menuItem, onclose));
   };
 
@@ -77,7 +76,7 @@ function FoodForm(props) {
               displayEmpty
               value={name}
               sx={{ m: 1, width: "25ch" }}
-              onChange={handleChangeFood}
+              onChange={(e) => handleChangeFood(e)}
             >
               {Menu.map((option) => (
                 <MenuItem key={option.id} value={option.name}>
@@ -95,7 +94,7 @@ function FoodForm(props) {
                   id="outlined-adornment-weight"
                   value={quantity }
                   type="number"
-                  onChange={handleChangeQuantity}
+                  onChange={(e) => handleChangeQuantity(e)}
                   aria-describedby="outlined-weight-helper-text"
                   inputProps={{
                     "aria-label": "weight",

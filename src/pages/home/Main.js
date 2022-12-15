@@ -27,7 +27,6 @@ function Main() {
   const listDinner  = (Menu.filter(item => dinners?.includes(item.id)));
   const resBreakFasts = useMemo(() => {
     let arrayTemp = [];
-    console.log(" kiem tra data : ", breakFasts1);
     listBreakFast.map(e => {
       let temp = breakFasts1.find(item => item.foodId === e.id);
       if(temp){

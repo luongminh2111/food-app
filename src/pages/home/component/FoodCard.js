@@ -11,7 +11,6 @@ import FoodForm from "./FoodForm";
 const FoodCard = (props) => {
   const [open, setOpen] = React.useState(false);
   const {date, item } = props;
-  console.log("kiem tra props card :", props);
 
   const handleClickOpen = () => {
     setOpen(true);
