@@ -6,15 +6,15 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { ja } from "date-fns/locale";
 
 function DateSetting(props) {
-  const {date, setDate } = props;
+  const {dateSelect, setDateSelect } = props;
 
   return (
     <LocalizationProvider locale={ja} dateAdapter={AdapterDateFns}>
       <DatePicker
         className="date__button"
-        value={date}
+        value={dateSelect}
         onChange={(newValue) => {
-          setDate(newValue);
+          setDateSelect(newValue.getTime());
         }}
         renderInput={(params) => (
           <TextField

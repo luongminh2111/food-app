@@ -1,5 +1,5 @@
 import {AnyAction, configureStore, ThunkAction} from '@reduxjs/toolkit';
-import reducer from './reducer';
+import reducer from '../reducers/index';
 // ...
 
 const store = configureStore({
@@ -12,5 +12,6 @@ const store = configureStore({
             },
         })
 });
+
 
 export default store;

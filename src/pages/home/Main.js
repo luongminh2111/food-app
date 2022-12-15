@@ -1,10 +1,11 @@
 import React, {useState} from "react";
-import  { useDispatch } from "react-redux";
+import  { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
 import Targetform from "./component/TargetForm";
 import Foodform from "./component/FoodForm";
 import { Menu } from "../../contains/Menu";
+import { fetchFood } from "../../actions/food/foodAction";
 import axios from 'axios';
 import DateSetting from "./component/DateSetting";
 import { useEffect } from "react";
@@ -15,31 +16,23 @@ function Main() {
   const [openFoodForm, setOpenFoodForm] = React.useState(false);
   const [Type, setType] = React.useState();
   const [other, setOther] = React.useState([]);
-  const [dateSelect, setDateSelect] = React.useState(new Date());
-  const [listBreakFast, setListBreakFast] = useState([]);
-  const [listLunch, setListLunch] = useState([]);
-  const [listDinner, setListDinner] = useState([]);
+  const [dateSelect, setDateSelect] = React.useState((new Date().getTime()));
+  // const listFoods = useSelector(state => state.food?.listFoods);
+  const breakFasts = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'BREAKFAST')?.map(e => e.foodId) || [];
+  const lunchs = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'LUNCH')?.map(e => e.foodId) || [];
+  const dinners = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'DINNER')?.map(e =>e.foodId) || [];
+  const listBreakFast = (Menu.filter(item => breakFasts?.includes(item.id)));
+  const listLunch = (Menu.filter(item => lunchs?.includes(item.id)));
+  const listDinner  = (Menu.filter(item => dinners?.includes(item.id)));
+
   const dispatch = useDispatch();
   useEffect(() => {
-    axios.get(`http://localhost:8082/api/daybook/currentday?date=1671035696407`)
-    .then(res => {
-        const listFoods = res?.data?.data;
-        const breakfasts = listFoods?.filter(e => e.meal === 'BREAKFAST')?.map(e => e.foodId) || [];
-        const lunchs = listFoods?.filter(e => e.meal === 'LUNCH')?.map(e => e.foodId) || [];
-        const dinners = listFoods?.filter(e => e.meal === 'DINNER')?.map(e =>e.foodId) || [];
-        console.log("kiem tra res :", res);
-        if(breakfasts.lengh > 0){
-          setListBreakFast(Menu.filter(item => breakfasts.includes(item.id)));
-        }
-        if(lunchs.length > 0){
-          setListLunch(Menu.filter(item => lunchs.includes(item.id)));
-        }
-        if(dinners.length > 0){
-          setListDinner(Menu.filter(item => dinners.includes(item.id)));
-        }
-    })
-    
+    dispatch(getFilterFood((new Date()).getTime()));
   }, []);
+
+  useEffect(() => {
+    dispatch(getFilterFood(dateSelect));
+  }, [dateSelect]);
 
   const handleClickOpen = () => {
     setOpen(true);

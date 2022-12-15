@@ -1,9 +1,10 @@
 import { BASE_URL } from "../../contains/common";
+import { fetchFood } from "./foodAction";
 import axios from 'axios';
 export const getFilterFood = (date) => (dispatch)=> {
     axios.get(`${BASE_URL}/daybook/currentday?date=${date}`)
     .then(res => {
-      return res?.data;
+      dispatch(fetchFood(res?.data));
     })
     .catch(error => console.log(error));
 };
