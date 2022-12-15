@@ -27,14 +27,19 @@ function Main() {
   const listDinner  = (Menu.filter(item => dinners?.includes(item.id)));
   const resBreakFasts = useMemo(() => {
     let arrayTemp = [];
+    console.log(" kiem tra data : ", breakFasts1);
     listBreakFast.map(e => {
       let temp = breakFasts1.find(item => item.foodId === e.id);
-      arrayTemp.push({
-        id: temp.foodId,
-        name: e.name,
-        amount: temp.amount,
-        calo: e.calo,
-      })
+      if(temp){
+        arrayTemp.push({
+          id: temp.foodId,
+          type: temp.meal,
+          idBE: temp.id,
+          name: e.name,
+          amount: temp.amount,
+          calo: e.calo,
+        })
+      }
     })
     return arrayTemp;
   }, [listBreakFast]);
@@ -44,9 +49,11 @@ function Main() {
       let temp = lunchs1?.find(item => item.foodId === e.id);
       if(temp){
         arrayTemp.push({
-          id: temp?.foodId,
+          id: temp.foodId,
+          type: temp.meal,
+          idBE: temp.id,
           name: e.name,
-          amount: temp?.amount,
+          amount: temp.amount,
           calo: e.calo,
         })
       }
@@ -60,12 +67,16 @@ function Main() {
     let arrayTemp = [];
     listDinner.map(e => {
       let temp = dinners1?.find(item => item.foodId === e.id);
-      arrayTemp.push({
-        id: temp?.foodId,
-        name: e.name,
-        amount: temp?.amount,
-        calo: e.calo,
-      })
+      if(temp){
+        arrayTemp.push({
+          id: temp.foodId,
+          type: temp.meal,
+          idBE: temp.id,
+          name: e.name,
+          amount: temp.amount,
+          calo: e.calo,
+        })
+      }
     })
     return arrayTemp;
   }, [listDinner]);
@@ -118,10 +129,9 @@ function Main() {
           <ul className="main__menu">
             {resBreakFasts.map((item, index) => (
               <FoodCard
-                id={item.id}
-                FoodName={item.name}
-                quantity={item.amount}
-                calo={item.calo}
+                key={index *4}
+                item={item}
+                date={dateSelect}
               />
             ))}
             <li className="main__icon">
@@ -143,10 +153,9 @@ function Main() {
           <ul className="main__menu">
             {resLunchs.map((item, index) => (
               <FoodCard
-              id={item.id}
-              FoodName={item.name}
-              quantity={item.amount}
-              calo={item.calo}
+              key={index *3}
+              item={item}
+              date={dateSelect}
               />)
             )}
             <li className="main__icon">
@@ -168,10 +177,9 @@ function Main() {
           <ul className="main__menu">
             {resDinners.map((item, index) => (
               <FoodCard
-              id={item.id}
-                FoodName={item.name}
-                quantity={item.amount}
-                calo={item.calo}
+                key ={index}
+                item={item}
+                date={dateSelect}
               />
             ))}
             <li className="main__icon">
@@ -193,11 +201,10 @@ function Main() {
           <ul className="main__menu">
             {other.map((item, index) => (
               <FoodCard
-              id={item.id}
-                amount={item.amount}
-                FoodName={item.name}
-                quantity={item.gram}
-                calo={item.calo}
+                key ={index * 2}
+                item={item}
+                type={Type}
+                date={dateSelect}
               />
             ))}
 
@@ -218,6 +225,7 @@ function Main() {
         onclose={handleCloseFoodForm}
         type={Type}
         date={dateSelect}
+        update={false}
       />
       <Targetform onclick={open} onclose={handleClose} />
     </div>
