@@ -23,7 +23,7 @@ export default function FreeModeForm(props) {
       value: "フリーモード",
     },
     {
-      value: "レコメンデーション",
+      value: "レコメンド",
     },
   ];
 
@@ -37,7 +37,7 @@ export default function FreeModeForm(props) {
   };
 
   return (
-    <Dialog open={props.onclick} onClose={props.onclose}>
+    <Dialog>
       <DialogContent>
         <div className="main__statistics">
           <div className="main__statistics-title">吸収量の目標を設定</div>
