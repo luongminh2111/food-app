@@ -91,6 +91,16 @@
       width: 100%;
       text-align: center;
     }
+    .input-wrapper{
+      display: flex;
+      flex-wrap: nowrap;
+      .MuiFormControl-root {
+        width: 200px !important;
+      }
+      .main__input{
+        width: 220px !important;
+      }
+    }
   }
   &__input {
     &--flex {
