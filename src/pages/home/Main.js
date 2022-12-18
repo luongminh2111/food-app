@@ -1,5 +1,5 @@
-import React, {useState, useMemo} from "react";
-import  { useDispatch, useSelector } from "react-redux";
+import React, { useState, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
 import Targetform from "./component/TargetForm";
@@ -7,15 +7,18 @@ import FoodForm from "./component/FoodForm";
 import DateSetting from "./component/DateSetting";
 import { useEffect } from "react";
 import FoodCard from "./component/FoodCard";
-import { getFilterFood, getListFood } from "../../actions/food/foodActionCallApi";
+import {
+  getFilterFood,
+  getListFood,
+} from "../../actions/food/foodActionCallApi";
 function Main() {
   const [open, setOpen] = React.useState(false);
   const [openFoodForm, setOpenFoodForm] = React.useState(false);
   const [Type, setType] = React.useState();
-  const [dateSelect, setDateSelect] = React.useState((new Date().getTime()));
-  const listFood = useSelector(state => state.food.listFoods);
-  const positionCallApi = useSelector(state => state.food.positionCallApi);
-  const listFilterFood = useSelector(state => state.food.listFilterFood);
+  const [dateSelect, setDateSelect] = React.useState(new Date().getTime());
+  const listFood = useSelector((state) => state.food.listFoods);
+  const positionCallApi = useSelector((state) => state.food.positionCallApi);
+  const listFilterFood = useSelector((state) => state.food.listFilterFood);
   const [breakFastCalo, setBreakFastCalo] = useState(0);
   const [lunchCalo, setLunchCalo] = useState(0);
   const [dinnerCalo, setDinnerCalo] = useState(0);
@@ -24,31 +27,29 @@ function Main() {
 
   const handleSumCalo = (arr) => {
     let sumCalo = 0;
-    arr.map(e => {
+    arr.map((e) => {
       sumCalo += e.amount * e.food.calo;
     });
     return sumCalo;
-  }
+  };
 
   const listBreakFast = useMemo(() => {
-    const foods = listFilterFood.filter(e => e.mealType === 'BREAK_FAST');
+    const foods = listFilterFood.filter((e) => e.mealType === "BREAK_FAST");
     setBreakFastCalo(handleSumCalo(foods));
     return foods;
   }, [listFilterFood]);
 
   const listLunch = useMemo(() => {
-    const foods = listFilterFood.filter(e => e.mealType === 'LUNCH');
+    const foods = listFilterFood.filter((e) => e.mealType === "LUNCH");
     setLunchCalo(handleSumCalo(foods));
     return foods;
   }, [listFilterFood]);
 
   const listDinner = useMemo(() => {
-    const foods = listFilterFood.filter(e => e.mealType === 'DINNER');
+    const foods = listFilterFood.filter((e) => e.mealType === "DINNER");
     setDinnerCalo(handleSumCalo(foods));
     return foods;
-
   }, [listFilterFood]);
-
 
   useEffect(() => {
     dispatch(getListFood());
@@ -76,18 +77,22 @@ function Main() {
   };
   return (
     <div className="main">
-      <DateSetting dateSelect={dateSelect} setDateSelect={setDateSelect}/>
+      <DateSetting dateSelect={dateSelect} setDateSelect={setDateSelect} />
 
       <div className="main__parameter">
-        <span>総カロリー：{breakFastCalo + lunchCalo + dinnerCalo}カロリー</span>
         <span>
-          目標：{customCalo}カロリー
-          <FontAwesomeIcon
-            icon={faPen}
-            className="main__parameter-icon"
-            onClick={handleClickOpen}
-          />
+          総カロリー：{breakFastCalo + lunchCalo + dinnerCalo}カロリー
         </span>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <span>目標：{customCalo}カロリー</span>
+          <div className="main__parameter-icon">
+            <FontAwesomeIcon
+              icon={faPen}
+              className="main__parameter-icon-item"
+              onClick={handleClickOpen}
+            />
+          </div>
+        </div>
       </div>
       <ul className="main__form">
         <li className="main__form-item">

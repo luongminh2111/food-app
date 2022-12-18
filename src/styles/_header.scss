@@ -13,7 +13,7 @@
   -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
   -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
   box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
-
+  z-index: 1;
   &__logo {
     width: 150px;
     height: 50px;
@@ -65,7 +65,7 @@
     border: 1px solid #d3d5d7;
     border-radius: 3px;
     font-size: 16px;
-    color: #0088FF;
+    color: #0088ff;
     margin: 4px;
 
     .btn-list {
@@ -75,13 +75,12 @@
       cursor: pointer;
 
       &:hover {
-        background: #F2F7f9;
+        background: #f2f7f9;
       }
     }
 
     .btn-logout {
       margin-bottom: 8px;
     }
-
   }
 }
