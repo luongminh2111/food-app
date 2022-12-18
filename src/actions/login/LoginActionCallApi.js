@@ -14,11 +14,9 @@ export const login = (email, password) => (dispatch) => {
       },
     })
     .then(res => {
-      console.log("kiem tra res: ", res);
     });
 }
 export const register = (email, password) => (dispatch) => {
-  console.log("kiem tra email :", email);
   fetch(`${BASE_URL}/account/register?account=${email}&password=${password}`,
     {
       mode: 'cors',
@@ -29,6 +27,5 @@ export const register = (email, password) => (dispatch) => {
       },
     })
     .then(res => {
-      console.log("kiem tra res: ", res);
     });
 }

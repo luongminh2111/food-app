@@ -1,6 +1,7 @@
 
 const initState = {
   listFoods: [],
+  listFilterFood: [],
   positionCallApi: false,
 };
 
@@ -12,7 +13,14 @@ const food = (state = initState, action) => {
         ...state,
         listFoods: action.data.data,
       };
-      case 'POSITION_CALL_API':
+    case 'GET_LIST_FILTER_FOOD':{
+      return{
+        ...state,
+        listFilterFood: action.data.data,
+      }
+    }  
+    case 'DELETE_FOOD_ITEM':
+    case 'POSITION_CALL_API':
       return {
         ...state,
         positionCallApi: !state.positionCallApi,
