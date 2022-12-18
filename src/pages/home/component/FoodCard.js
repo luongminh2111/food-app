@@ -27,6 +27,7 @@ const FoodCard = (props) => {
           alignItems: "center",
           flexDirection: "column",
           fontFamily: ["Kosugi Maru", "M PLUS 1p"],
+          width:""
         }}
       >
         <Typography gutterBottom variant="h5" component="div">

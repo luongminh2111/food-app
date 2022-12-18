@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ffd00a90-3a5b-42ee-90f8-bf3593b66941" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/contains/text" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/component/FoodCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/component/FoodCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/component/FreeModeForm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/component/Targetform.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/component/Targetform.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/recipe/RecipeModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/recipe/RecipeModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/recipe/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/recipe/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/_header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_header.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/_recipe.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_recipe.scss" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2IwREnHok8hs9G7x94FfXIGZ83F" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/ja-vi 333/Desktop/New folder/ITSS-Japanese",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\ja-vi 333\\Desktop\\New folder\\food-app\\node_modules\\prettier",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ffd00a90-3a5b-42ee-90f8-bf3593b66941" name="Changes" comment="" />
+      <created>1671090551133</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1671090551133</updated>
+      <workItem from="1671090551940" duration="616000" />
+      <workItem from="1671292069232" duration="21000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

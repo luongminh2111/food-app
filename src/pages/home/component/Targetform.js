@@ -81,7 +81,6 @@ export const TargetForm = (props) => {
               ))}
             </Select>
           </div>
-
           <div className="main__input main__input--flex">
             <div>
               <div className="main__input-title">カープ</div>
