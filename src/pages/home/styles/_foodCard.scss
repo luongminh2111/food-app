@@ -1,10 +1,10 @@
 .foodCard {
   &-icon {
     font-size: 15px;
-    color: #f3ba2f;
+    color: #3ab19b;
     width: 30px;
     height: 30px;
-    border: 3px solid #f3ba2f;
+    border: 3px solid #3ab19b;
     border-radius: 50%;
     padding: 6px;
     display: flex;
@@ -13,7 +13,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: #f3ba2f;
+      background-color: #3ab19b;
       color: white;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
@@ -30,7 +30,7 @@
   }
 }
 .MuiCard-root {
-  width: 200px;
+  width: 180px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

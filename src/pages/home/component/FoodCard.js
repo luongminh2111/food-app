@@ -36,7 +36,7 @@ const FoodCard = (props) => {
 
   return listFoodOfDay?.length > 0
     ? listFoodOfDay?.map((item) => (
-        <Card sx={{ Width: "100px" }} key={item?.food?.id}>
+        <Card key={item?.food?.id}>
           <CardContent
             sx={{
               display: "flex",

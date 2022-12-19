@@ -11,6 +11,7 @@ import {
   getFilterFood,
   getListFood,
 } from "../../actions/food/foodActionCallApi";
+
 function Main() {
   const [open, setOpen] = React.useState(false);
   const [openFoodForm, setOpenFoodForm] = React.useState(false);
@@ -23,8 +24,8 @@ function Main() {
   const [lunchCalo, setLunchCalo] = useState(0);
   const [dinnerCalo, setDinnerCalo] = useState(0);
   const [customCalo, setCustomCalo] = useState(0);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const handleSumCalo = (arr) => {
     let sumCalo = 0;
     arr.map((e) => {
@@ -36,6 +37,7 @@ function Main() {
   const listBreakFast = useMemo(() => {
     const foods = listFilterFood.filter((e) => e.mealType === "BREAK_FAST");
     setBreakFastCalo(handleSumCalo(foods));
+
     return foods;
   }, [listFilterFood]);
 
