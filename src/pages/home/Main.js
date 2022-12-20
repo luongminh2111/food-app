@@ -1,78 +1,61 @@
-import React, {useMemo} from "react";
-import  { useDispatch, useSelector } from "react-redux";
+import React, { useState, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
 import Targetform from "./component/TargetForm";
-import Foodform from "./component/FoodForm";
-import { Menu } from "../../contains/Menu";
+import FoodForm from "./component/FoodForm";
 import DateSetting from "./component/DateSetting";
 import { useEffect } from "react";
 import FoodCard from "./component/FoodCard";
-import { getFilterFood } from "../../actions/food/foodActionCallApi";
+import {
+  getFilterFood,
+  getListFood,
+} from "../../actions/food/foodActionCallApi";
+
 function Main() {
   const [open, setOpen] = React.useState(false);
   const [openFoodForm, setOpenFoodForm] = React.useState(false);
   const [Type, setType] = React.useState();
-  const [other, setOther] = React.useState([]);
-  const [dateSelect, setDateSelect] = React.useState((new Date().getTime()));
-  const positionCallApi = useSelector(state => state.food.positionCallApi);
-  const breakFasts1 = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'BREAK_FAST') || [];
-  const lunchs1 = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'LUNCH') || [];
-  const dinners1 = useSelector(state => state.food?.listFoods)?.filter(e => e.meal === 'DINNER') || [];
-  const breakFasts = breakFasts1?.map(e => e.foodId) || [];
-  const lunchs = lunchs1?.map(e => e.foodId) || [];
-  const dinners = dinners1?.map(e =>e.foodId) || [];
-  const listBreakFast = (Menu.filter(item => breakFasts?.includes(item.id)));
-  const listLunch = (Menu.filter(item => lunchs?.includes(item.id)));
-  const listDinner  = (Menu.filter(item => dinners?.includes(item.id)));
-  const resBreakFasts = useMemo(() => {
-    let arrayTemp = [];
-    listBreakFast.map(e => {
-      let temp = breakFasts1.find(item => item.foodId === e.id);
-      arrayTemp.push({
-        id: temp.foodId,
-        name: e.name,
-        amount: temp.amount,
-        calo: e.calo,
-      })
-    })
-    return arrayTemp;
-  }, [listBreakFast]);
-  const resLunchs = useMemo(() => {
-    let arrayTemp = [];
-    listLunch.map(e => {
-      let temp = lunchs1?.find(item => item.foodId === e.id);
-      if(temp){
-        arrayTemp.push({
-          id: temp?.foodId,
-          name: e.name,
-          amount: temp?.amount,
-          calo: e.calo,
-        })
-      }
-    
-    })
-
-    return arrayTemp;
-  }, [listLunch]);
-
-  const resDinners = useMemo(() => {
-    let arrayTemp = [];
-    listDinner.map(e => {
-      let temp = dinners1?.find(item => item.foodId === e.id);
-      arrayTemp.push({
-        id: temp?.foodId,
-        name: e.name,
-        amount: temp?.amount,
-        calo: e.calo,
-      })
-    })
-    return arrayTemp;
-  }, [listDinner]);
+  const [dateSelect, setDateSelect] = React.useState(new Date().getTime());
+  const listFood = useSelector((state) => state.food.listFoods);
+  const positionCallApi = useSelector((state) => state.food.positionCallApi);
+  const listFilterFood = useSelector((state) => state.food.listFilterFood);
+  const [breakFastCalo, setBreakFastCalo] = useState(0);
+  const [lunchCalo, setLunchCalo] = useState(0);
+  const [dinnerCalo, setDinnerCalo] = useState(0);
+  const [customCalo, setCustomCalo] = useState(0);
 
   const dispatch = useDispatch();
+  const handleSumCalo = (arr) => {
+    let sumCalo = 0;
+    arr.map((e) => {
+      sumCalo += e.amount * e.food.calo;
+    });
+    return sumCalo;
+  };
+
+  const listBreakFast = useMemo(() => {
+    const foods = listFilterFood.filter((e) => e.mealType === "BREAK_FAST");
+    setBreakFastCalo(handleSumCalo(foods));
+
+    return foods;
+  }, [listFilterFood]);
+
+  const listLunch = useMemo(() => {
+    const foods = listFilterFood.filter((e) => e.mealType === "LUNCH");
+    setLunchCalo(handleSumCalo(foods));
+    return foods;
+  }, [listFilterFood]);
+
+  const listDinner = useMemo(() => {
+    const foods = listFilterFood.filter((e) => e.mealType === "DINNER");
+    setDinnerCalo(handleSumCalo(foods));
+    return foods;
+  }, [listFilterFood]);
+
   useEffect(() => {
-    dispatch(getFilterFood((new Date()).getTime()));
+    dispatch(getListFood());
+    dispatch(getFilterFood(dateSelect));
   }, []);
 
   useEffect(() => {
@@ -96,34 +79,37 @@ function Main() {
   };
   return (
     <div className="main">
-      <DateSetting dateSelect={dateSelect} setDateSelect={setDateSelect}/>
+      <DateSetting dateSelect={dateSelect} setDateSelect={setDateSelect} />
 
       <div className="main__parameter">
-        <span>総カロリー：730カロリー</span>
         <span>
-          目標：1000カロリー
-          <FontAwesomeIcon
-            icon={faPen}
-            className="main__parameter-icon"
-            onClick={handleClickOpen}
-          />
+          総カロリー：{breakFastCalo + lunchCalo + dinnerCalo}カロリー
         </span>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <span>目標：{customCalo}カロリー</span>
+          <div className="main__parameter-icon">
+            <FontAwesomeIcon
+              icon={faPen}
+              className="main__parameter-icon-item"
+              onClick={handleClickOpen}
+            />
+          </div>
+        </div>
       </div>
       <ul className="main__form">
         <li className="main__form-item">
           <span className="main__title">
-            朝ごはん: {listBreakFast.reduce((total, item) => total + item.calo, 0)}
+            朝ごはん: {breakFastCalo}
             カロリー
           </span>
           <ul className="main__menu">
-            {resBreakFasts.map((item, index) => (
-              <FoodCard
-                id={item.id}
-                FoodName={item.name}
-                quantity={item.amount}
-                calo={item.calo}
-              />
-            ))}
+            <FoodCard
+              key={1}
+              type="朝ごはん"
+              listFood={listFood}
+              listFoodOfDay={listBreakFast}
+              date={dateSelect}
+            />
             <li className="main__icon">
               <button
                 className="main__icon-item"
@@ -137,18 +123,17 @@ function Main() {
         </li>
         <li className="main__form-item">
           <span className="main__title">
-            昼ごはん: {listLunch.reduce((total, item) => total + item.calo, 0)}
+            昼ごはん: {lunchCalo}
             カロリー
           </span>
           <ul className="main__menu">
-            {resLunchs.map((item, index) => (
-              <FoodCard
-              id={item.id}
-              FoodName={item.name}
-              quantity={item.amount}
-              calo={item.calo}
-              />)
-            )}
+            <FoodCard
+              key={2}
+              listFood={listFood}
+              type="昼ごはん"
+              listFoodOfDay={listLunch}
+              date={dateSelect}
+            />
             <li className="main__icon">
               <button
                 className="main__icon-item"
@@ -162,18 +147,17 @@ function Main() {
         </li>
         <li className="main__form-item">
           <span className="main__title">
-            晩ごはん: {listDinner.reduce((total, item) => total + item.calo, 0)}
+            晩ごはん: {dinnerCalo}
             カロリー
           </span>
           <ul className="main__menu">
-            {resDinners.map((item, index) => (
-              <FoodCard
-              id={item.id}
-                FoodName={item.name}
-                quantity={item.amount}
-                calo={item.calo}
-              />
-            ))}
+            <FoodCard
+              key={3}
+              type="晩ごはん"
+              listFood={listFood}
+              listFoodOfDay={listDinner}
+              date={dateSelect}
+            />
             <li className="main__icon">
               <button
                 className="main__icon-item"
@@ -185,39 +169,14 @@ function Main() {
             </li>
           </ul>
         </li>
-        <li className="main__form-item">
-          <span className="main__title">
-            他: {other.reduce((total, item) => total + item.calo, 0)}
-            カロリー
-          </span>
-          <ul className="main__menu">
-            {other.map((item, index) => (
-              <FoodCard
-              id={item.id}
-                amount={item.amount}
-                FoodName={item.name}
-                quantity={item.gram}
-                calo={item.calo}
-              />
-            ))}
-
-            <li className="main__icon">
-              <button
-                className="main__icon-item"
-                value="他"
-                onClick={handleClickOpenFoodForm}
-              >
-                <FontAwesomeIcon icon={faPlus} />
-              </button>
-            </li>
-          </ul>
-        </li>
       </ul>
-      <Foodform
+      <FoodForm
         onclick={openFoodForm}
         onclose={handleCloseFoodForm}
         type={Type}
         date={dateSelect}
+        isUpdate={false}
+        listFood={listFood}
       />
       <Targetform onclick={open} onclose={handleClose} />
     </div>

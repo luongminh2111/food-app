@@ -1,15 +1,36 @@
 import { BASE_URL } from "../../contains/common";
-import { fetchFood, changePositionCallAPi } from "./foodAction";
+import { fetchListFood, fetchFilterFood, changePositionCallAPi, deleteFoodItemRedux } from "./foodAction";
 import axios from 'axios';
+
+export const getListFood = () => (dispatch)=> {
+  axios.get(`${BASE_URL}/food/list`)
+  .then(res => {
+    dispatch(fetchListFood(res?.data));
+  })
+  .catch(error => console.log(error));
+};
+
 export const getFilterFood = (date) => (dispatch)=> {
     axios.get(`${BASE_URL}/daybook/currentday?date=${date}`)
     .then(res => {
-      dispatch(fetchFood(res?.data));
+      dispatch(fetchFilterFood(res?.data));
     })
     .catch(error => console.log(error));
 };
 
-export const saveFoodItem = (menuItem, onclose) => (dispatch) => {  
+export const deleteFoodItem = (id) => (dispatch)=> {
+  return axios.post(`${BASE_URL}/daybook/delete/${id}`)
+  .then(res => {
+    if(res?.data?.message === "SUCCESS"){
+      dispatch(deleteFoodItemRedux(id));
+      return true;
+    } 
+    return false;
+  })
+  .catch(error => console.log(error));
+};
+
+export const saveFoodItem = (menuItem, isUpdate, onclose) => (dispatch) => { 
   let type;
   if(menuItem.type === '朝ごはん'){
     type = 'BREAK_FAST';
@@ -20,12 +41,12 @@ export const saveFoodItem = (menuItem, onclose) => (dispatch) => {
     type = 'DINNER';
   }
   const dataSave = {
+    id: menuItem?.id,
     mealType: type,
-    foodId: menuItem?.food?.id,
+    foodId: menuItem?.foodId,
     amount: menuItem?.quantity,
     date: menuItem.date
   }
-  console.log("kiem tra ok  :", dataSave);
   fetch(`${BASE_URL}/daybook/save`,
     {
       mode: 'cors',

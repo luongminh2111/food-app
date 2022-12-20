@@ -13,7 +13,7 @@
   -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
   -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
   box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
-
+  z-index: 1;
   &__logo {
     width: 150px;
     height: 50px;
@@ -37,6 +37,7 @@
 
       &:hover {
         border-bottom: 5px solid #3ab19b;
+        transition: border-bottom 0.3s linear;
       }
       & > a :active {
         color: black;
@@ -56,6 +57,7 @@
     &:hover {
       color: white;
       background-color: #3ab19b;
+      transition: background-color 0.3s linear, color 0.3s linear;
     }
   }
 

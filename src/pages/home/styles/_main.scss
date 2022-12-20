@@ -1,4 +1,5 @@
 @import "date";
+@import "foodCard";
 
 .main {
   color: black;
@@ -13,17 +14,26 @@
     text-align: center;
     margin: 20px 0;
     &-icon {
+      font-size: 15px;
       color: #3ab19b;
-
-      width: 12px;
-      height: 12px;
+      width: 30px;
+      height: 30px;
       border: 3px solid #3ab19b;
       border-radius: 50%;
-      display: inline-block;
       padding: 6px;
-      margin-top: 10px;
-      margin-left: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       cursor: pointer;
+      margin-left: 10px;
+      &:hover {
+        background-color: #3ab19b;
+        color: white;
+        transition: background-color 0.3s ease-in, color 0.3s ease-in;
+      }
+      &:active {
+        box-shadow: 2px 2px 5px #93c5bc;
+      }
     }
   }
   &__menu {
@@ -45,6 +55,7 @@
     gap: 20px;
     justify-content: center;
     align-items: center;
+
     &-item {
       width: 50px;
       height: 50px;
@@ -57,6 +68,14 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
+      &:hover {
+        background-color: #3ab19b;
+        color: white;
+        transition: background-color 0.3s linear, color 0.3s linear;
+      }
+      &:active {
+        box-shadow: 2px 2px 5px #93c5bc;
+      }
     }
   }
   &__selecter {
@@ -78,6 +97,16 @@
       font-size: 32px;
       width: 100%;
       text-align: center;
+    }
+    .input-wrapper {
+      display: flex;
+      flex-wrap: nowrap;
+      .MuiFormControl-root {
+        width: 200px !important;
+      }
+      .main__input {
+        width: 220px !important;
+      }
     }
   }
   &__input {

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../home/Header";
 import { useHistory } from "react-router-dom";
 import { Button, Box } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 import SearchBar from "material-ui-search-bar";
 import "../../styles/_recipe.scss";
 import { faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
@@ -10,14 +11,17 @@ import RecipeModal from "./RecipeModal";
 import Footer from "../home/Footer";
 import TagsInput from "./component/TagsInput";
 import { recipes } from "../../contains/recipe";
+import RecipeCard from "./component/RecipeCard";
+
 function Recipe(props) {
   const history = useHistory();
-  const [open, setOpen] = React.useState(false);
+
   const [searchStr, setSearchStr] = useState("");
-  const handleSearch = () => {
-    // if (searchStr) history.push(`/list/${searchStr.split(' ').join(':')}`);
-  };
-  const [suggestions, setSuggestions] = useState([]);
+  const [recipe, setRecipe] = React.useState(
+    recipes.map((a) => {
+      return a;
+    })
+  );
 
   return (
     <Box className="recipe-wrapper">
@@ -33,11 +37,17 @@ function Recipe(props) {
         <Box className="body-contents">
           <Box className="content-item item_bottom">
             <Box className="item__title">食べて</Box>
+
             <Box className="suggestion-list-1">
               {recipes.map((item, index) => (
-                <Box className="suggestion-item-1" key={index}>
-                  {item.recipeName}
-                </Box>
+                <RecipeCard
+                  id={item.id}
+                  recipeName={item.recipeName}
+                  img={item.img}
+                  tutorial={item.tutorial}
+                  calo={item.calo}
+                  ingredients={item.ingredients}
+                />
               ))}
             </Box>
           </Box>
