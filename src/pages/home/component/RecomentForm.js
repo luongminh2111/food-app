@@ -12,7 +12,7 @@ import TextField from "@mui/material/TextField";
 
 import MenuItem from "@mui/material/MenuItem";
 import { Select } from "@mui/material";
-export default function FreeModeForm(props) {
+export default function RecomentForm(props) {
   const [values, setValues] = useState({
     weight: "",
     age: "",

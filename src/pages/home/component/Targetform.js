@@ -11,9 +11,14 @@ import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import { Select } from "@mui/material";
-import { modes, genders, types, activityModes } from "../../../contains/dataConst";
+import {
+  modes,
+  genders,
+  types,
+  activityModes,
+} from "../../../contains/dataConst";
 
-function TargetForm(props){
+function TargetForm(props) {
   const [mode, setMode] = React.useState("フリーモード");
   const [type, setType] = React.useState("カロリー");
   const [gender, setGender] = React.useState("男性");
@@ -56,41 +61,46 @@ function TargetForm(props){
   const handleType = (event) => {
     setType(event.target.value);
   };
-  
+
   const handleChangGender = (e) => {
     setGender(e.target.value);
-  }
+  };
 
   const handleChangActivityMode = (e) => {
     setActivityMode(e.target.value);
-  }
+  };
 
   const handleChangeCalories = (e) => {
     setFreeModeCalories(e.target.value);
-  }
+  };
 
   const resultR = () => {
-    switch(activityMode){
-      case activityModes[0].value: return 1.2;
-      case activityModes[1].value: return 1.375;
-      case activityModes[2].value: return 1.55;
-      case activityModes[3].value: return 1.725;
-      case activityModes[4].value: return 1.9;
-      default : return 0;
+    switch (activityMode) {
+      case activityModes[0].value:
+        return 1.2;
+      case activityModes[1].value:
+        return 1.375;
+      case activityModes[2].value:
+        return 1.55;
+      case activityModes[3].value:
+        return 1.725;
+      case activityModes[4].value:
+        return 1.9;
+      default:
+        return 0;
     }
-  } 
+  };
 
   const sumCalo = useMemo(() => {
     const valueR = resultR();
     let totalCalo = 0;
-    if( protein > 0 || fat > 0 || carb > 0 ){
-      totalCalo = (carb + protein ) * 4 + fat * 9;
-    }else{
+    if (protein > 0 || fat > 0 || carb > 0) {
+      totalCalo = (carb + protein) * 4 + fat * 9;
+    } else {
       let bmr = 0;
-      if(gender === '男性'){
+      if (gender === "男性") {
         bmr = 13.397 * weight + 4.799 * height - 5.677 * age + 88.362;
-      }
-      else{
+      } else {
         bmr = 9.247 * weight + 3.098 * height - 4.33 * age + 447.593;
       }
       totalCalo = bmr * valueR;
@@ -99,25 +109,25 @@ function TargetForm(props){
   }, [fat, protein, carb, weight, height, gender, age, activityMode]);
 
   const renderRecommend = () => {
-    return(
+    return (
       <div className="main__statistics">
-         <div className="main__input">
-            <div className="main__input-title">性別</div>
-            <div className="main__selecter">
-              <Select
-                displayEmpty
-                value={gender}
-                sx={{ m: 1, width: "25ch" }}
-                onChange={handleChangGender}
-              >
-                {genders.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.value}
-                  </MenuItem>
-                ))}
-              </Select>
-            </div>
+        <div className="main__input">
+          <div className="main__input-title">性別</div>
+          <div className="main__selecter">
+            <Select
+              displayEmpty
+              value={gender}
+              sx={{ m: 1, width: "25ch" }}
+              onChange={handleChangGender}
+            >
+              {genders.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.value}
+                </MenuItem>
+              ))}
+            </Select>
           </div>
+        </div>
         <div className="input-wrapper d-flex flex-nowrap">
           <div className="main__input">
             <div className="main__input-title">体重</div>
@@ -184,8 +194,8 @@ function TargetForm(props){
         </div>
         <div className="mmain__statistics-total">目標:{sumCalo}カロリー</div>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <Dialog open={props.onclick} onClose={props.onclose}>
@@ -206,8 +216,8 @@ function TargetForm(props){
               ))}
             </Select>
           </div>
-          {mode === 'フリーモード' ? (
-            <> 
+          {mode === "フリーモード" ? (
+            <>
               <div className="main__selecter">
                 <Select
                   displayEmpty
@@ -222,11 +232,14 @@ function TargetForm(props){
                   ))}
                 </Select>
               </div>
-              {type === 'カロリー' ? (
+              {type === "カロリー" ? (
                 <div className="main__input main__input--flex">
                   <div>
                     <div className="main__input-title">カロリー</div>
-                    <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                    <FormControl
+                      sx={{ m: 1, width: "25ch" }}
+                      variant="outlined"
+                    >
                       <OutlinedInput
                         id="outlined-adornment-calories"
                         value={freeModeCalories}
@@ -242,75 +255,88 @@ function TargetForm(props){
                     </FormControl>
                   </div>
                 </div>
-              ): (
-              <>
-                <div className="main__input main__input--flex">
-                  <div>
-                  <div className="main__input-title">カープ</div>
-                  <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-                    <OutlinedInput
-                      id="outlined-adornment-weight"
-                      value={carb}
-                      onChange={(e) => handleChangeCarb(e)}
-                      endAdornment={
-                        <InputAdornment position="end">g</InputAdornment>
-                      }
-                      aria-describedby="outlined-weight-helper-text"
-                      inputProps={{
-                        "aria-label": "weight",
-                      }}
-                    />
-                  </FormControl>
+              ) : (
+                <>
+                  <div className="main__input main__input--flex">
+                    <div>
+                      <div className="main__input-title">カープ</div>
+                      <FormControl
+                        sx={{ m: 1, width: "25ch" }}
+                        variant="outlined"
+                      >
+                        <OutlinedInput
+                          id="outlined-adornment-weight"
+                          value={carb}
+                          onChange={(e) => handleChangeCarb(e)}
+                          endAdornment={
+                            <InputAdornment position="end">g</InputAdornment>
+                          }
+                          aria-describedby="outlined-weight-helper-text"
+                          inputProps={{
+                            "aria-label": "weight",
+                          }}
+                        />
+                      </FormControl>
+                    </div>
                   </div>
-                </div>
-                <div className="main__input main__input--flex">
-                  <div>
-                    <div className="main__input-title">プロテイン</div>
-                    <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-                      <OutlinedInput
-                        id="outlined-adornment-weight"
-                        value={protein}
-                        onChange={(e) => handleChangeProtein(e)}
-                        endAdornment={
-                          <InputAdornment position="end">g</InputAdornment>
-                        }
-                        aria-describedby="outlined-weight-helper-text"
-                        inputProps={{
-                          "aria-label": "weight",
-                        }}
-                      />
-                    </FormControl>
+                  <div className="main__input main__input--flex">
+                    <div>
+                      <div className="main__input-title">プロテイン</div>
+                      <FormControl
+                        sx={{ m: 1, width: "25ch" }}
+                        variant="outlined"
+                      >
+                        <OutlinedInput
+                          id="outlined-adornment-weight"
+                          value={protein}
+                          onChange={(e) => handleChangeProtein(e)}
+                          endAdornment={
+                            <InputAdornment position="end">g</InputAdornment>
+                          }
+                          aria-describedby="outlined-weight-helper-text"
+                          inputProps={{
+                            "aria-label": "weight",
+                          }}
+                        />
+                      </FormControl>
+                    </div>
                   </div>
-                </div>
-                <div className="main__input main__input--flex">
-                  <div>
-                    <div className="main__input-title">ファット</div>
-                    <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-                      <OutlinedInput
-                        id="outlined-adornment-weight"
-                        value={fat}
-                        onChange={(e) => handleChangeFat(e)}
-                        endAdornment={
-                          <InputAdornment position="end">g</InputAdornment>
-                        }
-                        aria-describedby="outlined-weight-helper-text"
-                        inputProps={{
-                          "aria-label": "weight",
-                        }}
-                      />
-                    </FormControl>
+                  <div className="main__input main__input--flex">
+                    <div>
+                      <div className="main__input-title">ファット</div>
+                      <FormControl
+                        sx={{ m: 1, width: "25ch" }}
+                        variant="outlined"
+                      >
+                        <OutlinedInput
+                          id="outlined-adornment-weight"
+                          value={fat}
+                          onChange={(e) => handleChangeFat(e)}
+                          endAdornment={
+                            <InputAdornment position="end">g</InputAdornment>
+                          }
+                          aria-describedby="outlined-weight-helper-text"
+                          inputProps={{
+                            "aria-label": "weight",
+                          }}
+                        />
+                      </FormControl>
+                    </div>
                   </div>
-                </div>
-                <div className="mmain__statistics-total" style={{textAlign: 'center'}}>目標:{sumCalo}カロリー</div>
-              </>
-              ) }
+                  <div
+                    className="mmain__statistics-total"
+                    style={{ textAlign: "center" }}
+                  >
+                    目標:{sumCalo}カロリー
+                  </div>
+                </>
+              )}
             </>
-          ) : 
-          (
+          ) : (
             renderRecommend()
-          ) }
+          )}
         </div>
-      </DialogContent> 
+      </DialogContent>
       <DialogActions>
         <Button onClick={props.onclose} xs={{}}>
           キャンセル
@@ -320,9 +346,8 @@ function TargetForm(props){
         </Button>
       </DialogActions>
     </Dialog>
-    
   );
-};
+}
 TargetForm.propTypes = {
   onclick: PropTypes.bool,
   onclose: PropTypes.func,

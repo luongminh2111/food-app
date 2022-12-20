@@ -39,6 +39,10 @@
         border-bottom: 5px solid #3ab19b;
         transition: border-bottom 0.3s linear;
       }
+      & > a :active {
+        color: black;
+        border-bottom: 5px solid #3ab19b;
+      }
     }
   }
 

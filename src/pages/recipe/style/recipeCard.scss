@@ -1,0 +1,12 @@
+.MuiCard-root {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &:hover {
+    .MuiCardActions-root.MuiCardActions-spacing {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
