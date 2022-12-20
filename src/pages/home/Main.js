@@ -2,10 +2,11 @@ import React, { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
-import Targetform from "./component/TargetForm";
+import TargetForm from "./component/TargetForm";
 import FoodForm from "./component/FoodForm";
 import DateSetting from "./component/DateSetting";
 import { useEffect } from "react";
+import { getTarget } from "../../actions/target/TargetActionCallApi";
 import FoodCard from "./component/FoodCard";
 import {
   getFilterFood,
@@ -24,7 +25,7 @@ function Main() {
   const [lunchCalo, setLunchCalo] = useState(0);
   const [dinnerCalo, setDinnerCalo] = useState(0);
   const [customCalo, setCustomCalo] = useState(0);
-
+  const target = useSelector(state  => state.target?.data);
   const dispatch = useDispatch();
   const handleSumCalo = (arr) => {
     let sumCalo = 0;
@@ -56,10 +57,12 @@ function Main() {
   useEffect(() => {
     dispatch(getListFood());
     dispatch(getFilterFood(dateSelect));
+    dispatch(getTarget(dateSelect));
   }, []);
 
   useEffect(() => {
     dispatch(getFilterFood(dateSelect));
+    dispatch(getTarget(dateSelect));
   }, [dateSelect, positionCallApi]);
 
   const handleClickOpen = () => {
@@ -178,7 +181,7 @@ function Main() {
         isUpdate={false}
         listFood={listFood}
       />
-      <Targetform onclick={open} onclose={handleClose} />
+      <TargetForm onclick={open} onclose={handleClose} date={dateSelect} target={target} setCustomCalo={setCustomCalo} customCalo={customCalo} />
     </div>
   );
 }

@@ -19,8 +19,10 @@ import {
 } from "../../../contains/dataConst";
 import { useDispatch } from "react-redux";
 import { saveTargetItem } from "../../../actions/target/TargetActionCallApi";
+import { useEffect } from "react";
 
 function TargetForm(props) {
+  const { date, target, customCalo, setCustomCalo } = props;
   const [mode, setMode] = React.useState("フリーモード");
   const [type, setType] = React.useState("カロリー");
   const [gender, setGender] = React.useState("男性");
@@ -33,6 +35,22 @@ function TargetForm(props) {
   const [fat, setFat] = useState(0);
   const [height, setHeight] = useState(0);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(target){
+      setMode(target?.modeType);
+      setType(target?.type);
+      setGender(target?.gender);
+      setActivityMode(target?.activityType);
+      setFreeModeCalories(target?.calories);
+      setCarb(target?.carb);
+      setAge(target?.age);
+      setWeight(target?.weight);
+      setHeight(target?.height);
+      setFat(target?.fat);
+      setProtein(target?.protein);
+    }
+  }, [target]);
 
   const handleChangeCarb = (event) => {
     setCarb(event.target.value);
@@ -94,7 +112,7 @@ function TargetForm(props) {
     }
   };
 
-  const sumCalo = useMemo(() => {
+  useEffect(() => {
     const valueR = resultR();
     let totalCalo = 0;
     if (protein > 0 || fat > 0 || carb > 0) {
@@ -108,15 +126,15 @@ function TargetForm(props) {
       }
       totalCalo = bmr * valueR;
     }
-    return totalCalo;
+    setCustomCalo(totalCalo);
   }, [fat, protein, carb, weight, height, gender, age, activityMode]);
 
   const handleSaveTarget = () => {
     const targetItem = {
-      mode, type, gender, activityMode, freeModeCalories, carb, age, height, weight, fat, protein
+      mode, type, gender, activityMode, freeModeCalories, carb, age, height, weight, fat, protein, date
     };
 
-    dispatch(saveTargetItem(targetItem));
+    dispatch(saveTargetItem(targetItem, onclose));
   }
 
   const renderRecommend = () => {
@@ -203,7 +221,7 @@ function TargetForm(props) {
             </div>
           </div>
         </div>
-        <div className="mmain__statistics-total">目標:{sumCalo}カロリー</div>
+        <div className="mmain__statistics-total">目標:{customCalo}カロリー</div>
       </div>
     );
   };
@@ -338,7 +356,7 @@ function TargetForm(props) {
                     className="mmain__statistics-total"
                     style={{ textAlign: "center" }}
                   >
-                    目標:{sumCalo}カロリー
+                    目標:{customCalo}カロリー
                   </div>
                 </>
               )}

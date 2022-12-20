@@ -1,42 +1,64 @@
 import { BASE_URL } from "../../contains/common";
-import { changePositionCallApiTarget, fetchTarget } from "./TargetAction";
+import { fetchTarget } from "./TargetAction";
 import axios from 'axios';
+import { changePositionCallAPi } from "../food/FoodAction";
 
 export const getTarget = (date) => (dispatch)=> {
-  axios.get(`${BASE_URL}/diary/currentday/${date}`)
+  axios.get(`${BASE_URL}/diary/currentday/?date=${date}`)
   .then(res => {
-    console.log("kiem tra res :", res);
     dispatch(fetchTarget(res?.data));
   })
   .catch(error => console.log(error));
 };
 
-export const saveTargetItem = (targetItem, isUpdate, onclose) => (dispatch) => { 
-  let type;
-  if(targetItem.type === '朝ごはん'){
-    type = 'BREAK_FAST';
-  } else if(targetItem.type === '昼ごはん'){
-    type = 'LUNCH';
-  }
-  else if(targetItem.type === '晩ごはん'){
-    type = 'DINNER';
-  }
-  const dataSave = {
-    id: targetItem?.id,
-    mealType: type,
-    foodId: targetItem?.foodId,
-    amount: targetItem?.quantity,
+export const saveTargetItem = (targetItem, onclose) => (dispatch) => { 
+  let dataSave = {
+    modeType: targetItem.mode,
+    type: targetItem.type,
     date: targetItem.date
-  }
-  fetch(`${BASE_URL}/daybook/save`,
-    {
-      mode: 'cors',
-      method: 'POST',
-      dataType: 'jsonp',
-      body: JSON.stringify(dataSave),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-   
+  };
+  if(targetItem.mode === 'フリーモード'){
+    if(targetItem.type === 'カロリー'){
+      dataSave = {
+        ...dataSave,
+        calories: Number(targetItem.freeModeCalories)
+      }
+    }else{
+      dataSave = {
+        ...dataSave,
+        carb: targetItem.carb,
+        protein: targetItem.protein,
+        fat: targetItem.fat,
+      }
+    }
+  } else {
+      dataSave = {
+        ...dataSave,
+        weight: targetItem.weight,
+        height: targetItem.height,
+        age: targetItem.age,
+        activity_type: targetItem.activityMode,
+        gender: targetItem.gender,
+      }
+    }
+  console.log("kiem tra dataa asvee :", dataSave)
+
+  fetch(`${BASE_URL}/diary/save`,
+  {
+    mode: 'cors',
+    method: 'POST',
+    dataType: 'jsonp',
+    body: JSON.stringify(dataSave),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .then(res => {
+    console.log("kiem tra resssss :", res);
+      if(res?.status === 200){
+        fetchTarget(dataSave);
+        dispatch(changePositionCallAPi());
+        onclose();
+      }
+  });
 }

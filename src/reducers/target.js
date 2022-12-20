@@ -1,7 +1,6 @@
 
 const initState = {
     data: [],
-    positionCallApiTarget: false,
   };
   
   const target = (state = initState, action) => {
