@@ -10,7 +10,7 @@ import FoodCard from "./component/FoodCard";
 import {
   getFilterFood,
   getListFood,
-} from "../../actions/food/foodActionCallApi";
+} from "../../actions/food/FoodActionCallApi";
 
 function Main() {
   const [open, setOpen] = React.useState(false);

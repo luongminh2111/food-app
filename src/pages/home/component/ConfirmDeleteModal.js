@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useDispatch } from 'react-redux';
-import { deleteFoodItem } from '../../../actions/food/foodActionCallApi';
+import { deleteFoodItem } from '../../../actions/food/FoodActionCallApi';
 
 function ConfirmDeleteModal(props) {
 

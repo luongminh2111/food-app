@@ -17,6 +17,8 @@ import {
   types,
   activityModes,
 } from "../../../contains/dataConst";
+import { useDispatch } from "react-redux";
+import { saveTargetItem } from "../../../actions/target/TargetActionCallApi";
 
 function TargetForm(props) {
   const [mode, setMode] = React.useState("フリーモード");
@@ -30,6 +32,7 @@ function TargetForm(props) {
   const [protein, setProtein] = useState(0);
   const [fat, setFat] = useState(0);
   const [height, setHeight] = useState(0);
+  const dispatch = useDispatch();
 
   const handleChangeCarb = (event) => {
     setCarb(event.target.value);
@@ -107,6 +110,14 @@ function TargetForm(props) {
     }
     return totalCalo;
   }, [fat, protein, carb, weight, height, gender, age, activityMode]);
+
+  const handleSaveTarget = () => {
+    const targetItem = {
+      mode, type, gender, activityMode, freeModeCalories, carb, age, height, weight, fat, protein
+    };
+
+    dispatch(saveTargetItem(targetItem));
+  }
 
   const renderRecommend = () => {
     return (
@@ -341,7 +352,7 @@ function TargetForm(props) {
         <Button onClick={props.onclose} xs={{}}>
           キャンセル
         </Button>
-        <Button onClick={props.onclose} autoFocus>
+        <Button onClick={handleSaveTarget} autoFocus>
           サーブ
         </Button>
       </DialogActions>

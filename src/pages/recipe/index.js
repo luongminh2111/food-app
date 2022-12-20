@@ -10,18 +10,19 @@ import { faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
 import RecipeModal from "./RecipeModal";
 import Footer from "../home/Footer";
 import TagsInput from "./component/TagsInput";
-import { recipes } from "../../contains/recipe";
 import RecipeCard from "./component/RecipeCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getListRecipe } from "../../actions/recipe/RecipeActionCallApi";
 
 function Recipe(props) {
-  const history = useHistory();
 
   const [searchStr, setSearchStr] = useState("");
-  const [recipe, setRecipe] = React.useState(
-    recipes.map((a) => {
-      return a;
-    })
-  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getListRecipe());
+  }, []);
+  const recipe = useSelector(state => state.recipe?.data);
 
   return (
     <Box className="recipe-wrapper">
@@ -39,7 +40,7 @@ function Recipe(props) {
             <Box className="item__title">食べて</Box>
 
             <Box className="suggestion-list-1">
-              {recipes.map((item, index) => (
+              {recipe.map((item, index) => (
                 <RecipeCard
                   id={item.id}
                   recipeName={item.recipeName}

@@ -9,7 +9,7 @@ import DialogContent from "@mui/material/DialogContent";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
 import { Select } from "@mui/material";
-import { saveFoodItem } from "../../../actions/food/foodActionCallApi";
+import { saveFoodItem } from "../../../actions/food/FoodActionCallApi";
 
 function FoodForm(props) {
   const { type, date, onclose, isUpdate ,listFood, foodSelected} = props;

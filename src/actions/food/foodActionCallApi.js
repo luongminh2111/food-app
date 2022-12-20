@@ -1,5 +1,5 @@
 import { BASE_URL } from "../../contains/common";
-import { fetchListFood, fetchFilterFood, changePositionCallAPi, deleteFoodItemRedux } from "./foodAction";
+import { fetchListFood, fetchFilterFood, changePositionCallAPi, deleteFoodItemRedux } from "./FoodAction";
 import axios from 'axios';
 
 export const getListFood = () => (dispatch)=> {
