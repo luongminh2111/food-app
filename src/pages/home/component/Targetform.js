@@ -8,6 +8,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import { Select } from "@mui/material";
 import {
@@ -29,6 +30,7 @@ function TargetForm(props) {
   const [freeModeCalories, setFreeModeCalories] = useState(0);
   const [carb, setCarb] = useState(0);
   const [age, setAge] = useState(0);
+  const [isAllowDisable, setIsAllowDisable] = useState(false);
   const [weight, setWeight] = useState(0);
   const [protein, setProtein] = useState(0);
   const [fat, setFat] = useState(0);
@@ -36,20 +38,33 @@ function TargetForm(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setMode(target?.modeType || "フリーモード");
-    setType(target?.type || "カロリー");
-    setGender(target?.gender || "男性");
-    setActivityMode(target?.activityType || "活動強度");
-    setFreeModeCalories(target?.calories || 0);
-    setCarb(target?.carb || 0);
-    setAge(target?.age || 0);
-    setWeight(target?.weight || 0);
-    setHeight(target?.height || 0);
-    setFat(target?.fat || 0);
-    setProtein(target?.protein || 0);
-   
+    if (target) {
+      setMode(target?.modeType);
+      setType(target?.type);
+      setGender(target?.gender);
+      setActivityMode(target?.activityType);
+      setFreeModeCalories(target?.calories);
+      setCarb(target?.carb);
+      setAge(target?.age);
+      setWeight(target?.weight);
+      setHeight(target?.height);
+      setFat(target?.fat);
+      setProtein(target?.protein);
+      if (
+        target.calories > 0 ||
+        target.fat > 0 ||
+        target.protein > 0 ||
+        target.carb > 0 ||
+        target.height > 0 ||
+        target.weight > 0 ||
+        target.age > 0 ||
+        target.activityMode
+      ) {
+        setIsAllowDisable(true);
+      }
+    }
   }, [target]);
-  console.log("kiem tra target :", target);
+
   const handleChangeCarb = (event) => {
     setCarb(event.target.value);
   };
@@ -113,9 +128,7 @@ function TargetForm(props) {
   useEffect(() => {
     const valueR = resultR();
     let totalCalo = 0;
-    if(freeModeCalories > 0){
-      totalCalo = freeModeCalories;
-    } else  if (protein > 0 || fat > 0 || carb > 0) {
+    if (protein > 0 || fat > 0 || carb > 0) {
       totalCalo = (carb + protein) * 4 + fat * 9;
     } else {
       let bmr = 0;
@@ -127,15 +140,26 @@ function TargetForm(props) {
       totalCalo = bmr * valueR;
     }
     setCustomCalo(totalCalo);
-  }, [fat, protein, carb, weight, height, gender, age, activityMode, freeModeCalories]);
+  }, [fat, protein, carb, weight, height, gender, age, activityMode]);
 
   const handleSaveTarget = () => {
     const targetItem = {
-      mode, type, gender, activityMode, freeModeCalories, carb, age, height, weight, fat, protein, date, id: target?.id
+      mode,
+      type,
+      gender,
+      activityMode,
+      freeModeCalories,
+      carb,
+      age,
+      height,
+      weight,
+      fat,
+      protein,
+      date,
     };
 
-    dispatch(saveTargetItem(targetItem, props.onclose, date));
-  }
+    dispatch(saveTargetItem(targetItem, onclose));
+  };
 
   const renderRecommend = () => {
     return (
@@ -160,7 +184,11 @@ function TargetForm(props) {
         <div className="input-wrapper d-flex flex-nowrap">
           <div className="main__input">
             <div className="main__input-title">体重</div>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+            <FormControl
+              sx={{ m: 1, width: "25ch" }}
+              variant="outlined"
+              disabled={isAllowDisable}
+            >
               <OutlinedInput
                 id="outlined-adornment-weight"
                 value={weight}
@@ -177,7 +205,11 @@ function TargetForm(props) {
           </div>
           <div className="main__input">
             <div className="main__input-title">身長</div>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined" >
+            <FormControl
+              sx={{ m: 1, width: "25ch" }}
+              variant="outlined"
+              disabled={isAllowDisable}
+            >
               <OutlinedInput
                 id="outlined-adornment-height"
                 value={height}
@@ -192,7 +224,11 @@ function TargetForm(props) {
         <div className="input-wrapper d-flex flex-nowrap">
           <div className="main__input">
             <div className="main__input-title">年</div>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined" >
+            <FormControl
+              sx={{ m: 1, width: "25ch" }}
+              variant="outlined"
+              disabled={isAllowDisable}
+            >
               <OutlinedInput
                 id="outlined-adornment-age"
                 value={age}
@@ -211,6 +247,7 @@ function TargetForm(props) {
                 value={activityMode}
                 sx={{ m: 1, width: "25ch" }}
                 onChange={handleChangActivityMode}
+                disabled={isAllowDisable}
               >
                 {activityModes.map((option) => (
                   <MenuItem key={option.id} value={option.value}>
@@ -268,6 +305,7 @@ function TargetForm(props) {
                     <FormControl
                       sx={{ m: 1, width: "25ch" }}
                       variant="outlined"
+                      disabled={isAllowDisable}
                     >
                       <OutlinedInput
                         id="outlined-adornment-calories"
@@ -292,6 +330,7 @@ function TargetForm(props) {
                       <FormControl
                         sx={{ m: 1, width: "25ch" }}
                         variant="outlined"
+                        disabled={isAllowDisable}
                       >
                         <OutlinedInput
                           id="outlined-adornment-weight"
@@ -311,7 +350,8 @@ function TargetForm(props) {
                   <div className="main__input main__input--flex">
                     <div>
                       <div className="main__input-title">プロテイン</div>
-                      <FormControl 
+                      <FormControl
+                        disabled={isAllowDisable}
                         sx={{ m: 1, width: "25ch" }}
                         variant="outlined"
                       >
@@ -334,6 +374,7 @@ function TargetForm(props) {
                     <div>
                       <div className="main__input-title">ファット</div>
                       <FormControl
+                        disabled={isAllowDisable}
                         sx={{ m: 1, width: "25ch" }}
                         variant="outlined"
                       >
@@ -377,4 +418,8 @@ function TargetForm(props) {
     </Dialog>
   );
 }
+TargetForm.propTypes = {
+  onclick: PropTypes.bool,
+  onclose: PropTypes.func,
+};
 export default TargetForm;

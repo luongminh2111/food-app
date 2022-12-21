@@ -5,34 +5,37 @@ import { Button, Box } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import SearchBar from "material-ui-search-bar";
-import "../../styles/_recipe.scss";
+
 import { faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
 import RecipeModal from "./RecipeModal";
 import Footer from "../home/Footer";
 import TagsInput from "./component/TagsInput";
 import RecipeCard from "./component/RecipeCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getListRecipe, getFilterRecipe } from "../../actions/recipe/RecipeActionCallApi";
+import {
+  getListRecipe,
+  getFilterRecipe,
+} from "../../actions/recipe/RecipeActionCallApi";
 
 function Recipe(props) {
-
   const [searchStr, setSearchStr] = useState([]);
   const dispatch = useDispatch();
-  const recipe = useSelector(state => state.recipe?.data);
+  const recipe = useSelector((state) => {
+    console.log(state.recipe?.data);
+    return state.recipe?.data;
+  });
 
   useEffect(() => {
     dispatch(getListRecipe());
   }, []);
 
   useEffect(() => {
-    if(searchStr.length === 0){
+    if (searchStr.length === 0) {
       dispatch(getListRecipe());
-    }else{
+    } else {
       dispatch(getFilterRecipe(searchStr));
     }
-   
   }, [searchStr]);
-
 
   return (
     <Box className="recipe-wrapper">
@@ -43,7 +46,7 @@ function Recipe(props) {
           className="search-bar"
           sx={{ display: "flex", justifyContent: "center" }}
         >
-          <TagsInput setSearchStr={setSearchStr} searchStr={searchStr}/>
+          <TagsInput setSearchStr={setSearchStr} searchStr={searchStr} />
         </Box>
         <Box className="body-contents">
           <Box className="content-item item_bottom">

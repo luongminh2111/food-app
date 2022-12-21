@@ -13,6 +13,10 @@
     padding-bottom: 50px;
 
     .item__title {
+      word-wrap: break-word;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       font-size: 20px;
       font-weight: 700;
       margin-bottom: 10px;
@@ -53,9 +57,10 @@
       display: block;
 
       .suggestion-list-1 {
-        display: flex;
-        flex-wrap: wrap;
-
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        justify-content: space-between;
+        row-gap: 20px;
         .suggestion-item-1 {
           text-align: center;
           line-height: 80px;
@@ -82,7 +87,7 @@
 
   input {
     border: none;
-    width: 200px;
+    width: 700px;
     font-size: 14px;
 
     &:focus {
@@ -105,7 +110,8 @@
 }
 
 .tag {
-  width: auto;
+  max-width: 700px;
+
   height: 32px;
   display: flex;
   align-items: center;
@@ -133,6 +139,10 @@
   }
   .tag-title {
     margin-top: 3px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .tag-close-icon {
     display: block;
@@ -150,8 +160,11 @@
     cursor: pointer;
   }
 }
+.search-input {
+  width: 700px;
+}
 .button {
-  width: 50px;
+  width: 80px;
   &-search {
     border: none;
     background-color: white;
@@ -159,16 +172,15 @@
     justify-content: center;
     align-items: center;
     :hover {
-      color: white;
-      background-color: #3ab19b;
+      background-color: #3b9685;
     }
   }
   &-icon {
-    color: #3ab19b;
+    color: white;
+    background-color: #3ab19b;
     width: 12px;
     height: 12px;
 
-    border: 3px solid #3ab19b;
     border-radius: 50%;
     display: inline-block;
     padding: 6px;

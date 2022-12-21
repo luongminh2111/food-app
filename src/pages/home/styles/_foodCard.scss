@@ -29,20 +29,20 @@
     }
   }
 }
-.MuiCard-root {
-  width: 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  &:hover {
-    .MuiCardActions-root.MuiCardActions-spacing {
-      visibility: visible;
-      opacity: 1;
-    }
-  }
-}
-.MuiCardActions-root.MuiCardActions-spacing {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.3s ease-in, opacity 0.3s ease-in;
-}
+// .MuiCard-root {
+//   width: 180px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   &:hover {
+//     .MuiCardActions-root.MuiCardActions-spacing {
+//       visibility: visible;
+//       opacity: 1;
+//     }
+//   }
+// }
+// .MuiCardActions-root.MuiCardActions-spacing {
+//   visibility: hidden;
+//   opacity: 0;
+//   transition: visibility 0.3s ease-in, opacity 0.3s ease-in;
+// }

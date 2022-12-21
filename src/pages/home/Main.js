@@ -25,7 +25,7 @@ function Main() {
   const [lunchCalo, setLunchCalo] = useState(0);
   const [dinnerCalo, setDinnerCalo] = useState(0);
   const [customCalo, setCustomCalo] = useState(0);
-  const target = useSelector(state  => state.target?.data);
+  const target = useSelector((state) => state.target?.data);
   const dispatch = useDispatch();
   const handleSumCalo = (arr) => {
     let sumCalo = 0;
@@ -181,7 +181,14 @@ function Main() {
         isUpdate={false}
         listFood={listFood}
       />
-      <TargetForm onclick={open} onclose={handleClose} date={dateSelect} target={target} setCustomCalo={setCustomCalo} customCalo={customCalo} />
+      <TargetForm
+        onclick={open}
+        onclose={handleClose}
+        date={dateSelect}
+        target={target}
+        setCustomCalo={setCustomCalo}
+        customCalo={customCalo}
+      />
     </div>
   );
 }

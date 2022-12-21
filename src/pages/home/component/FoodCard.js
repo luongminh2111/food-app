@@ -9,7 +9,7 @@ import { faPen, faX } from "@fortawesome/free-solid-svg-icons";
 import FoodForm from "./FoodForm";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import { borderColor } from "@material-ui/system";
-
+import "../styles/_foodCard.scss";
 const FoodCard = (props) => {
   const [open, setOpen] = React.useState(false);
   const [openDeleteModal, setOpenDeleteModal] = React.useState(false);
@@ -36,7 +36,17 @@ const FoodCard = (props) => {
 
   return listFoodOfDay?.length > 0
     ? listFoodOfDay?.map((item) => (
-        <Card key={item?.food?.id}>
+        <Card
+          key={item?.food?.id}
+          sx={{
+            cursor: "pointer",
+            width: "180px",
+
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
           <CardContent
             sx={{
               display: "flex",
@@ -50,7 +60,7 @@ const FoodCard = (props) => {
               variant="h5"
               component="div"
               sx={{
-                height: "64px",
+                height: "96px",
                 lineBreak: "strict",
                 display: "flex",
                 alignItems: "center",
