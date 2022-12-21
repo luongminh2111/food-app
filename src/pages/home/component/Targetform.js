@@ -47,7 +47,6 @@ function TargetForm(props) {
     setHeight(target?.height || 0);
     setFat(target?.fat || 0);
     setProtein(target?.protein || 0);
-   
   }, [target]);
   console.log("kiem tra target :", target);
   const handleChangeCarb = (event) => {
@@ -113,9 +112,9 @@ function TargetForm(props) {
   useEffect(() => {
     const valueR = resultR();
     let totalCalo = 0;
-    if(freeModeCalories > 0){
+    if (freeModeCalories > 0) {
       totalCalo = freeModeCalories;
-    } else  if (protein > 0 || fat > 0 || carb > 0) {
+    } else if (protein > 0 || fat > 0 || carb > 0) {
       totalCalo = (carb + protein) * 4 + fat * 9;
     } else {
       let bmr = 0;
@@ -127,15 +126,37 @@ function TargetForm(props) {
       totalCalo = bmr * valueR;
     }
     setCustomCalo(totalCalo);
-  }, [fat, protein, carb, weight, height, gender, age, activityMode, freeModeCalories]);
+  }, [
+    fat,
+    protein,
+    carb,
+    weight,
+    height,
+    gender,
+    age,
+    activityMode,
+    freeModeCalories,
+  ]);
 
   const handleSaveTarget = () => {
     const targetItem = {
-      mode, type, gender, activityMode, freeModeCalories, carb, age, height, weight, fat, protein, date, id: target?.id
+      mode,
+      type,
+      gender,
+      activityMode,
+      freeModeCalories,
+      carb,
+      age,
+      height,
+      weight,
+      fat,
+      protein,
+      date,
+      id: target?.id,
     };
 
     dispatch(saveTargetItem(targetItem, props.onclose, date));
-  }
+  };
 
   const renderRecommend = () => {
     return (
@@ -177,7 +198,7 @@ function TargetForm(props) {
           </div>
           <div className="main__input">
             <div className="main__input-title">身長</div>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined" >
+            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
               <OutlinedInput
                 id="outlined-adornment-height"
                 value={height}
@@ -192,7 +213,7 @@ function TargetForm(props) {
         <div className="input-wrapper d-flex flex-nowrap">
           <div className="main__input">
             <div className="main__input-title">年</div>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined" >
+            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
               <OutlinedInput
                 id="outlined-adornment-age"
                 value={age}
@@ -311,7 +332,7 @@ function TargetForm(props) {
                   <div className="main__input main__input--flex">
                     <div>
                       <div className="main__input-title">プロテイン</div>
-                      <FormControl 
+                      <FormControl
                         sx={{ m: 1, width: "25ch" }}
                         variant="outlined"
                       >
