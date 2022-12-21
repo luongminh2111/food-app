@@ -31,15 +31,28 @@ export default function RecipeCard(props) {
   };
   return (
     <div>
-      <Card sx={{ cursor: "pointer" }} onClick={handleClickOpen}>
-        <CardMedia
-          component="img"
-          height="194"
-          image={props.img}
-          // alt="Paella dish"
-        />
-        <CardHeader title={props.recipeName} />
-        <CardContent>{props.calo}カロリー</CardContent>
+      <Card
+        sx={{
+          cursor: "pointer",
+          width: "250px",
+          height: "300px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+        onClick={handleClickOpen}
+      >
+        <div>
+          <CardMedia
+            component="img"
+            height="194"
+            image={props.img}
+            // alt="Paella dish"
+          />
+          <div className="card-title">{props.recipeName}</div>
+        </div>
+
+        <div className="card-subtitle"> {props.calo}カロリー</div>
       </Card>
       <RecipeInfo
         onclick={open}
