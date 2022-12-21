@@ -1,8 +1,12 @@
 .footer {
-  background: #D3D5D7;
+  background: #d3d5d7;
   height: 150px;
-  color: #FFFFFF;
+  color: #ffffff;
   display: flex;
   align-items: center;
   font-size: 18px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
