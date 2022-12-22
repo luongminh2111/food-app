@@ -30,7 +30,7 @@ function Main() {
   const handleSumCalo = (arr) => {
     let sumCalo = 0;
     arr.map((e) => {
-      sumCalo += e.amount * e.food.calo;
+      sumCalo += (e.amount * e.food.calo) / 100;
     });
     return sumCalo;
   };
