@@ -89,7 +89,7 @@ function Main() {
           総カロリー：{breakFastCalo + lunchCalo + dinnerCalo}カロリー
         </span>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <span>目標：{customCalo}カロリー</span>
+          <span>目標：{customCalo.toFixed(2)}カロリー</span>
           <div className="main__parameter-icon">
             <FontAwesomeIcon
               icon={faPen}
