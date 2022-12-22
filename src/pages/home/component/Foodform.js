@@ -56,6 +56,9 @@ function FoodForm(props) {
       date,
     };
     dispatch(saveFoodItem(menuItem, isUpdate, onclose));
+    setQuantity(0);
+    setCaloCustom(0);
+    setName(listFood[0]?.name);
   };
 
   return (
