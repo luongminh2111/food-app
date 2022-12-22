@@ -32,7 +32,7 @@ function Main() {
     arr.map((e) => {
       sumCalo += (e.amount * e.food.calo) / 100;
     });
-    return sumCalo;
+    return Math.round(sumCalo * 100) / 100;
   };
 
   const listBreakFast = useMemo(() => {
@@ -89,7 +89,7 @@ function Main() {
           総カロリー：{breakFastCalo + lunchCalo + dinnerCalo}カロリー
         </span>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <span>目標：{customCalo}カロリー</span>
+          <span>目標：{Math.round(customCalo * 100) / 100}カロリー</span>
           <div className="main__parameter-icon">
             <FontAwesomeIcon
               icon={faPen}
