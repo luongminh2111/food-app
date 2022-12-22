@@ -27,7 +27,9 @@
 
   &__link {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    margin-left: 200px;
+    gap: 200px;
     align-items: center;
     cursor: pointer;
 

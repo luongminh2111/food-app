@@ -50,7 +50,7 @@ function Recipe(props) {
         </Box>
         <Box className="body-contents">
           <Box className="content-item item_bottom">
-            <Box className="item__title">食べて</Box>
+            <Box className="item__title">おすすめレセピー</Box>
 
             <Box className="suggestion-list-1">
               {recipe.map((item, index) => (
