@@ -25,7 +25,7 @@ function TargetForm(props) {
   const [mode, setMode] = React.useState("Tự nhập");
   const [type, setType] = React.useState("calo");
   const [gender, setGender] = React.useState("Nam");
-  const [activityMode, setActivityMode] = React.useState("活動強度");
+  const [activityMode, setActivityMode] = React.useState("Ít vận động");
   const [freeModeCalories, setFreeModeCalories] = useState(0);
   const [carb, setCarb] = useState(0);
   const [age, setAge] = useState(0);
@@ -39,7 +39,7 @@ function TargetForm(props) {
     setMode(target?.modeType || "Tự nhập");
     setType(target?.type || "calo");
     setGender(target?.gender || "Nam");
-    setActivityMode(target?.activityType || "活動強度");
+    setActivityMode(target?.activityType || "Ít vận động");
     setFreeModeCalories(target?.calories || 0);
     setCarb(target?.carb || 0);
     setAge(target?.age || 0);
@@ -48,7 +48,7 @@ function TargetForm(props) {
     setFat(target?.fat || 0);
     setProtein(target?.protein || 0);
   }, [target]);
-  console.log("kiem tra target :", target);
+  // console.log("kiem tra target :", target);
   const handleChangeCarb = (event) => {
     setCarb(event.target.value);
   };
@@ -154,7 +154,7 @@ function TargetForm(props) {
       date,
       id: target?.id,
     };
-
+    console.log(targetItem);
     dispatch(saveTargetItem(targetItem, props.onclose, date));
   };
 
@@ -379,7 +379,7 @@ function TargetForm(props) {
                     className="mmain__statistics-total"
                     style={{ textAlign: "center" }}
                   >
-                  Mục tiêu:{customCalo}calo
+                    Mục tiêu:{customCalo}calo
                   </div>
                 </>
               )}
@@ -394,7 +394,7 @@ function TargetForm(props) {
           Hủy
         </Button>
         <Button onClick={handleSaveTarget} autoFocus>
-         Lưu
+          Lưu
         </Button>
       </DialogActions>
     </Dialog>

@@ -20,8 +20,10 @@ export const saveTargetItem = (targetItem, onclose, date) => (dispatch) => {
     date: targetItem.date,
     id: targetItem?.id,
   };
-  if (targetItem.mode === "フリーモード") {
-    if (targetItem.type === "カロリー") {
+  console.log(dataSave);
+  if (targetItem.mode === "Tự nhập") {
+   
+    if (targetItem.type === "calo") {
       dataSave = {
         ...dataSave,
         calories: Number(targetItem.freeModeCalories),
