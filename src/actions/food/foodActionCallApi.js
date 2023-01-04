@@ -40,11 +40,11 @@ export const deleteFoodItem = (id) => (dispatch) => {
 
 export const saveFoodItem = (menuItem, isUpdate, onclose) => (dispatch) => {
   let type;
-  if (menuItem.type === "朝ごはん") {
+  if (menuItem.type === "Bữa sáng") {
     type = "BREAK_FAST";
-  } else if (menuItem.type === "昼ごはん") {
+  } else if (menuItem.type === "Bữa trưa") {
     type = "LUNCH";
-  } else if (menuItem.type === "晩ごはん") {
+  } else if (menuItem.type === "Bữa tối") {
     type = "DINNER";
   }
   const dataSave = {

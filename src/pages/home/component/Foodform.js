@@ -84,7 +84,7 @@ function FoodForm(props) {
 
           <div className="main__input main__input--flex">
             <div>
-              <div className="main__input-title">額(グラム)</div>
+              <div className="main__input-title">Lượng (gam)</div>
               <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                 <OutlinedInput
                   id="outlined-adornment-weight"
@@ -101,7 +101,7 @@ function FoodForm(props) {
           </div>
           <div className="main__input main__input--flex">
             <div>
-              <div className="main__input-title">カロリー</div>
+              <div className="main__input-title">calo</div>
               <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                 <OutlinedInput
                   id="outlined-adornment-weight"
@@ -120,10 +120,10 @@ function FoodForm(props) {
 
       <DialogActions>
         <Button onClick={props.onclose} xs={{}}>
-          キャンセル
+          HỦY
         </Button>
         <Button onClick={(e) => handleSaveFoodItem(e)} autoFocus>
-          サーブ
+          LƯU
         </Button>
       </DialogActions>
     </Dialog>

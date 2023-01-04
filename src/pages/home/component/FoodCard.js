@@ -76,7 +76,7 @@ const FoodCard = (props) => {
               component="div"
               sx={{ fontSize: "18px", color: "#8d8d8d" }}
             >
-              {item.amount} グラム
+              {item.amount} gram
             </Typography>
             <Typography
               gutterBottom
@@ -84,7 +84,7 @@ const FoodCard = (props) => {
               component="div"
               sx={{ fontSize: "18px", color: "#8d8d8d" }}
             >
-              {((item?.food?.calo / 100) * item?.amount).toFixed(2)}カロリー
+              {((item?.food?.calo / 100) * item?.amount).toFixed(2)} calo
             </Typography>
           </CardContent>
 

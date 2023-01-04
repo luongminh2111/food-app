@@ -22,9 +22,9 @@ import { useEffect } from "react";
 
 function TargetForm(props) {
   const { date, target, customCalo, setCustomCalo } = props;
-  const [mode, setMode] = React.useState("フリーモード");
-  const [type, setType] = React.useState("カロリー");
-  const [gender, setGender] = React.useState("男性");
+  const [mode, setMode] = React.useState("Tự nhập");
+  const [type, setType] = React.useState("calo");
+  const [gender, setGender] = React.useState("Nam");
   const [activityMode, setActivityMode] = React.useState("活動強度");
   const [freeModeCalories, setFreeModeCalories] = useState(0);
   const [carb, setCarb] = useState(0);
@@ -36,9 +36,9 @@ function TargetForm(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setMode(target?.modeType || "フリーモード");
-    setType(target?.type || "カロリー");
-    setGender(target?.gender || "男性");
+    setMode(target?.modeType || "Tự nhập");
+    setType(target?.type || "calo");
+    setGender(target?.gender || "Nam");
     setActivityMode(target?.activityType || "活動強度");
     setFreeModeCalories(target?.calories || 0);
     setCarb(target?.carb || 0);
@@ -118,7 +118,7 @@ function TargetForm(props) {
       totalCalo = (carb + protein) * 4 + fat * 9;
     } else {
       let bmr = 0;
-      if (gender === "男性") {
+      if (gender === "Nam") {
         bmr = 13.397 * weight + 4.799 * height - 5.677 * age + 88.362;
       } else {
         bmr = 9.247 * weight + 3.098 * height - 4.33 * age + 447.593;
@@ -162,7 +162,7 @@ function TargetForm(props) {
     return (
       <div className="main__statistics">
         <div className="main__input">
-          <div className="main__input-title">性別</div>
+          <div className="main__input-title">Giới tính</div>
           <div className="main__selecter">
             <Select
               displayEmpty
@@ -180,7 +180,7 @@ function TargetForm(props) {
         </div>
         <div className="input-wrapper d-flex flex-nowrap">
           <div className="main__input">
-            <div className="main__input-title">体重</div>
+            <div className="main__input-title">Cân nặng</div>
             <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
               <OutlinedInput
                 id="outlined-adornment-weight"
@@ -197,7 +197,7 @@ function TargetForm(props) {
             </FormControl>
           </div>
           <div className="main__input">
-            <div className="main__input-title">身長</div>
+            <div className="main__input-title">Chiều cao</div>
             <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
               <OutlinedInput
                 id="outlined-adornment-height"
@@ -212,20 +212,20 @@ function TargetForm(props) {
         </div>
         <div className="input-wrapper d-flex flex-nowrap">
           <div className="main__input">
-            <div className="main__input-title">年</div>
+            <div className="main__input-title">Tuổi</div>
             <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
               <OutlinedInput
                 id="outlined-adornment-age"
                 value={age}
                 onChange={(e) => handleChangeAge(e)}
                 endAdornment={
-                  <InputAdornment position="end">歳</InputAdornment>
+                  <InputAdornment position="end">tuổi</InputAdornment>
                 }
               />
             </FormControl>
           </div>
           <div className="main__input">
-            <div className="main__input-title">運動強度</div>
+            <div className="main__input-title">Cường độ vận động</div>
             <div className="main__selecter">
               <Select
                 displayEmpty
@@ -242,7 +242,9 @@ function TargetForm(props) {
             </div>
           </div>
         </div>
-        <div className="mmain__statistics-total">目標:{customCalo}カロリー</div>
+        <div className="mmain__statistics-total">
+          Mục tiêu:{customCalo} calo
+        </div>
       </div>
     );
   };
@@ -251,7 +253,7 @@ function TargetForm(props) {
     <Dialog open={props.onclick} onClose={props.onclose}>
       <DialogContent>
         <div className="main__statistics main__statistics--column">
-          <div className="main__statistics-title">吸収量の目標を設定</div>
+          <div className="main__statistics-title">Đặt mục tiêu ăn uống</div>
           <div className="main__selecter">
             <Select
               displayEmpty
@@ -266,7 +268,7 @@ function TargetForm(props) {
               ))}
             </Select>
           </div>
-          {mode === "フリーモード" ? (
+          {mode === "Tự nhập" ? (
             <>
               <div className="main__selecter">
                 <Select
@@ -282,10 +284,10 @@ function TargetForm(props) {
                   ))}
                 </Select>
               </div>
-              {type === "カロリー" ? (
+              {type === "calo" ? (
                 <div className="main__input main__input--flex">
                   <div>
-                    <div className="main__input-title">カロリー</div>
+                    <div className="main__input-title">calo</div>
                     <FormControl
                       sx={{ m: 1, width: "25ch" }}
                       variant="outlined"
@@ -309,7 +311,7 @@ function TargetForm(props) {
                 <>
                   <div className="main__input main__input--flex">
                     <div>
-                      <div className="main__input-title">カープ</div>
+                      <div className="main__input-title">Đường</div>
                       <FormControl
                         sx={{ m: 1, width: "25ch" }}
                         variant="outlined"
@@ -331,7 +333,7 @@ function TargetForm(props) {
                   </div>
                   <div className="main__input main__input--flex">
                     <div>
-                      <div className="main__input-title">プロテイン</div>
+                      <div className="main__input-title">Đạm</div>
                       <FormControl
                         sx={{ m: 1, width: "25ch" }}
                         variant="outlined"
@@ -353,7 +355,7 @@ function TargetForm(props) {
                   </div>
                   <div className="main__input main__input--flex">
                     <div>
-                      <div className="main__input-title">ファット</div>
+                      <div className="main__input-title">Béo</div>
                       <FormControl
                         sx={{ m: 1, width: "25ch" }}
                         variant="outlined"
@@ -377,7 +379,7 @@ function TargetForm(props) {
                     className="mmain__statistics-total"
                     style={{ textAlign: "center" }}
                   >
-                    目標:{customCalo}カロリー
+                  Mục tiêu:{customCalo}calo
                   </div>
                 </>
               )}
@@ -389,10 +391,10 @@ function TargetForm(props) {
       </DialogContent>
       <DialogActions>
         <Button onClick={props.onclose} xs={{}}>
-          キャンセル
+          Hủy
         </Button>
         <Button onClick={handleSaveTarget} autoFocus>
-          サーブ
+         Lưu
         </Button>
       </DialogActions>
     </Dialog>
