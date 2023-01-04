@@ -6,7 +6,7 @@ import {
   deleteFoodItemRedux,
 } from "./FoodAction";
 import axios from "axios";
-
+axios.defaults.headers.common["ngrok-skip-browser-warning"] = "6024";
 export const getListFood = () => (dispatch) => {
   axios
     .get(`${BASE_URL}/food/list`)
@@ -40,11 +40,11 @@ export const deleteFoodItem = (id) => (dispatch) => {
 
 export const saveFoodItem = (menuItem, isUpdate, onclose) => (dispatch) => {
   let type;
-  if (menuItem.type === "朝ごはん") {
+  if (menuItem.type === "Bữa sáng") {
     type = "BREAK_FAST";
-  } else if (menuItem.type === "昼ごはん") {
+  } else if (menuItem.type === "Bữa trưa") {
     type = "LUNCH";
-  } else if (menuItem.type === "晩ごはん") {
+  } else if (menuItem.type === "Bữa tối") {
     type = "DINNER";
   }
   const dataSave = {
@@ -61,6 +61,7 @@ export const saveFoodItem = (menuItem, isUpdate, onclose) => (dispatch) => {
     body: JSON.stringify(dataSave),
     headers: {
       "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "6024",
     },
   }).then((res) => {
     if (res?.status === 200) {

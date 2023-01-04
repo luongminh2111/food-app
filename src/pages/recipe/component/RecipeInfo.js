@@ -27,11 +27,11 @@ function RecipeInfo(props) {
         <div className="Info__container">
           <div className="Info__title">
             <h2>{props.recipeName}</h2>
-            <p>{props.calo}カロリー</p>
+            <p>{props.calo} calo</p>
           </div>
           <img className="Info__image" src={props.img} />
           <div className="Info__ingredients">
-            材料:
+            Nguyên liệu:
             <ul>
               {props.ingredients.map((item, index) => {
                 return <li className="Info__ingredients-item">{item.name}</li>;
@@ -40,7 +40,7 @@ function RecipeInfo(props) {
           </div>
 
           <div className="Info__tutorial">
-            作り方:
+            Cách nấu:
             <ul>
               {desc.map((item, index) => {
                 return <li className="Info__tutorial-item">{item}</li>;

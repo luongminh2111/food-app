@@ -2,6 +2,7 @@ import { BASE_URL } from "../../contains/common";
 import { fetchTarget } from "./TargetAction";
 import axios from "axios";
 import { changePositionCallAPi } from "../food/FoodAction";
+axios.defaults.headers.common["ngrok-skip-browser-warning"] = "6024";
 
 export const getTarget = (date) => (dispatch) => {
   axios
@@ -52,6 +53,7 @@ export const saveTargetItem = (targetItem, onclose, date) => (dispatch) => {
     body: JSON.stringify(dataSave),
     headers: {
       "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "6024",
     },
   }).then((res) => {
     console.log("kiem tra resssss :", res);

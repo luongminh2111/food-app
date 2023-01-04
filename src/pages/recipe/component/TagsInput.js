@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-function TagsInput(props){
-  const {setSearchStr, searchStr} = props;
+function TagsInput(props) {
+  const { setSearchStr, searchStr } = props;
   const removeTags = (indexToRemove) => {
     setSearchStr([...searchStr.filter((_, index) => index !== indexToRemove)]);
   };
@@ -31,7 +31,7 @@ function TagsInput(props){
           <input
             type="text"
             onKeyUp={(event) => (event.key === "Enter" ? addTags(event) : null)}
-            placeholder="Enter キーを押してタグを追加する"
+            placeholder="Nhấn Enter để thêm thẻ"
             className="tags-input"
           />
         </ul>
@@ -41,6 +41,6 @@ function TagsInput(props){
       </button>
     </div>
   );
-};
+}
 
 export default TagsInput;

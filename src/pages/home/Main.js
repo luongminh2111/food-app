@@ -30,9 +30,9 @@ function Main() {
   const handleSumCalo = (arr) => {
     let sumCalo = 0;
     arr.map((e) => {
-      sumCalo += e.amount * e.food.calo;
+      sumCalo += (e.amount * e.food.calo) / 100;
     });
-    return sumCalo;
+    return Math.round(sumCalo * 100) / 100;
   };
 
   const listBreakFast = useMemo(() => {
@@ -86,10 +86,10 @@ function Main() {
 
       <div className="main__parameter">
         <span>
-          総カロリー：{breakFastCalo + lunchCalo + dinnerCalo}カロリー
+          Tổng lượng calo: {breakFastCalo + lunchCalo + dinnerCalo} calo
         </span>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <span>目標：{customCalo.toFixed(2)}カロリー</span>
+          <span>Mục tiêu: {Math.round(customCalo * 100) / 100} calo</span>
           <div className="main__parameter-icon">
             <FontAwesomeIcon
               icon={faPen}
@@ -101,14 +101,11 @@ function Main() {
       </div>
       <ul className="main__form">
         <li className="main__form-item">
-          <span className="main__title">
-            朝ごはん: {breakFastCalo}
-            カロリー
-          </span>
+          <span className="main__title">Bữa sáng: {breakFastCalo} calo</span>
           <ul className="main__menu">
             <FoodCard
               key={1}
-              type="朝ごはん"
+              type="Bữa sáng"
               listFood={listFood}
               listFoodOfDay={listBreakFast}
               date={dateSelect}
@@ -116,7 +113,7 @@ function Main() {
             <li className="main__icon">
               <button
                 className="main__icon-item"
-                value="朝ごはん"
+                value="Bữa sáng"
                 onClick={handleClickOpenFoodForm}
               >
                 <FontAwesomeIcon icon={faPlus} />
@@ -125,22 +122,19 @@ function Main() {
           </ul>
         </li>
         <li className="main__form-item">
-          <span className="main__title">
-            昼ごはん: {lunchCalo}
-            カロリー
-          </span>
+          <span className="main__title">bữa trưa: {lunchCalo} calo</span>
           <ul className="main__menu">
             <FoodCard
               key={2}
               listFood={listFood}
-              type="昼ごはん"
+              type="Bữa trưa"
               listFoodOfDay={listLunch}
               date={dateSelect}
             />
             <li className="main__icon">
               <button
                 className="main__icon-item"
-                value="昼ごはん"
+                value="Bữa trưa"
                 onClick={handleClickOpenFoodForm}
               >
                 <FontAwesomeIcon icon={faPlus} />
@@ -149,14 +143,11 @@ function Main() {
           </ul>
         </li>
         <li className="main__form-item">
-          <span className="main__title">
-            晩ごはん: {dinnerCalo}
-            カロリー
-          </span>
+          <span className="main__title">Bữa tối: {dinnerCalo} calo</span>
           <ul className="main__menu">
             <FoodCard
               key={3}
-              type="晩ごはん"
+              type="Bữa tối"
               listFood={listFood}
               listFoodOfDay={listDinner}
               date={dateSelect}
@@ -164,7 +155,7 @@ function Main() {
             <li className="main__icon">
               <button
                 className="main__icon-item"
-                value="晩ごはん"
+                value="Bữa tối"
                 onClick={handleClickOpenFoodForm}
               >
                 <FontAwesomeIcon icon={faPlus} />

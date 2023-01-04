@@ -52,7 +52,7 @@ export default function RecipeCard(props) {
           <div className="card-title">{props.recipeName}</div>
         </div>
 
-        <div className="card-subtitle"> {props.calo}カロリー</div>
+        <div className="card-subtitle"> {props.calo} calo</div>
       </Card>
       <RecipeInfo
         onclick={open}

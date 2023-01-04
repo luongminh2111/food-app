@@ -16,7 +16,7 @@ function Header() {
             className="header__link-item--underline"
             onClick={() => history.push("/daily")}
           >
-            日記
+           Nhật ký
           </span>
         </li>
         {/* <li className="header__link-item " onClick={()=> history.push("/statistic")}>
@@ -24,7 +24,7 @@ function Header() {
         </li> */}
         <li className="header__link-item ">
           <span className="" onClick={() => history.push("/recipe")}>
-            レシピ
+           Công thức
           </span>
         </li>
         {/* <li className="header__link-item ">
@@ -42,13 +42,13 @@ function Header() {
               className="btn-list btn-logout"
               onClick={() => history.push("/login")}
             >
-              ログアウト
+              Đăng suất
             </div>
             <div
               className="btn-list change-pass"
               onClick={() => history.push("/change-password")}
             >
-              パスワードを変更
+              Đổi mật khẩu
             </div>
           </div>
         ) : null}
