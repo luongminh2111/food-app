@@ -28,30 +28,30 @@ function Login(props) {
       <Box className="head">
         <ArrowCircleLeftOutlinedIcon onClick={goHomePage}/>
         <Box className="head_title">
-          サインイン
+          Đăng nhập
         </Box>
       </Box>
       <Box className="email form-input">
         <Box className="txt-label">
-          メールアドレス
+          Email
         </Box>
         <TextField type="text" variant="outlined" onChange={(e) => setEmail(e.target.value)} />
       </Box>
       <Box className="password form-input">
       <Box className="txt-label">
-        パスワード
+        Password
         </Box>
         <TextField type="password" variant="outlined" onChange={(e) => setPassword(e.target.value)}/>
       </Box>
       <Button variant="text" className="btn-forget" onClick={() => history.push('/forget-password')}>
-        パスワードをお忘れました。
+        Quên mật khẩu
       </Button>
       <Box className="btn-list">
       <Button variant="outlined" className="signin-btn" onClick={handleLogin}>
-        サインイン
+        Đăng nhập
       </Button>
       <Button variant="text" className="signup-btn" onClick={handleGoToRegister} >
-        サインアップ
+        Đăng ký
       </Button>
       </Box>
      

@@ -8,34 +8,6 @@ function ChangePassword(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const renderChangePassword = () => {
-    <Box className="change-password-form">
-    <Box className="head">
-      <ArrowCircleLeftOutlinedIcon />
-      <Box className="head_title">
-        パスワード再発行
-      </Box>
-    </Box>
-    <Box className="new-password form-input" sx={{mb :2 }}>
-      <Box className="txt-label">
-        新しいパスワード
-      </Box>
-      <TextField placeholder="パスワード" variant="outlined" />
-    </Box>
-    <Box className="password form-input">
-    <Box className="txt-label">
-      新しいパスワード(確認)
-      </Box>
-      <TextField placeholder="パスワード" variant="outlined" />
-    </Box>
-    <Box className="btn">
-      <Button variant="outlined" className="reset-btn">
-        リセット
-      </Button>
-    </Box>
-  </Box>
-  };
-
   return (
     <Box className="change-password-form">
       <Box className="head">

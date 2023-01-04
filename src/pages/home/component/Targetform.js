@@ -228,8 +228,8 @@ function TargetForm(props) {
             <div className="main__input-title">Cường độ vận động</div>
             <div className="main__selecter">
               <Select
-                displayEmpty
                 value={activityMode}
+                label="Chọn cường độ"
                 sx={{ m: 1, width: "25ch" }}
                 onChange={handleChangActivityMode}
               >

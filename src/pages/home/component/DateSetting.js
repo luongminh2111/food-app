@@ -9,7 +9,7 @@ function DateSetting(props) {
   const {dateSelect, setDateSelect } = props;
 
   return (
-    <LocalizationProvider locale={ja} dateAdapter={AdapterDateFns}>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
         className="date__button"
         value={dateSelect}

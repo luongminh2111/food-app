@@ -30,39 +30,39 @@ function Register(props) {
       <Box className="head">
         <ArrowCircleLeftOutlinedIcon onClick={goHomePage} />
         <Box className="head_title">
-          サインアップ
+          Đăng ký
         </Box>
       </Box>
       <Box className="email form-input">
         <Box className="txt-label">
-          メールアドレス
+          Email
         </Box>
         <TextField variant="outlined" onChange={(e) => setEmail(e.target.value)} />
       </Box>
       <Box className="username form-input">
         <Box className="txt-label">
-          ユーザー名
+          Tài khoản
         </Box>
         <TextField variant="outlined" onChange={(e) => setUsername(e.target.value)} />
       </Box>
       <Box className="password form-input">
         <Box className="txt-label">
-        パスワード
+        Mật khẩu
         </Box>
         <TextField type="password" variant="outlined" onChange={(e) => setPassword(e.target.value)} />
       </Box>
       <Box className="password-confirm form-input">
         <Box className="txt-label">
-        パスワード(確認)
+        Xác nhận mật khẩu
         </Box>
         <TextField type="password" variant="outlined" onChange={(e) => setConfirmPassword(e.target.value)}/>
       </Box>
       <Box className="btn-list">
       <Button variant="outlined" className="signup-btn" onClick={handleRegister}>
-        サインアップ
+        Đăng ký
       </Button>
       <Button variant="text" className="signin-btn" onClick={handleGoToRegister}>
-        サインイン
+        Đăng nhập
       </Button>
       </Box>
      

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { BASE_URL } from "../../contains/common";
 
 export const login = (email, password) => (dispatch) => {
@@ -14,13 +15,17 @@ export const login = (email, password) => (dispatch) => {
   }).then((res) => {});
 };
 export const register = (email, password) => (dispatch) => {
-  fetch(`${BASE_URL}/account/register?account=${email}&password=${password}`, {
+  const options = {
     mode: "cors",
-    method: "GET",
     dataType: "jsonp",
     headers: {
       "Content-Type": "application/json",
       "ngrok-skip-browser-warning": "6024",
     },
-  }).then((res) => {});
+    data: {
+      account: email,
+      password: password
+    }
+  }
+  return axios.get(`${BASE_URL}/account/register`, options ).then(json => console.log("check json : ", json));
 };
