@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, TextField, Box } from "@mui/material";
 import "../../styles/_login.scss";
-import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
+import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../actions/login/LoginActionCallApi";
@@ -12,53 +12,66 @@ function Login(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   const goHomePage = () => {
-    history.push('/');
+    history.push("/");
   };
-  
+
   const handleGoToRegister = () => {
-    history.push('/register');
+    history.push("/register");
   };
 
   const handleLogin = () => {
+<<<<<<< HEAD
     if(email.length === 0 || password.length === 0){
       alert("Wrong Email or Password");
     } else {
        dispatch(login(email, password, history));
     }
+=======
+    dispatch(login("minh", "minh123"));
+>>>>>>> 166b2a8d622f433415a3afe4c228efdd3ec41668
   };
 
   return (
     <Box className="login-form">
       <Box className="head">
-        <ArrowCircleLeftOutlinedIcon onClick={goHomePage}/>
-        <Box className="head_title">
-          Đăng nhập
-        </Box>
+        <ArrowCircleLeftOutlinedIcon onClick={goHomePage} />
+        <Box className="head_title">Đăng nhập</Box>
       </Box>
       <Box className="email form-input">
-        <Box className="txt-label">
-          Email
-        </Box>
-        <TextField type="text" variant="outlined" onChange={(e) => setEmail(e.target.value)} />
+        <Box className="txt-label">Email</Box>
+        <TextField
+          type="text"
+          variant="outlined"
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </Box>
       <Box className="password form-input">
-      <Box className="txt-label">
-        Password
-        </Box>
-        <TextField type="password" variant="outlined" onChange={(e) => setPassword(e.target.value)}/>
+        <Box className="txt-label">Password</Box>
+        <TextField
+          type="password"
+          variant="outlined"
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </Box>
-      <Button variant="text" className="btn-forget" onClick={() => history.push('/forget-password')}>
+      <Button
+        variant="text"
+        className="btn-forget"
+        onClick={() => history.push("/forget-password")}
+      >
         Quên mật khẩu
       </Button>
       <Box className="btn-list">
-      <Button variant="outlined" className="signin-btn" onClick={handleLogin}>
-        Đăng nhập
-      </Button>
-      <Button variant="text" className="signup-btn" onClick={handleGoToRegister} >
-        Đăng ký
-      </Button>
+        <Button variant="outlined" className="signin-btn" onClick={handleLogin}>
+          Đăng nhập
+        </Button>
+        <Button
+          variant="text"
+          className="signup-btn"
+          onClick={handleGoToRegister}
+        >
+          Đăng ký
+        </Button>
       </Box>
-     
     </Box>
   );
 }
