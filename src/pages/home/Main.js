@@ -75,6 +75,7 @@ function Main() {
 
   const listBreakFast = useMemo(() => {
     const foods = listFilterFood.filter((e) => e.mealType === "BREAK_FAST");
+    setBreakFastCalo(handleSumCalo(foods));
     setBreakFastCarb(handleSumCarb(foods));
     setBreakFastProtein(handleSumProtein(foods));
     setBreakFastFat(handleSumFat(foods));
