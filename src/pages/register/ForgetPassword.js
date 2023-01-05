@@ -94,7 +94,6 @@ function ForgetPassword(props) {
     )
   
   };
-  console.log("check fomr : ", isChangeForm);
   return (
     isChangeForm === 0 ? renderGetPassCode() : isChangeForm === 1 ? renderConfirmPassCode() : renderChangePassword()
   );

@@ -12,6 +12,10 @@ import {
   getFilterFood,
   getListFood,
 } from "../../actions/food/FoodActionCallApi";
+import {
+  getListRecipe,
+  getFilterRecipe,
+} from "../../actions/recipe/RecipeActionCallApi";
 
 function Main() {
   const [open, setOpen] = React.useState(false);
@@ -21,6 +25,8 @@ function Main() {
   const listFood = useSelector((state) => state.food.listFoods);
   const positionCallApi = useSelector((state) => state.food.positionCallApi);
   const listFilterFood = useSelector((state) => state.food.listFilterFood);
+  const targetReducer = useSelector(state => state.target);
+  console.log("check target reducer :", targetReducer);
   const [breakFastCalo, setBreakFastCalo] = useState(0);
   const [lunchCalo, setLunchCalo] = useState(0);
   const [dinnerCalo, setDinnerCalo] = useState(0);
@@ -38,7 +44,6 @@ function Main() {
   const listBreakFast = useMemo(() => {
     const foods = listFilterFood.filter((e) => e.mealType === "BREAK_FAST");
     setBreakFastCalo(handleSumCalo(foods));
-
     return foods;
   }, [listFilterFood]);
 
@@ -72,6 +77,7 @@ function Main() {
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleClickOpenFoodForm = (event) => {
     setType(event.currentTarget.value);
     setOpenFoodForm(true);
@@ -89,6 +95,9 @@ function Main() {
           Tổng lượng calo: {breakFastCalo + lunchCalo + dinnerCalo} calo
         </span>
         <div style={{ display: "flex", alignItems: "center" }}>
+          <div>
+            <div>Mục tiêu</div>
+          </div>
           <span>Mục tiêu: {Math.round(customCalo * 100) / 100} calo</span>
           <div className="main__parameter-icon">
             <FontAwesomeIcon

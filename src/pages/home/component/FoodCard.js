@@ -78,6 +78,7 @@ const FoodCard = (props) => {
             >
               {item.amount} gram
             </Typography>
+
             <Typography
               gutterBottom
               variant="h5"
@@ -85,6 +86,19 @@ const FoodCard = (props) => {
               sx={{ fontSize: "18px", color: "#8d8d8d" }}
             >
               {((item?.food?.calo / 100) * item?.amount).toFixed(2)} calo
+            </Typography>
+
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              sx={{ fontSize: "18px", color: "#8d8d8d" }}
+            >
+              Đường: {(item?.food?.carb * item?.amount / 100).toFixed(2)} g
+              <br />
+              Đạm: {(item?.food?.protein * item?.amount / 100).toFixed(2)} g
+              <br />
+              Béo: {(item?.food?.fat * item?.amount / 100).toFixed(2)} g
             </Typography>
           </CardContent>
 

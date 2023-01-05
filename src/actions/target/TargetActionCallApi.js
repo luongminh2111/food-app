@@ -44,7 +44,6 @@ export const saveTargetItem = (targetItem, onclose, date) => (dispatch) => {
       gender: targetItem.gender,
     };
   }
-  console.log("kiem tra dataa asvee :", dataSave);
 
   fetch(`${BASE_URL}/diary/save`, {
     mode: "cors",
@@ -56,11 +55,10 @@ export const saveTargetItem = (targetItem, onclose, date) => (dispatch) => {
       "ngrok-skip-browser-warning": "6024",
     },
   }).then((res) => {
-    console.log("kiem tra resssss :", res);
+    console.log("kiem tra res diary :", res);
     if (res?.status === 200) {
       getTarget(date);
       dispatch(changePositionCallAPi());
-      console.log("kiem tra ressssshauhakshukahfua :");
       onclose();
     }
   });

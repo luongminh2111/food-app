@@ -12,7 +12,6 @@ export const getListRecipe = () => (dispatch)=> {
 };
 
 export const getFilterRecipe = (valueSearch) => (dispatch)=> {
-  console.log("kiem tra search value : ", valueSearch);
   axios.get(`${BASE_URL}/recipe/search?ingredients=${valueSearch}`)
   .then(res => {
     dispatch(fetchListRecipe(res?.data));

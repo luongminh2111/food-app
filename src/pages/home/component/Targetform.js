@@ -19,6 +19,7 @@ import {
 import { useDispatch } from "react-redux";
 import { saveTargetItem } from "../../../actions/target/TargetActionCallApi";
 import { useEffect } from "react";
+import { updatePropertiesTarget } from "../../../actions/target/TargetAction";
 
 function TargetForm(props) {
   const { date, target, customCalo, setCustomCalo } = props;
@@ -26,6 +27,7 @@ function TargetForm(props) {
   const [type, setType] = React.useState("calo");
   const [gender, setGender] = React.useState("Nam");
   const [activityMode, setActivityMode] = React.useState("Vận động nhẹ");
+
   const [freeModeCalories, setFreeModeCalories] = useState(0);
   const [carb, setCarb] = useState(0);
   const [age, setAge] = useState(0);
@@ -51,26 +53,32 @@ function TargetForm(props) {
 
   const handleChangeCarb = (event) => {
     setCarb(event.target.value);
+    dispatch(updatePropertiesTarget('card', event.target.value));
   };
 
   const handleChangeProtein = (event) => {
     setProtein(event.target.value);
+    dispatch(updatePropertiesTarget('protein', event.target.value));
   };
 
   const handleChangeAge = (event) => {
     setAge(event.target.value);
+    dispatch(updatePropertiesTarget('age', event.target.value));
   };
 
   const handleChangeWeight = (event) => {
     setWeight(event.target.value);
+    dispatch(updatePropertiesTarget('weight', event.target.value));
   };
 
   const handleChangeHeight = (event) => {
     setHeight(event.target.value);
+    dispatch(updatePropertiesTarget('height', event.target.value));
   };
 
   const handleChangeFat = (event) => {
     setFat(event.target.value);
+    dispatch(updatePropertiesTarget('fat', event.target.value));
   };
 
   const handleMode = (event) => {
@@ -91,6 +99,7 @@ function TargetForm(props) {
       setCarb(0);
     }
     setMode(event.target.value);
+    dispatch(updatePropertiesTarget('mode', event.target.value));
   };
   const handleType = (event) => {
     if(event.target.value === "marco"){
@@ -102,6 +111,7 @@ function TargetForm(props) {
       setActivityMode(null);
     }
     setType(event.target.value);
+    dispatch(updatePropertiesTarget('type', event.target.value));
   };
 
   const handleChangGender = (e) => {
@@ -114,6 +124,7 @@ function TargetForm(props) {
 
   const handleChangeCalories = (e) => {
     setFreeModeCalories(e.target.value);
+    dispatch(updatePropertiesTarget('calo', e.target.value));
   };
 
   const resultR = () => {
@@ -140,7 +151,8 @@ function TargetForm(props) {
       totalCalo = freeModeCalories;
     } else if (protein > 0 || fat > 0 || carb > 0) {
       totalCalo = (carb + protein) * 4 + fat * 9;
-    } else {
+      
+    } else if(mode === "Đề xuất") {
       let bmr = 0;
       if (gender === "Nam") {
         bmr = 13.397 * weight + 4.799 * height - 5.677 * age + 88.362;
@@ -148,6 +160,7 @@ function TargetForm(props) {
         bmr = 9.247 * weight + 3.098 * height - 4.33 * age + 447.593;
       }
       totalCalo = bmr * valueR;
+
     }
     setCustomCalo(totalCalo);
   }, [
@@ -402,7 +415,7 @@ function TargetForm(props) {
                     className="mmain__statistics-total"
                     style={{ textAlign: "center" }}
                   >
-                  Mục tiêu:{customCalo}calo
+                    Mục tiêu:{customCalo}calo
                   </div>
                 </>
               )}
@@ -417,7 +430,7 @@ function TargetForm(props) {
           Hủy
         </Button>
         <Button onClick={handleSaveTarget} autoFocus>
-         Lưu
+          Lưu
         </Button>
       </DialogActions>
     </Dialog>
