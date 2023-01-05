@@ -20,14 +20,14 @@ export default function RecomentForm(props) {
   });
   const modes = [
     {
-      value: "フリーモード",
+      value: "Tự nhập",
     },
     {
-      value: "レコメンド",
+      value: "Đề xuất",
     },
   ];
 
-  const [mode, setMode] = React.useState("フリーモード");
+  const [mode, setMode] = React.useState("Tự nhập");
 
   const handleMode = (event) => {
     setMode(event.target.value);
@@ -128,7 +128,3 @@ export default function RecomentForm(props) {
     </Dialog>
   );
 }
-FreeModeForm.propTypes = {
-  onclick: PropTypes.bool,
-  onclose: PropTypes.func,
-};

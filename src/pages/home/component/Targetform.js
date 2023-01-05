@@ -25,7 +25,7 @@ function TargetForm(props) {
   const [mode, setMode] = React.useState("Tự nhập");
   const [type, setType] = React.useState("calo");
   const [gender, setGender] = React.useState("Nam");
-  const [activityMode, setActivityMode] = React.useState("活動強度");
+  const [activityMode, setActivityMode] = React.useState("Vận động nhẹ");
   const [freeModeCalories, setFreeModeCalories] = useState(0);
   const [carb, setCarb] = useState(0);
   const [age, setAge] = useState(0);
@@ -39,7 +39,7 @@ function TargetForm(props) {
     setMode(target?.modeType || "Tự nhập");
     setType(target?.type || "calo");
     setGender(target?.gender || "Nam");
-    setActivityMode(target?.activityType || "活動強度");
+    setActivityMode(target?.activityType || "Vận động nhẹ");
     setFreeModeCalories(target?.calories || 0);
     setCarb(target?.carb || 0);
     setAge(target?.age || 0);
@@ -48,7 +48,7 @@ function TargetForm(props) {
     setFat(target?.fat || 0);
     setProtein(target?.protein || 0);
   }, [target]);
-  console.log("kiem tra target :", target);
+
   const handleChangeCarb = (event) => {
     setCarb(event.target.value);
   };
@@ -74,9 +74,33 @@ function TargetForm(props) {
   };
 
   const handleMode = (event) => {
+    if(event.target.value === "Tự nhập"){
+      setGender(null);
+      setWeight(0);
+      setHeight(0);
+      setAge(0);
+      setActivityMode(null);
+      setProtein(0);
+      setFat(0);
+      setCarb(0);
+    }
+    else{
+      setFreeModeCalories(0);
+      setProtein(0);
+      setFat(0);
+      setCarb(0);
+    }
     setMode(event.target.value);
   };
   const handleType = (event) => {
+    if(event.target.value === "marco"){
+      setFreeModeCalories(0);
+      setGender(null);
+      setWeight(0);
+      setHeight(0);
+      setAge(0);
+      setActivityMode(null);
+    }
     setType(event.target.value);
   };
 
@@ -154,7 +178,6 @@ function TargetForm(props) {
       date,
       id: target?.id,
     };
-
     dispatch(saveTargetItem(targetItem, props.onclose, date));
   };
 
@@ -293,17 +316,17 @@ function TargetForm(props) {
                       variant="outlined"
                     >
                       <OutlinedInput
-                        id="outlined-adornment-calories"
-                        value={freeModeCalories}
-                        onChange={(e) => handleChangeCalories(e)}
-                        endAdornment={
-                          <InputAdornment position="end">Cal</InputAdornment>
-                        }
-                        aria-describedby="outlined-weight-helper-text"
-                        inputProps={{
-                          "aria-label": "weight",
-                        }}
-                      />
+                          id="outlined-adornment-calories"
+                          value={freeModeCalories}
+                          onChange={(e) => handleChangeCalories(e)}
+                          endAdornment={
+                            <InputAdornment position="end">Cal</InputAdornment>
+                          }
+                          aria-describedby="outlined-weight-helper-text"
+                          inputProps={{
+                            "aria-label": "calories",
+                          }}
+                        />
                     </FormControl>
                   </div>
                 </div>
