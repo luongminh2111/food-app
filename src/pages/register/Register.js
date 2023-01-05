@@ -11,6 +11,7 @@ function Register(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [checkPass, setIsCheckPass] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
   const goHomePage = () => {
@@ -22,7 +23,18 @@ function Register(props) {
   };
 
   const handleRegister = () => {
-    dispatch(register("bach", "bach12345"));
+    if(password !== confirmPassword){
+      setIsCheckPass(true);
+    }
+    else{
+      if(email.length === 0 || password.length === 0){
+        alert("Email or password is wrong");
+      } else {
+        dispatch(register(email, password, history));
+      }
+    }
+  
+    
   };
 
   return (
@@ -57,6 +69,10 @@ function Register(props) {
         </Box>
         <TextField type="password" variant="outlined" onChange={(e) => setConfirmPassword(e.target.value)}/>
       </Box>
+      { checkPass ?    
+       <Box className="txt-label" style={{ color: 'red', marginLeft :' 35px'}}>
+        Mật khẩu không trùng khớp
+        </Box> : null}
       <Box className="btn-list">
       <Button variant="outlined" className="signup-btn" onClick={handleRegister}>
         Đăng ký

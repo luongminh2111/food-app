@@ -20,7 +20,11 @@ function Login(props) {
   };
 
   const handleLogin = () => {
-    dispatch(login('bach', 'bach12345'));
+    if(email.length === 0 || password.length === 0){
+      alert("Wrong Email or Password");
+    } else {
+       dispatch(login(email, password, history));
+    }
   };
 
   return (
