@@ -25,11 +25,20 @@ function Main() {
   const listFood = useSelector((state) => state.food.listFoods);
   const positionCallApi = useSelector((state) => state.food.positionCallApi);
   const listFilterFood = useSelector((state) => state.food.listFilterFood);
-  const targetReducer = useSelector(state => state.target);
+  const targetReducer = useSelector((state) => state.target.editData);
   console.log("check target reducer :", targetReducer);
   const [breakFastCalo, setBreakFastCalo] = useState(0);
   const [lunchCalo, setLunchCalo] = useState(0);
   const [dinnerCalo, setDinnerCalo] = useState(0);
+  const [breakFastCarb, setBreakFastCarb] = useState(0);
+  const [lunchCarb, setLunchCarb] = useState(0);
+  const [dinnerCarb, setDinnerCarb] = useState(0);
+  const [breakFastProtein, setBreakFastProtein] = useState(0);
+  const [lunchProtein, setLunchProtein] = useState(0);
+  const [dinnerProtein, setDinnerProtein] = useState(0);
+  const [breakFastFat, setBreakFastFat] = useState(0);
+  const [lunchFat, setLunchFat] = useState(0);
+  const [dinnerFat, setDinnerFat] = useState(0);
   const [customCalo, setCustomCalo] = useState(0);
   const target = useSelector((state) => state.target?.data);
   const dispatch = useDispatch();
@@ -41,21 +50,53 @@ function Main() {
     return Math.round(sumCalo * 100) / 100;
   };
 
+  const handleSumProtein = (arr) => {
+    let sumProtein = 0;
+    arr.map((e) => {
+      sumProtein += (e.amount * e.food.protein) / 100;
+    });
+    return Math.round(sumProtein * 100) / 100;
+  };
+  const handleSumCarb = (arr) => {
+    let sumCarb = 0;
+    arr.map((e) => {
+      sumCarb += (e.amount * e.food.carb) / 100;
+    });
+    return Math.round(sumCarb * 100) / 100;
+  };
+
+  const handleSumFat = (arr) => {
+    let sumFat = 0;
+    arr.map((e) => {
+      sumFat += (e.amount * e.food.fat) / 100;
+    });
+    return Math.round(sumFat * 100) / 100;
+  };
+
   const listBreakFast = useMemo(() => {
     const foods = listFilterFood.filter((e) => e.mealType === "BREAK_FAST");
-    setBreakFastCalo(handleSumCalo(foods));
+    setBreakFastCarb(handleSumCarb(foods));
+    setBreakFastProtein(handleSumProtein(foods));
+    setBreakFastFat(handleSumFat(foods));
+
     return foods;
   }, [listFilterFood]);
 
   const listLunch = useMemo(() => {
     const foods = listFilterFood.filter((e) => e.mealType === "LUNCH");
     setLunchCalo(handleSumCalo(foods));
+    setLunchCarb(handleSumCarb(foods));
+    setLunchProtein(handleSumProtein(foods));
+    setLunchFat(handleSumFat(foods));
     return foods;
   }, [listFilterFood]);
 
   const listDinner = useMemo(() => {
     const foods = listFilterFood.filter((e) => e.mealType === "DINNER");
     setDinnerCalo(handleSumCalo(foods));
+    setDinnerCarb(handleSumCarb(foods));
+    setDinnerProtein(handleSumProtein(foods));
+    setDinnerFat(handleSumFat(foods));
     return foods;
   }, [listFilterFood]);
 
@@ -91,14 +132,34 @@ function Main() {
       <DateSetting dateSelect={dateSelect} setDateSelect={setDateSelect} />
 
       <div className="main__parameter">
-        <span>
+        <span className="main__sum">
           Tổng lượng calo: {breakFastCalo + lunchCalo + dinnerCalo} calo
+          <p>Đạm {breakFastProtein + lunchProtein + dinnerProtein}</p>
+          <p>Đường {breakFastCarb + lunchCarb + dinnerCarb}</p>
+          <p>Béo {breakFastFat + lunchFat + dinnerFat}</p>
         </span>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <div>
-            <div>Mục tiêu</div>
+          <div style={{ display: "flex", flexWrap: "no-wrap" }}>
+            <div style={{ marginRight: "25px" }}>Mục tiêu</div>
+            {targetReducer.mode === "Tự nhập" ? (
+              targetReducer.type === "calo" ? (
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  {targetReducer.calo} calo{" "}
+                </div>
+              ) : (
+                <div>
+                  <div> Đường : {targetReducer.carb} </div>
+                  <div> Đạm : {targetReducer.protein} </div>
+                  <div> Béo : {targetReducer.fat} </div>
+                </div>
+              )
+            ) : (
+              <div style={{ display: "flex", alignItems: "center" }}>
+                {targetReducer.calo} calo{" "}
+              </div>
+            )}
           </div>
-          <span>Mục tiêu: {Math.round(customCalo * 100) / 100} calo</span>
+          {/* <span>Mục tiêu: {Math.round(customCalo * 100) / 100} calo</span> */}
           <div className="main__parameter-icon">
             <FontAwesomeIcon
               icon={faPen}
@@ -182,6 +243,7 @@ function Main() {
         listFood={listFood}
       />
       <TargetForm
+        targetReducer={targetReducer}
         onclick={open}
         onclose={handleClose}
         date={dateSelect}

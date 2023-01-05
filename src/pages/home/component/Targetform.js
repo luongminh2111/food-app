@@ -53,36 +53,36 @@ function TargetForm(props) {
 
   const handleChangeCarb = (event) => {
     setCarb(event.target.value);
-    dispatch(updatePropertiesTarget('card', event.target.value));
+    dispatch(updatePropertiesTarget("carb", event.target.value));
   };
 
   const handleChangeProtein = (event) => {
     setProtein(event.target.value);
-    dispatch(updatePropertiesTarget('protein', event.target.value));
+    dispatch(updatePropertiesTarget("protein", event.target.value));
   };
 
   const handleChangeAge = (event) => {
     setAge(event.target.value);
-    dispatch(updatePropertiesTarget('age', event.target.value));
+    dispatch(updatePropertiesTarget("age", event.target.value));
   };
 
   const handleChangeWeight = (event) => {
     setWeight(event.target.value);
-    dispatch(updatePropertiesTarget('weight', event.target.value));
+    dispatch(updatePropertiesTarget("weight", event.target.value));
   };
 
   const handleChangeHeight = (event) => {
     setHeight(event.target.value);
-    dispatch(updatePropertiesTarget('height', event.target.value));
+    dispatch(updatePropertiesTarget("height", event.target.value));
   };
 
   const handleChangeFat = (event) => {
     setFat(event.target.value);
-    dispatch(updatePropertiesTarget('fat', event.target.value));
+    dispatch(updatePropertiesTarget("fat", event.target.value));
   };
 
   const handleMode = (event) => {
-    if(event.target.value === "Tự nhập"){
+    if (event.target.value === "Tự nhập") {
       setGender(null);
       setWeight(0);
       setHeight(0);
@@ -91,18 +91,18 @@ function TargetForm(props) {
       setProtein(0);
       setFat(0);
       setCarb(0);
-    }
-    else{
+    } else {
       setFreeModeCalories(0);
       setProtein(0);
       setFat(0);
       setCarb(0);
     }
     setMode(event.target.value);
-    dispatch(updatePropertiesTarget('mode', event.target.value));
+    dispatch(updatePropertiesTarget("type", "calo"));
+    dispatch(updatePropertiesTarget("mode", event.target.value));
   };
   const handleType = (event) => {
-    if(event.target.value === "marco"){
+    if (event.target.value === "marco") {
       setFreeModeCalories(0);
       setGender(null);
       setWeight(0);
@@ -111,20 +111,22 @@ function TargetForm(props) {
       setActivityMode(null);
     }
     setType(event.target.value);
-    dispatch(updatePropertiesTarget('type', event.target.value));
+    dispatch(updatePropertiesTarget("type", event.target.value));
   };
 
   const handleChangGender = (e) => {
+    dispatch(updatePropertiesTarget("gender", e.target.value));
     setGender(e.target.value);
   };
 
   const handleChangActivityMode = (e) => {
+    dispatch(updatePropertiesTarget("activityType", e.target.value));
     setActivityMode(e.target.value);
   };
 
   const handleChangeCalories = (e) => {
     setFreeModeCalories(e.target.value);
-    dispatch(updatePropertiesTarget('calo', e.target.value));
+    dispatch(updatePropertiesTarget("calo", e.target.value));
   };
 
   const resultR = () => {
@@ -151,8 +153,7 @@ function TargetForm(props) {
       totalCalo = freeModeCalories;
     } else if (protein > 0 || fat > 0 || carb > 0) {
       totalCalo = (carb + protein) * 4 + fat * 9;
-      
-    } else if(mode === "Đề xuất") {
+    } else if (mode === "Đề xuất") {
       let bmr = 0;
       if (gender === "Nam") {
         bmr = 13.397 * weight + 4.799 * height - 5.677 * age + 88.362;
@@ -160,9 +161,9 @@ function TargetForm(props) {
         bmr = 9.247 * weight + 3.098 * height - 4.33 * age + 447.593;
       }
       totalCalo = bmr * valueR;
-
+      dispatch(updatePropertiesTarget("calo", Math.round(totalCalo)));
     }
-    setCustomCalo(totalCalo);
+    setCustomCalo(Math.round(totalCalo));
   }, [
     fat,
     protein,
@@ -329,17 +330,17 @@ function TargetForm(props) {
                       variant="outlined"
                     >
                       <OutlinedInput
-                          id="outlined-adornment-calories"
-                          value={freeModeCalories}
-                          onChange={(e) => handleChangeCalories(e)}
-                          endAdornment={
-                            <InputAdornment position="end">Cal</InputAdornment>
-                          }
-                          aria-describedby="outlined-weight-helper-text"
-                          inputProps={{
-                            "aria-label": "calories",
-                          }}
-                        />
+                        id="outlined-adornment-calories"
+                        value={freeModeCalories}
+                        onChange={(e) => handleChangeCalories(e)}
+                        endAdornment={
+                          <InputAdornment position="end">Cal</InputAdornment>
+                        }
+                        aria-describedby="outlined-weight-helper-text"
+                        inputProps={{
+                          "aria-label": "calories",
+                        }}
+                      />
                     </FormControl>
                   </div>
                 </div>
