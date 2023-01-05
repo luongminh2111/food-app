@@ -23,7 +23,6 @@ function Register(props) {
   };
 
   const handleRegister = () => {
-<<<<<<< HEAD
     if(password !== confirmPassword){
       setIsCheckPass(true);
     }
@@ -34,11 +33,7 @@ function Register(props) {
         dispatch(register(email, password, history));
       }
     }
-  
-    
-=======
-    dispatch(register("minh", "bach12345"));
->>>>>>> 166b2a8d622f433415a3afe4c228efdd3ec41668
+
   };
 
   return (

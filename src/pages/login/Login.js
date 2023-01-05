@@ -20,15 +20,11 @@ function Login(props) {
   };
 
   const handleLogin = () => {
-<<<<<<< HEAD
     if(email.length === 0 || password.length === 0){
       alert("Wrong Email or Password");
     } else {
        dispatch(login(email, password, history));
     }
-=======
-    dispatch(login("minh", "minh123"));
->>>>>>> 166b2a8d622f433415a3afe4c228efdd3ec41668
   };
 
   return (
