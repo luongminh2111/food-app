@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=M+PLUS+1p:wght@100;300;400;500;700;800&display=swap");
 
 * {
   padding: 0;
@@ -12,10 +11,11 @@
 
 html {
   font-size: 16px;
+  height: 100%;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Kosugi Maru", "M PLUS 1p", sans-serif;
 }
 
 ul {
@@ -35,41 +35,9 @@ img {
   max-width: 100%;
 }
 
-@each $color, $val in $colors {
-  .color-#{$color} {
-    color: $val;
-  }
-
-  .bg-#{$color} {
-    background-color: $val;
-  }
-}
-
-@each $val in $numbers {
-  .grid-col-#{$val} {
-    grid-template-columns: repeat($val, 1fr);
-  }
-}
-
-@each $val in $numbers {
-  .grid-col-md-#{$val} {
-  }
-}
-
-@each $val in $numbers {
-  .grid-col-sm-#{$val} {
-  }
-}
-
 .container {
-  width: 100%;
-  max-width: 1620px;
-  padding: 0 2rem;
+  width: 80%;
 
   margin: auto;
-  margin-top: $header-height;
-}
-
-.grid {
-  display: grid;
+  margin-top: 120px;
 }

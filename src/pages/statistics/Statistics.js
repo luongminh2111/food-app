@@ -13,6 +13,8 @@ import {
   faAngleRight,
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
+import Header from "../home/Header";
+import Footer from "../home/Footer";
 
 const types = [
   {
@@ -29,7 +31,10 @@ export default function Statistics() {
     setCurrency(event.target.value);
   };
   return (
+    <>
+     <Header />
     <div className="statistics__container">
+ 
       <div className="statistics__search">
         <Paper
           component="form"
@@ -43,8 +48,8 @@ export default function Statistics() {
         >
           <InputBase
             sx={{ ml: 1, flex: 1 }}
-            // placeholder="Search Google Maps"
-            // inputProps={{ "aria-label": "search google maps" }}
+            placeholder="Search Google Maps"
+            inputProps={{ "aria-label": "search google maps" }}
           />
 
           <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
@@ -86,6 +91,10 @@ export default function Statistics() {
         <BarChart />
         <div className="statistics__chart--count">平均：2171カロリー</div>
       </div>
+     
     </div>
+     <Footer />
+    </>
+   
   );
 }

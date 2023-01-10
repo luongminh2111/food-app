@@ -1,0 +1,48 @@
+.foodCard {
+  &-icon {
+    font-size: 15px;
+    color: #3ab19b;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #3ab19b;
+    border-radius: 50%;
+    padding: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #3ab19b;
+      color: white;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    &:nth-child(2) {
+      color: #fe6a5e;
+      border: 3px solid #fe6a5e;
+
+      &:hover {
+        background-color: #fe6a5e;
+        color: white;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+    }
+  }
+}
+// .MuiCard-root {
+//   width: 180px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   &:hover {
+//     .MuiCardActions-root.MuiCardActions-spacing {
+//       visibility: visible;
+//       opacity: 1;
+//     }
+//   }
+// }
+// .MuiCardActions-root.MuiCardActions-spacing {
+//   visibility: hidden;
+//   opacity: 0;
+//   transition: visibility 0.3s ease-in, opacity 0.3s ease-in;
+// }

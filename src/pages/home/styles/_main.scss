@@ -1,0 +1,122 @@
+@import "date";
+
+
+.main {
+  color: black;
+  font-size: 24px;
+  font-weight: 600;
+  &__none {
+    display: none;
+  }
+  &__parameter {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin: 20px 0;
+    &-icon {
+      font-size: 15px;
+      color: #3ab19b;
+      width: 30px;
+      height: 30px;
+      border: 3px solid #3ab19b;
+      border-radius: 50%;
+      padding: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      margin-left: 10px;
+      &:hover {
+        background-color: #3ab19b;
+        color: white;
+        transition: background-color 0.3s ease-in, color 0.3s ease-in;
+      }
+      &:active {
+        box-shadow: 2px 2px 5px #93c5bc;
+      }
+    }
+  }
+  &__menu {
+    margin: 20px auto;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  &__desc {
+    width: 130px;
+    height: 130px;
+    border: 3px solid black;
+    text-align: center;
+    border-radius: 20px;
+  }
+  &__icon {
+    display: flex;
+
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+
+    &-item {
+      width: 50px;
+      height: 50px;
+      color: #3ab19b;
+      font-size: 24px;
+      border: 3px solid #3ab19b;
+      background-color: white;
+      border-radius: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      &:hover {
+        background-color: #3ab19b;
+        color: white;
+        transition: background-color 0.3s linear, color 0.3s linear;
+      }
+      &:active {
+        box-shadow: 2px 2px 5px #93c5bc;
+      }
+    }
+  }
+  &__selecter {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  &__statistics {
+    width: 550px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-weight: 600;
+    &--column {
+      flex-direction: column;
+    }
+    &-title {
+      font-size: 32px;
+      width: 100%;
+      text-align: center;
+    }
+    .input-wrapper {
+      display: flex;
+      flex-wrap: nowrap;
+      .MuiFormControl-root {
+        width: 200px !important;
+      }
+      .main__input {
+        width: 220px !important;
+      }
+    }
+  }
+  &__input {
+    &--flex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    &-title {
+      margin-left: 10px;
+    }
+  }
+}

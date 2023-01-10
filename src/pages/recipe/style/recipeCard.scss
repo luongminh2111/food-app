@@ -1,0 +1,14 @@
+.card {
+  &-title {
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    line-break: strict;
+    justify-self: start;
+  }
+  &-subtitle {
+    padding: 10px;
+    font-size: 18px;
+    color: gray;
+  }
+}

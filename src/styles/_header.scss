@@ -1,5 +1,6 @@
 .header {
   width: 100%;
+  padding: 0 1rem;
   position: fixed;
   top: 0px;
   background-color: white;
@@ -8,8 +9,11 @@
   font-size: 24px;
   padding: 0.5rem 2rem;
   display: grid;
-  grid-template-columns: 150px auto 50px;
-
+  grid-template-columns: 150px 1250px auto;
+  -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  z-index: 1;
   &__logo {
     width: 150px;
     height: 50px;
@@ -20,17 +24,30 @@
     color: white;
     background-color: #3ab19b;
   }
+
   &__link {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    margin-left: 200px;
+    gap: 200px;
+    align-items: center;
     cursor: pointer;
 
     &-item {
+      border-top: 5px solid white;
+      border-bottom: 5px solid white;
+
       &:hover {
+        border-bottom: 5px solid #3ab19b;
+        transition: border-bottom 0.3s linear;
+      }
+      & > a :active {
+        color: black;
         border-bottom: 5px solid #3ab19b;
       }
     }
   }
+
   &__icon {
     width: 50px;
     height: 50px;
@@ -38,9 +55,40 @@
     justify-content: center;
     align-items: center;
     border-radius: 100px;
+
     &:hover {
       color: white;
       background-color: #3ab19b;
+      transition: background-color 0.3s linear, color 0.3s linear;
+    }
+  }
+
+  .dropdown-list {
+    display: block;
+    position: absolute;
+    width: 180px;
+    height: max-content;
+    top: 70px;
+    right: 25px;
+    border: 1px solid #d3d5d7;
+    border-radius: 3px;
+    font-size: 16px;
+    color: #0088ff;
+    margin: 4px;
+
+    .btn-list {
+      display: flex;
+      justify-content: end;
+      padding: 8px 16px;
+      cursor: pointer;
+
+      &:hover {
+        background: #f2f7f9;
+      }
+    }
+
+    .btn-logout {
+      margin-bottom: 8px;
     }
   }
 }

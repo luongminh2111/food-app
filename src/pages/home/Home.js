@@ -1,8 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import Main from "./Main";
-import Statistics from "../statistics/Statistics";
-export default function home() {
+function Home() {
   return (
     <div>
       <Header />
@@ -12,3 +11,4 @@ export default function home() {
     </div>
   );
 }
+export default Home;
