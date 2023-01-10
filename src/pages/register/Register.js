@@ -5,6 +5,7 @@ import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutl
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { register } from "../../actions/login/LoginActionCallApi";
+import { Mail } from "@mui/icons-material";
 
 function Register(props) {
   const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ function Register(props) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [checkPass, setIsCheckPass] = useState(false);
+  const [alert, setAlert]= useState('');
   const history = useHistory();
   const dispatch = useDispatch();
   const goHomePage = () => {
@@ -22,13 +24,27 @@ function Register(props) {
     history.push("/login");
   };
 
+  const handleValidateEmail =  (mail) =>{
+    const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(mail.match(mailformat))
+    {
+      return (true)
+    }
+     
+      return (false)
+  }
   const handleRegister = () => {
     if(password !== confirmPassword){
       setIsCheckPass(true);
+      setAlert("Mật khẩu không trùng khớp");
     }
     else{
-      if(email.length === 0 || password.length === 0){
-        alert("Email or password is wrong");
+      if(!handleValidateEmail(email)){
+        setIsCheckPass(true);
+        setAlert("Email không hợp lệ!");
+      }else if(password.length < 8){
+        setIsCheckPass(true);
+        setAlert("Mật khẩu tối thiểu 8 chữ số");
       } else {
         dispatch(register(email, password, history));
       }
@@ -74,7 +90,7 @@ function Register(props) {
       </Box>
       { checkPass ?    
        <Box className="txt-label" style={{ color: 'red', marginLeft :' 35px'}}>
-        Mật khẩu không trùng khớp
+        {alert}
         </Box> : null}
       <Box className="btn-list">
         <Button

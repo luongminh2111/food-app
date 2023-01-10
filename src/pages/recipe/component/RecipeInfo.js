@@ -10,7 +10,7 @@ import "../../recipe/style/recipeInfo.scss";
 function RecipeInfo(props) {
   const [desc, setDesc] = React.useState([]);
   useEffect(() => {
-    const myArray = props.tutorial.split("。");
+    const myArray = props.tutorial.split(".");
 
     setDesc(myArray.filter((arr) => arr));
   }, []);

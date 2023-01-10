@@ -15,13 +15,27 @@ function Login(props) {
     history.push("/");
   };
 
+  const handleValidateEmail =  (mail) =>{
+    const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(mail.match(mailformat))
+    {
+      return (true)
+    }
+     
+      return (false)
+  }
   const handleGoToRegister = () => {
     history.push("/register");
   };
 
   const handleLogin = () => {
-    if(email.length === 0 || password.length === 0){
-      alert("Wrong Email or Password");
+    if(!handleValidateEmail(email)){
+      // setIsCheckPass(true);
+      // setAlert("Email không hợp lệ!");
+      alert("Email không hợp lệ");
+    }
+    if( password.length === 0){
+      alert("Sai Email hoặc mật khẩu");
     } else {
        dispatch(login(email, password, history));
     }

@@ -41,7 +41,7 @@
     justify-content: flex-start;
     flex-direction: column;
     & * {
-      display: inline-block;
+      text-align: left;
     }
   }
   &__menu {
