@@ -1,10 +1,13 @@
 @import "date";
 
-
 .main {
   color: black;
   font-size: 24px;
   font-weight: 600;
+  width: 80%;
+
+  margin: auto;
+
   &__none {
     display: none;
   }
@@ -34,6 +37,15 @@
       &:active {
         box-shadow: 2px 2px 5px #93c5bc;
       }
+    }
+  }
+  &__sum {
+    display: flex;
+
+    justify-content: flex-start;
+    flex-direction: column;
+    & * {
+      display: inline-block;
     }
   }
   &__menu {

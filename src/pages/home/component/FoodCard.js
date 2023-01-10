@@ -94,11 +94,11 @@ const FoodCard = (props) => {
               component="div"
               sx={{ fontSize: "18px", color: "#8d8d8d" }}
             >
-              Đường: {(item?.food?.carb * item?.amount).toFixed(2)} g
+              Đường: {((item?.food?.carb * item?.amount) / 100).toFixed(2)} g
               <br />
-              Đạm: {(item?.food?.protein * item?.amount).toFixed(2)} g
+              Đạm: {((item?.food?.protein * item?.amount) / 100).toFixed(2)} g
               <br />
-              Béo: {(item?.food?.fat * item?.amount).toFixed(2)} g
+              Béo: {((item?.food?.fat * item?.amount) / 100).toFixed(2)} g
             </Typography>
           </CardContent>
 

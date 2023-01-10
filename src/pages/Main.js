@@ -23,9 +23,12 @@ function Main() {
   };
   return (
     <>
-      <Header />
-      {renderBody()}
-      <Footer />
+      <div className="container">
+        <Header />
+        <div className="content"> {renderBody()}</div>
+
+        <Footer />
+      </div>
     </>
   );
 }
