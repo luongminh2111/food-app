@@ -24,47 +24,69 @@ function Login(props) {
   };
 
   return (
-    <Box className="login-form">
-      <Box className="head">
-        <ArrowCircleLeftOutlinedIcon onClick={goHomePage} />
-        <Box className="head_title">Đăng nhập</Box>
-      </Box>
-      <Box className="email form-input">
-        <Box className="txt-label">Email</Box>
-        <TextField
-          type="text"
-          variant="outlined"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </Box>
-      <Box className="password form-input">
-        <Box className="txt-label">Password</Box>
-        <TextField
-          type="password"
-          variant="outlined"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </Box>
-      <Button
-        variant="text"
-        className="btn-forget"
-        onClick={() => history.push("/forget-password")}
-      >
-        Quên mật khẩu
-      </Button>
-      <Box className="btn-list">
-        <Button variant="outlined" className="signin-btn" onClick={handleLogin}>
-          Đăng nhập
-        </Button>
+    <div className="login-container">
+      <Box className="login-form">
+        <Box className="head">
+          <ArrowCircleLeftOutlinedIcon
+            style={{ color: "#3ab19b" }}
+            onClick={goHomePage}
+          />
+          <Box className="head_title">ĐĂNG NHẬP</Box>
+        </Box>
+        <Box className="email form-input">
+          <Box className="txt-label">Email</Box>
+          <TextField
+            type="text"
+            variant="outlined"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Box>
+        <Box className="password form-input">
+          <Box className="txt-label">Password</Box>
+          <TextField
+            type="password"
+            variant="outlined"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Box>
         <Button
           variant="text"
-          className="signup-btn"
-          onClick={handleGoToRegister}
+          className="btn-forget"
+          onClick={() => history.push("/forget-password")}
         >
-          Đăng ký
+          Quên mật khẩu
         </Button>
+        <Box className="btn-list">
+          <Button
+            variant="outlined"
+            className="signin-btn"
+            style={{
+              borderRadius: 35,
+              border: "none",
+              backgroundColor: "#21b6ae",
+              padding: "18px 36px",
+              color: "white",
+            }}
+            onClick={handleLogin}
+          >
+            Đăng nhập
+          </Button>
+          <Button
+            variant="text"
+            className="signup-btn"
+            onClick={handleGoToRegister}
+            sx={{
+              ml: 1,
+              "&.MuiButtonBase-root:hover": {
+                bgcolor: "transparent",
+              },
+            }}
+          >
+            Đăng ký
+          </Button>
+        </Box>
       </Box>
-    </Box>
+    </div>
   );
 }
 export default Login;

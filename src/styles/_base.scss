@@ -1,6 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=M+PLUS+1p:wght@100;300;400;500;700;800&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap");
 * {
   padding: 0;
   margin: 0;
@@ -15,9 +13,13 @@ html {
 }
 
 body {
-  font-family: "Kosugi Maru", "M PLUS 1p", sans-serif;
+  font-family: "Source Sans Pro", "Montserrat", sans-serif;
 }
-
+html,
+body,
+#root {
+  height: 100%;
+}
 ul {
   list-style-type: none;
 }
@@ -34,10 +36,30 @@ a:hover {
 img {
   max-width: 100%;
 }
-
+.content {
+  grid-area: main;
+}
 .container {
-  width: 80%;
+  // background-image: url("../contains/food-background-1.jpg");
+  // background-repeat: no-repeat;
+  // -webkit-background-size: cover;
+  // -moz-background-size: cover;
+  // -o-background-size: cover;
+  // background-size: cover;
+  // margin: 0;
+  // width: 100%;
+  // height: 100%;
 
-  margin: auto;
-  margin-top: 120px;
+  display: grid;
+
+  grid-auto-rows: minmax(100px, auto);
+  grid-template-areas:
+    "hd "
+    "main"
+    "main "
+    "main "
+    "main "
+    "main "
+    "main "
+    "ft";
 }

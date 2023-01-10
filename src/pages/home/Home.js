@@ -4,10 +4,7 @@ import Main from "./Main";
 function Home() {
   return (
     <div>
-      <Header />
-      <div className="container">
-        <Main />
-      </div>
+      <Main />
     </div>
   );
 }
