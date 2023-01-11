@@ -24,7 +24,6 @@ const target = (state = initState, action) => {
         data: action.data.data,
       };
     case "UPDATE_PROPERTIES_TARGET":
-      console.log("check action : ", action);
       return {
         ...state,
         editData: { ...state.editData, [action.key]: action.value },

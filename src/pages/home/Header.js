@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import { useHistory } from "react-router-dom";
+import { logout } from "../../actions/login/LoginAction";
 function Header() {
   const history = useHistory();
   const [showDropList, setShowDropList] = useState(false);
+
+  const handleLogout = () => {
+    logout();
+    history.push("/login");
+  };
 
   return (
     <div className="header">
@@ -40,7 +46,7 @@ function Header() {
           <div className="dropdown-list">
             <div
               className="btn-list btn-logout"
-              onClick={() => history.push("/login")}
+              onClick={() => handleLogout()}
             >
               Đăng xuất
             </div>

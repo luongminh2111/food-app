@@ -12,10 +12,7 @@ import {
   getFilterFood,
   getListFood,
 } from "../../actions/food/FoodActionCallApi";
-import {
-  getListRecipe,
-  getFilterRecipe,
-} from "../../actions/recipe/RecipeActionCallApi";
+import { handleCalcCalo } from "../../actions/target/TargetAction";
 
 function Main() {
   const [open, setOpen] = React.useState(false);
@@ -25,8 +22,6 @@ function Main() {
   const listFood = useSelector((state) => state.food.listFoods);
   const positionCallApi = useSelector((state) => state.food.positionCallApi);
   const listFilterFood = useSelector((state) => state.food.listFilterFood);
-  const targetReducer = useSelector((state) => state.target.editData);
-  console.log("check target reducer :", targetReducer);
   const [breakFastCalo, setBreakFastCalo] = useState(0);
   const [lunchCalo, setLunchCalo] = useState(0);
   const [dinnerCalo, setDinnerCalo] = useState(0);
@@ -125,7 +120,6 @@ function Main() {
     setType(event.currentTarget.value);
     setOpenFoodForm(true);
   };
-  console.log("check date :", dateSelect);
   const handleCloseFoodForm = () => {
     setOpenFoodForm(false);
   };
@@ -136,33 +130,33 @@ function Main() {
       <div className="main__parameter">
         <span className="main__sum">
           Tổng lượng đã ăn:
-          <p>Calo: {breakFastCalo + lunchCalo + dinnerCalo} calo</p>
-          <p>Đạm: {breakFastProtein + lunchProtein + dinnerProtein} g</p>
-          <p>Đường: {breakFastCarb + lunchCarb + dinnerCarb} g</p>
-          <p>Béo: {breakFastFat + lunchFat + dinnerFat} g</p>
+          <p>Calo: {Math.round((breakFastCalo + lunchCalo + dinnerCalo) * 100) / 100} calo</p>
+          <p>Đạm: {Math.round((breakFastProtein + lunchProtein + dinnerProtein) * 100) / 100} g</p>
+          <p>Đường: {Math.round((breakFastCarb + lunchCarb + dinnerCarb) * 100) / 100} g</p>
+          <p>Béo: {Math.round((breakFastFat + lunchFat + dinnerFat) * 100) / 100} g</p>
         </span>
         <div style={{ display: "flex", alignItems: "center" }}>
           <div style={{ display: "flex", flexWrap: "no-wrap" }}>
             <div style={{ marginRight: "25px" }}>Mục tiêu: </div>
-            {targetReducer.mode === "Tự nhập" ? (
-              targetReducer.type === "calo" ? (
+            {target ? 
+             target?.modeType === "Tự nhập" ? (
+              target?.type === "calo" ? (
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  {targetReducer.calo} calo{" "}
+                  {target?.calories} calo{" "}
                 </div>
               ) : (
                 <div>
-                  <div> Đường : {targetReducer.carb} g </div>
-                  <div> Đạm : {targetReducer.protein} g </div>
-                  <div> Béo : {targetReducer.fat} g </div>
+                  <div> Đường : {target?.carb} g </div>
+                  <div> Đạm : {target?.protein} g </div>
+                  <div> Béo : {target?.fat} g </div>
                 </div>
               )
             ) : (
               <div style={{ display: "flex", alignItems: "center" }}>
-                {targetReducer.calo} calo
+                {handleCalcCalo(target)} calo
               </div>
-            )}
+            ) : 0}
           </div>
-          {/* <span>Mục tiêu: {Math.round(customCalo * 100) / 100} calo</span> */}
           <div className="main__parameter-icon">
             <FontAwesomeIcon
               icon={faPen}
@@ -246,7 +240,6 @@ function Main() {
         listFood={listFood}
       />
       <TargetForm
-        targetReducer={targetReducer}
         onclick={open}
         onclose={handleClose}
         date={dateSelect}

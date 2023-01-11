@@ -5,10 +5,17 @@ import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutl
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../actions/login/LoginActionCallApi";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorEmail, setErrorEmail] = useState(false);
+  const [errorPass, setErrorPass] = useState(false);
+  const [messageMail, setMessageMail] = useState('');
+  const [messagePass, setMessagePass] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
   const goHomePage = () => {
@@ -18,25 +25,79 @@ function Login(props) {
   const handleValidateEmail = (mail) => {
     const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (mail.match(mailformat)) {
-      return true;
+      return false;
     }
-
-    return false;
+    return true;
   };
+  
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const onCloseClickHandler = (event) => {
+      setShowSnackbar(false);
+  };
+
+  const CustomSnackbar = (props) => (
+    <Snackbar
+        autoHideDuration={2000}
+        open={showSnackbar}
+        onClose={onCloseClickHandler}
+        anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
+        children={props.children}
+    >
+    </Snackbar>
+  );
+
   const handleGoToRegister = () => {
     history.push("/register");
   };
 
-  const handleLogin = () => {
-    if (!handleValidateEmail(email)) {
-      // setIsCheckPass(true);
-      // setAlert("Email không hợp lệ!");
-      alert("Email không hợp lệ");
+  const handleChangePass = (value) => {
+    if(value.length === 0){
+      setErrorPass(true);
+      setMessagePass("Mật khẩu không được để trống");
+    } else
+    if(value?.length < 8) {
+      setErrorPass(true);
+      setMessagePass("Mật khẩu không được ít hơn 8 kí tự");
+    }else {
+      setErrorPass(false);
+      setMessagePass('');
+      setPassword(value);
     }
-    if (password.length === 0) {
-      alert("Sai Email hoặc mật khẩu");
-    } else {
-      dispatch(login(email, password, history));
+  };
+
+  const handleChangeEmail = (value) => {
+    if(value.length === 0){
+      setErrorEmail(true);
+      setMessageMail("Email không được để trống");
+    } else
+    if(handleValidateEmail(value)){
+      setErrorEmail(true);
+      setMessageMail("Email không đúng định dạng");
+    } else{
+      setErrorEmail(false);
+      setMessageMail('');
+    }
+    setEmail(value);
+  }
+
+  const handleLogin = () => {
+    if(email?.length === 0){
+      setErrorEmail(true);
+      setMessageMail("Email không được để trống");
+    } else if(password?.length === 0){
+      setErrorPass(true);
+      setMessagePass("Mật khẩu không được để trống");
+    } else
+    if (!errorEmail && !errorPass){
+      dispatch(login(email, password, history)).then(json => {
+        if(!json.data){
+          setShowSnackbar(true);
+          setShowAlert(true);
+        }
+        else {
+          history.push('/');
+        }
+      });
     }
   };
 
@@ -55,15 +116,19 @@ function Login(props) {
           <TextField
             type="text"
             variant="outlined"
-            onChange={(e) => setEmail(e.target.value)}
+            error={errorEmail}
+            helperText={messageMail}
+            onChange={(e) => handleChangeEmail(e.target.value)}
           />
         </Box>
         <Box className="password form-input">
           <Box className="txt-label">Password</Box>
           <TextField
             type="password"
+            error={errorPass}
+            helperText={messagePass}
             variant="outlined"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => handleChangePass(e.target.value)}
           />
         </Box>
         <Button
@@ -103,6 +168,12 @@ function Login(props) {
           </Button>
         </Box>
       </Box>
+      {showAlert ?  <CustomSnackbar>
+        <Alert severity="error">
+            Đăng nhập thất bại, vui lòng thử lại
+        </Alert>
+      </CustomSnackbar> : null}
+
     </div>
   );
 }

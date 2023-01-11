@@ -3,7 +3,7 @@
   width: 500px;
   height: 600px;
   margin: 0 auto;
-  padding-top: 170px;
+  padding-top: 100px;
 
   .head {
     display: flex;
@@ -66,6 +66,11 @@
       margin-top: 15px;
       font-size: 14px;
       text-decoration: underline;
+    }
+  }
+  .password-confirm {
+    .MuiFormHelperText-root {
+      font-size: 16px !important;
     }
   }
 }

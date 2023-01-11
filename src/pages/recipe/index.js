@@ -21,7 +21,6 @@ function Recipe(props) {
   const [searchStr, setSearchStr] = useState([]);
   const dispatch = useDispatch();
   const recipe = useSelector((state) => {
-    console.log(state.recipe?.data);
     return state.recipe?.data;
   });
 

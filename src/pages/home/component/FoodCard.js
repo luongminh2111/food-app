@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -12,17 +12,27 @@ import { borderColor } from "@material-ui/system";
 import "../styles/_foodCard.scss";
 const FoodCard = (props) => {
   const [open, setOpen] = React.useState(false);
+
   const [openDeleteModal, setOpenDeleteModal] = React.useState(false);
   const { date, listFoodOfDay, listFood, type } = props;
-  const [foodSelected, setFoodSelected] = useState([]);
+  const [foodSelected, setFoodSelected] = useState({});
   const [idFood, setIdFood] = useState(0);
+  const [isSelect, setIsSelect] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
 
+  useEffect(() => {
+    if(isSelect){
+      setFoodSelected(listFoodOfDay.find((e) => e.food.id === idFood));
+      setOpen(true);
+    }
+
+  }, [isSelect]);
+
   const handleClickOpen = (id) => {
-    setFoodSelected(listFoodOfDay.find((e) => e.food.id === id));
-    setIsUpdate(true);
-    setOpen(true);
+    setIsSelect(true);
+    setIdFood(id);
   };
+  
   const handleDelete = (id) => {
     const itemDelete = listFoodOfDay.find((e) => e.food.id === id);
     setFoodSelected(itemDelete);
@@ -32,6 +42,7 @@ const FoodCard = (props) => {
 
   const handleClose = () => {
     setOpen(false);
+    setIsSelect(false);
   };
 
   return listFoodOfDay?.length > 0
@@ -123,7 +134,7 @@ const FoodCard = (props) => {
             setOpen={setOpenDeleteModal}
             id={idFood}
           />
-          <FoodForm
+         <FoodForm
             onclick={open}
             onclose={handleClose}
             type={type}
@@ -131,7 +142,8 @@ const FoodCard = (props) => {
             date={date}
             isUpdate={isUpdate}
             listFood={listFood}
-          />
+          /> 
+          
         </Card>
       ))
     : null;

@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import store from './store/store';
 import {
   BrowserRouter as Router,
   withRouter,
   Route,
   Switch,
+  Redirect
 } from "react-router-dom";
 
 import Login from "./pages/login/Login";
@@ -14,24 +15,43 @@ import ForgetPassword from "./pages/register/ForgetPassword";
 import ChangePassword from "./pages/register/ChangePassword";
 import Recipe from "./pages/recipe";
 import Statistics from "./pages/statistics/Statistics";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 
 function App() {
+  const checkAuth = useSelector(state => state.auth.positionCallApiCheckAuth);
+   const userStr = localStorage.getItem("user");
+
+  const [user, setUser] = useState(JSON.parse(userStr) || '');
+
+  useEffect(() => {
+    if(userStr){
+      setUser(JSON.parse(userStr));
+    }else{
+      setUser('');
+    }
+  }, [checkAuth]);
+
+  console.log("check user :", user);
   return (
     <Provider store={store} >
-      <Router>
+      <Router> 
         <React.Fragment>
           <Switch>
-            <Route exact path="/register" component={Register}></Route>
-            <Route exact path="/statistic" render={() => <Statistics />}></Route>
-            <Route exact path="/change-password" component={ChangePassword}></Route>
-            <Route exact path="/forgot-password" component={ChangePassword}></Route>
-            <Route exact path="/login" component={Login}></Route>
-            <Route exact path="/forget-password" component={ForgetPassword}></Route>
-            <Route exact path="/" render={() => <Main />}></Route>
-            <Route exact path="/recipe"  render={() => <Recipe />}></Route>
+          <Route exact path="/register" component={Register}></Route>
+          <Route exact path="/statistic" render={() => <Statistics />}></Route>
+          <Route exact path="/change-password" component={ChangePassword}></Route>
+          <Route exact path="/forgot-password" component={ChangePassword}></Route>
+          <Route exact path="/login" component={Login}></Route>
+          <Route exact path="/forget-password" component={ForgetPassword}></Route>
+          <Route exact path="/">
+            {!user ?  <Redirect to="/login" /> : <Main /> } 
+          </Route> 
+          <Route exact path="/recipe">
+            {!user ?  <Redirect to="/login" /> : <Recipe /> } 
+          </Route>              
           </Switch>
-        </React.Fragment>
+        </React.Fragment> 
+       
       </Router>
     </Provider>
   );

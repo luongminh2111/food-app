@@ -55,7 +55,6 @@ export const saveTargetItem = (targetItem, onclose, date) => (dispatch) => {
       "ngrok-skip-browser-warning": "6024",
     },
   }).then((res) => {
-    console.log("kiem tra res diary :", res);
     if (res?.status === 200) {
       getTarget(date);
       dispatch(changePositionCallAPi());

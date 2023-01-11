@@ -113,7 +113,6 @@ function FoodForm(props) {
     // dispatch(updatePropertiesTarget("type", "calo"));
     // dispatch(updatePropertiesTarget("mode", event.target.value));
   };
-  console.log("helo:", foodItem);
   const renderRecommend = () => {
     return (
       <div className="main__statistics main__statistics--column">
@@ -346,39 +345,6 @@ function FoodForm(props) {
           ) : (
             renderRecommend()
           )}
-          {/* <div className="main__input main__input--flex">
-            <div>
-              <div className="main__input-title">Lượng (gam)</div>
-              <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-                <OutlinedInput
-                  id="outlined-adornment-weight"
-                  value={quantity}
-                  type="number"
-                  onChange={(e) => handleChangeQuantity(e)}
-                  aria-describedby="outlined-weight-helper-text"
-                  inputProps={{
-                    "aria-label": "weight",
-                  }}
-                />
-              </FormControl>
-            </div>
-          </div>
-          <div className="main__input main__input--flex">
-            <div>
-              <div className="main__input-title">calo</div>
-              <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-                <OutlinedInput
-                  id="outlined-adornment-weight"
-                  value={caloCustom}
-                  aria-describedby="outlined-weight-helper-text"
-                  disabled
-                  inputProps={{
-                    "aria-label": "weight",
-                  }}
-                />
-              </FormControl>
-            </div>
-          </div> */}
         </div>
       </DialogContent>
 
