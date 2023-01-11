@@ -1,6 +1,7 @@
 const initState = {
   data: [],
   editData: {
+    date: (new Date()).getTime(),
     mode: "Tự nhập",
     type: "calo",
     calo: 0,

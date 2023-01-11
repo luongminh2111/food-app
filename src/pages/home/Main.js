@@ -41,6 +41,7 @@ function Main() {
   const [dinnerFat, setDinnerFat] = useState(0);
   const [customCalo, setCustomCalo] = useState(0);
   const target = useSelector((state) => state.target?.data);
+
   const dispatch = useDispatch();
   const handleSumCalo = (arr) => {
     let sumCalo = 0;
@@ -75,6 +76,7 @@ function Main() {
 
   const listBreakFast = useMemo(() => {
     const foods = listFilterFood.filter((e) => e.mealType === "BREAK_FAST");
+    setBreakFastCalo(handleSumCalo(foods));
     setBreakFastCarb(handleSumCarb(foods));
     setBreakFastProtein(handleSumProtein(foods));
     setBreakFastFat(handleSumFat(foods));
@@ -123,7 +125,7 @@ function Main() {
     setType(event.currentTarget.value);
     setOpenFoodForm(true);
   };
-
+  console.log("check date :", dateSelect);
   const handleCloseFoodForm = () => {
     setOpenFoodForm(false);
   };
@@ -133,14 +135,15 @@ function Main() {
 
       <div className="main__parameter">
         <span className="main__sum">
-          Tổng lượng calo: {breakFastCalo + lunchCalo + dinnerCalo} calo
-          <p>Đạm {breakFastProtein + lunchProtein + dinnerProtein}</p>
-          <p>Đường {breakFastCarb + lunchCarb + dinnerCarb}</p>
-          <p>Béo {breakFastFat + lunchFat + dinnerFat}</p>
+          Tổng lượng đã ăn:
+          <p>Calo: {breakFastCalo + lunchCalo + dinnerCalo} calo</p>
+          <p>Đạm: {breakFastProtein + lunchProtein + dinnerProtein} g</p>
+          <p>Đường: {breakFastCarb + lunchCarb + dinnerCarb} g</p>
+          <p>Béo: {breakFastFat + lunchFat + dinnerFat} g</p>
         </span>
         <div style={{ display: "flex", alignItems: "center" }}>
           <div style={{ display: "flex", flexWrap: "no-wrap" }}>
-            <div style={{ marginRight: "25px" }}>Mục tiêu</div>
+            <div style={{ marginRight: "25px" }}>Mục tiêu: </div>
             {targetReducer.mode === "Tự nhập" ? (
               targetReducer.type === "calo" ? (
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -148,14 +151,14 @@ function Main() {
                 </div>
               ) : (
                 <div>
-                  <div> Đường : {targetReducer.carb} </div>
-                  <div> Đạm : {targetReducer.protein} </div>
-                  <div> Béo : {targetReducer.fat} </div>
+                  <div> Đường : {targetReducer.carb} g </div>
+                  <div> Đạm : {targetReducer.protein} g </div>
+                  <div> Béo : {targetReducer.fat} g </div>
                 </div>
               )
             ) : (
               <div style={{ display: "flex", alignItems: "center" }}>
-                {targetReducer.calo} calo{" "}
+                {targetReducer.calo} calo
               </div>
             )}
           </div>
@@ -192,7 +195,7 @@ function Main() {
           </ul>
         </li>
         <li className="main__form-item">
-          <span className="main__title">bữa trưa: {lunchCalo} calo</span>
+          <span className="main__title">Bữa trưa: {lunchCalo} calo</span>
           <ul className="main__menu">
             <FoodCard
               key={2}

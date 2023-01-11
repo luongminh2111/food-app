@@ -45,8 +45,12 @@
     justify-content: flex-start;
     flex-direction: column;
     & * {
-      display: inline-block;
+      text-align: left;
     }
+  }
+  &__title {
+    font-size: 40px;
+    font-weight: 400;
   }
   &__menu {
     margin: 20px auto;
@@ -94,11 +98,15 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    &--grid {
+      display: grid;
+    }
   }
   &__statistics {
-    width: 550px;
+    width: 500px;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 20px;
     font-weight: 600;
