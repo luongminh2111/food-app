@@ -50,9 +50,8 @@ function Recipe(props) {
         </Box>
         <Box className="body-contents">
           <Box className="content-item item_bottom">
-            <Box className="item__title">おすすめレセピー</Box>
-
             <Box className="suggestion-list-1">
+              <Box className="item__title">Gợi ý công thức</Box>
               {recipe.map((item, index) => (
                 <RecipeCard
                   id={item.id}

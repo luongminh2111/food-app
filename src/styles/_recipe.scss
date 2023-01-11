@@ -13,9 +13,9 @@
     padding-bottom: 50px;
 
     .item__title {
+      grid-area: 1 / 1 / 1 / 5;
       font-size: 24px;
       font-weight: 700;
-      margin-bottom: 30px;
     }
 
     .item_top {
@@ -54,6 +54,7 @@
 
       .suggestion-list-1 {
         display: grid;
+        max-width: 1260px;
         grid-template-columns: 300px 300px 300px 300px;
 
         margin: 0 auto;

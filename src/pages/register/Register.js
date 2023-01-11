@@ -5,12 +5,15 @@ import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutl
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { register } from "../../actions/login/LoginActionCallApi";
+import { Mail } from "@mui/icons-material";
 
 function Register(props) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [checkPass, setIsCheckPass] = useState(false);
+  const [alert, setAlert] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
   const goHomePage = () => {
@@ -21,8 +24,29 @@ function Register(props) {
     history.push("/login");
   };
 
+  const handleValidateEmail = (mail) => {
+    const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (mail.match(mailformat)) {
+      return true;
+    }
+
+    return false;
+  };
   const handleRegister = () => {
-    dispatch(register("minh", "bach12345"));
+    if (password !== confirmPassword) {
+      setIsCheckPass(true);
+      setAlert("Mật khẩu không trùng khớp");
+    } else {
+      if (!handleValidateEmail(email)) {
+        setIsCheckPass(true);
+        setAlert("Email không hợp lệ!");
+      } else if (password.length < 8) {
+        setIsCheckPass(true);
+        setAlert("Mật khẩu tối thiểu 8 chữ số");
+      } else {
+        dispatch(register(email, password, history));
+      }
+    }
   };
 
   return (

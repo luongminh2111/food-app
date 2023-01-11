@@ -10,12 +10,17 @@ import "../../recipe/style/recipeInfo.scss";
 function RecipeInfo(props) {
   const [desc, setDesc] = React.useState([]);
   useEffect(() => {
-    const myArray = props.tutorial.split("。");
+    const myArray = props.tutorial.split(".");
 
     setDesc(myArray.filter((arr) => arr));
   }, []);
   return (
-    <Dialog open={props.onclick} onClose={props.onclose} maxWidth="md">
+    <Dialog
+      open={props.onclick}
+      fullWidth
+      onClose={props.onclose}
+      maxWidth="md"
+    >
       <DialogActions>
         <FontAwesomeIcon
           icon={faX}

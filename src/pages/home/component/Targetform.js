@@ -83,7 +83,7 @@ function TargetForm(props) {
 
   const handleMode = (event) => {
     if (event.target.value === "Tự nhập") {
-      setGender(null);
+      setGender("Nam");
       setWeight(0);
       setHeight(0);
       setAge(0);

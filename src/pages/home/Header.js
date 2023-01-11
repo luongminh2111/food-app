@@ -42,7 +42,7 @@ function Header() {
               className="btn-list btn-logout"
               onClick={() => history.push("/login")}
             >
-              Đăng suất
+              Đăng xuất
             </div>
             <div
               className="btn-list change-pass"

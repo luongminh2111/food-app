@@ -40,7 +40,7 @@ const FoodCard = (props) => {
           key={item?.food?.id}
           sx={{
             cursor: "pointer",
-            width: "180px",
+            width: "220px",
 
             display: "flex",
             flexDirection: "column",
@@ -52,7 +52,6 @@ const FoodCard = (props) => {
               display: "flex",
               alignItems: "center",
               flexDirection: "column",
-              fontFamily: ["Kosugi Maru", "M PLUS 1p"],
             }}
           >
             <Typography
@@ -76,7 +75,7 @@ const FoodCard = (props) => {
               component="div"
               sx={{ fontSize: "18px", color: "#8d8d8d" }}
             >
-              {item.amount} gram
+              {item.amount} g
             </Typography>
 
             <Typography

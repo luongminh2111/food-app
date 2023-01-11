@@ -38,23 +38,19 @@ img {
 }
 .content {
   grid-area: main;
+  padding-top: 100px;
+  background-image: url("../contains/food-background-1.jpg");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: 1fr;
 }
 .container {
-  // background-image: url("../contains/food-background-1.jpg");
-  // background-repeat: no-repeat;
-  // -webkit-background-size: cover;
-  // -moz-background-size: cover;
-  // -o-background-size: cover;
-  // background-size: cover;
-  // margin: 0;
-  // width: 100%;
-  // height: 100%;
-
   display: grid;
 
   grid-auto-rows: minmax(100px, auto);
   grid-template-areas:
-    "hd "
     "main"
     "main "
     "main "
