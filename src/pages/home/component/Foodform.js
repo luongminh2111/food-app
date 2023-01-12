@@ -33,7 +33,7 @@ function FoodForm(props) {
   const [protein, setProtein] = useState(0);
   const [fat, setFat] = useState(0);
   const [calo, setCalo] = useState(0);
-  const [mode, setMode] = React.useState("Đề xuất");
+  const [mode, setMode] = useState("Đề xuất");
 
   useEffect(() => {
     if (foodSelected?.food?.id > 0) {
@@ -96,14 +96,27 @@ function FoodForm(props) {
 
   const handleSaveFoodItem = (e) => {
     e.preventDefault();
-    const menuItem = {
-      id: foodSelected?.id,
-      type,
-      quantity,
-      foodId: foodItem.id,
-      date,
-    };
-    dispatch(saveFoodItem(menuItem, isUpdate, onclose));
+    let menuItem = {};
+    if(mode === "Tự nhập"){
+      menuItem = {
+        weight,
+        name,
+        protein,
+        carb,
+        fat,
+      };
+    } else {
+      menuItem = {
+        id: foodSelected?.id,
+        type,
+        quantity,
+        foodId: foodItem.id,
+        date,
+      };
+    }
+    
+    console.log("check menuItem : ", menuItem);
+    // dispatch(saveFoodItem(menuItem, isUpdate, onclose));
     setQuantity(0);
     setCaloCustom(0);
     setName(listFood[0]?.name);
