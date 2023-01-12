@@ -34,6 +34,7 @@ function FoodForm(props) {
   const [fat, setFat] = useState(0);
   const [calo, setCalo] = useState(0);
   const [mode, setMode] = useState("Đề xuất");
+  const [image, setImage] = useState('');
 
   useEffect(() => {
     if (foodSelected?.food?.id > 0) {
@@ -61,6 +62,11 @@ function FoodForm(props) {
     setName(event.target.value);
     // dispatch(updatePropertiesTarget("calo", event.target.value));
   };
+
+  const handleChangeImage = (value) => {
+    setImage(value);
+  };
+
   const handleChangeCalo = (event) => {
     setCalo(event.target.value);
     // dispatch(updatePropertiesTarget("calo", event.target.value));
@@ -228,7 +234,7 @@ function FoodForm(props) {
                   <div>
                     <div className="main__input-title">Tên món ăn</div>
                     <FormControl
-                      sx={{ m: 1, width: "25ch" }}
+                      sx={{ m: 1, width: "30ch" }}
                       variant="outlined"
                     >
                       <OutlinedInput
@@ -247,7 +253,7 @@ function FoodForm(props) {
                   <div>
                     <div className="main__input-title">Khối lượng</div>
                     <FormControl
-                      sx={{ m: 1, width: "25ch" }}
+                      sx={{ m: 1, width: "30ch" }}
                       variant="outlined"
                     >
                       <OutlinedInput
@@ -269,7 +275,7 @@ function FoodForm(props) {
                   <div>
                     <div className="main__input-title">Calo</div>
                     <FormControl
-                      sx={{ m: 1, width: "25ch" }}
+                      sx={{ m: 1, width: "30ch" }}
                       variant="outlined"
                     >
                       <OutlinedInput
@@ -291,7 +297,7 @@ function FoodForm(props) {
                   <div>
                     <div className="main__input-title">Đường</div>
                     <FormControl
-                      sx={{ m: 1, width: "25ch" }}
+                      sx={{ m: 1, width: "30ch" }}
                       variant="outlined"
                     >
                       <OutlinedInput
@@ -313,7 +319,7 @@ function FoodForm(props) {
                   <div>
                     <div className="main__input-title">Đạm</div>
                     <FormControl
-                      sx={{ m: 1, width: "25ch" }}
+                      sx={{ m: 1, width: "30ch" }}
                       variant="outlined"
                     >
                       <OutlinedInput
@@ -335,7 +341,7 @@ function FoodForm(props) {
                   <div>
                     <div className="main__input-title">Béo</div>
                     <FormControl
-                      sx={{ m: 1, width: "25ch" }}
+                      sx={{ m: 1, width: "30ch" }}
                       variant="outlined"
                     >
                       <OutlinedInput
@@ -352,6 +358,14 @@ function FoodForm(props) {
                       />
                     </FormControl>
                   </div>
+                </div>
+                <div>
+                  <div className="main__input-title">Nhập link ảnh</div>
+                  <FormControl
+                      sx={{ m: 1, width: "30ch" }}
+                      variant="outlined"
+                    ><TextField value={image} onChange={(e) => handleChangeImage(e.target.value)}></TextField></FormControl>
+                  
                 </div>
               </>
             </div>
