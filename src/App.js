@@ -19,7 +19,7 @@ import { Provider, useSelector } from "react-redux";
 
 function App() {
   const checkAuth = useSelector(state => state.auth.positionCallApiCheckAuth);
-   const userStr = localStorage.getItem("user");
+   const userStr = sessionStorage.getItem("user");
 
   const [user, setUser] = useState(JSON.parse(userStr) || '');
 

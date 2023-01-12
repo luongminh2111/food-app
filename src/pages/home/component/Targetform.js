@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { useState } from "react";
-import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Dialog from "@mui/material/Dialog";

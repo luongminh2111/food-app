@@ -13,7 +13,7 @@ import Box from "@mui/material/Box";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import { Select } from "@mui/material";
-import { saveFoodItem } from "../../../actions/food/FoodActionCallApi";
+import { saveFoodItem, addFoodItem } from "../../../actions/food/FoodActionCallApi";
 import {
   modes,
   genders,
@@ -34,8 +34,8 @@ function FoodForm(props) {
   const [fat, setFat] = useState(0);
   const [calo, setCalo] = useState(0);
   const [mode, setMode] = useState("Đề xuất");
-  const [image, setImage] = useState('');
-
+  const [image, setImage]= useState('');
+  
   useEffect(() => {
     if (foodSelected?.food?.id > 0) {
       setName(foodSelected.food.name);
@@ -62,17 +62,17 @@ function FoodForm(props) {
     setName(event.target.value);
     // dispatch(updatePropertiesTarget("calo", event.target.value));
   };
-
-  const handleChangeImage = (value) => {
-    setImage(value);
-  };
-
   const handleChangeCalo = (event) => {
     setCalo(event.target.value);
     // dispatch(updatePropertiesTarget("calo", event.target.value));
   };
   const handleChangeWeight = (event) => {
     setWeight(event.target.value);
+    // dispatch(updatePropertiesTarget("weight", event.target.value));
+  };
+
+  const handleChangeImage = (event) => {
+    setImage(event.target.value);
     // dispatch(updatePropertiesTarget("weight", event.target.value));
   };
   const handleChangeCarb = (event) => {
@@ -110,7 +110,10 @@ function FoodForm(props) {
         protein,
         carb,
         fat,
+        image,
+        calo
       };
+      dispatch(addFoodItem(menuItem, isUpdate, onclose, date));
     } else {
       menuItem = {
         id: foodSelected?.id,
@@ -119,10 +122,9 @@ function FoodForm(props) {
         foodId: foodItem.id,
         date,
       };
+      dispatch(saveFoodItem(menuItem, isUpdate, onclose));
     }
-    
-    console.log("check menuItem : ", menuItem);
-    // dispatch(saveFoodItem(menuItem, isUpdate, onclose));
+   
     setQuantity(0);
     setCaloCustom(0);
     setName(listFood[0]?.name);
@@ -136,7 +138,7 @@ function FoodForm(props) {
     return (
       <div className="main__statistics main__statistics--column">
         <Autocomplete
-          defaultValue={listFood[index]}
+          defaultValue={listFood[foodSelected?.food?.id -1 >= 0 ? foodSelected?.food?.id -1 : 0] }
           id="food-select"
           sx={{ m: 1, width: "30ch" }}
           options={listFood}
@@ -282,6 +284,7 @@ function FoodForm(props) {
                         id="outlined-adornment-weight"
                         value={calo}
                         onChange={(e) => handleChangeCalo(e)}
+                        type="number"
                         endAdornment={
                           <InputAdornment position="end">calo</InputAdornment>
                         }
@@ -303,6 +306,7 @@ function FoodForm(props) {
                       <OutlinedInput
                         id="outlined-adornment-weight"
                         value={carb}
+                        type="number"
                         onChange={(e) => handleChangeCarb(e)}
                         endAdornment={
                           <InputAdornment position="end">g</InputAdornment>
@@ -325,6 +329,7 @@ function FoodForm(props) {
                       <OutlinedInput
                         id="outlined-adornment-weight"
                         value={protein}
+                        type="number"
                         onChange={(e) => handleChangeProtein(e)}
                         endAdornment={
                           <InputAdornment position="end">g</InputAdornment>
@@ -347,6 +352,7 @@ function FoodForm(props) {
                       <OutlinedInput
                         id="outlined-adornment-weight"
                         value={fat}
+                        type="number"
                         onChange={(e) => handleChangeFat(e)}
                         endAdornment={
                           <InputAdornment position="end">g</InputAdornment>
@@ -364,8 +370,9 @@ function FoodForm(props) {
                   <FormControl
                       sx={{ m: 1, width: "30ch" }}
                       variant="outlined"
-                    ><TextField value={image} onChange={(e) => handleChangeImage(e.target.value)}></TextField></FormControl>
-                  
+                    >
+                  <TextField value={image} onChange={(e) => {handleChangeImage(e)}}></TextField>
+                  </FormControl>
                 </div>
               </>
             </div>

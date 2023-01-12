@@ -5,5 +5,5 @@ export const getCurrentUser = () => {
 };
 
 export const logout = () => {
-  localStorage.removeItem("user");
+  sessionStorage.removeItem("user");
 };

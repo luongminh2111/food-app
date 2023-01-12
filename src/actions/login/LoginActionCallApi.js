@@ -19,7 +19,7 @@ export const login = (email, password, history) => (dispatch) => {
   return axios
     .post(`${BASE_URL}/account/login`, body, options).then(json => {
       if (json.data?.data?.token) {
-        localStorage.setItem("user", JSON.stringify(json.data?.data?.token));
+        sessionStorage.setItem("user", JSON.stringify(json.data?.data?.token));
         dispatch(changePositionCallAPiAuth(true));
       }
       return json.data;
