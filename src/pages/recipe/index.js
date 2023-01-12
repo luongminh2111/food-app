@@ -21,7 +21,6 @@ function Recipe(props) {
   const [searchStr, setSearchStr] = useState([]);
   const dispatch = useDispatch();
   const recipe = useSelector((state) => {
-    console.log(state.recipe?.data);
     return state.recipe?.data;
   });
 
@@ -50,9 +49,8 @@ function Recipe(props) {
         </Box>
         <Box className="body-contents">
           <Box className="content-item item_bottom">
-            <Box className="item__title">おすすめレセピー</Box>
-
             <Box className="suggestion-list-1">
+              <Box className="item__title">Gợi ý công thức</Box>
               {recipe.map((item, index) => (
                 <RecipeCard
                   id={item.id}

@@ -1,6 +1,7 @@
 const initState = {
   data: [],
   editData: {
+    date: (new Date()).getTime(),
     mode: "Tự nhập",
     type: "calo",
     calo: 0,
@@ -23,7 +24,6 @@ const target = (state = initState, action) => {
         data: action.data.data,
       };
     case "UPDATE_PROPERTIES_TARGET":
-      console.log("check action : ", action);
       return {
         ...state,
         editData: { ...state.editData, [action.key]: action.value },
