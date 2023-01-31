@@ -2,9 +2,8 @@ import axios from "axios";
 axios.defaults.headers.common["ngrok-skip-browser-warning"] = "6024";
 
 const callApi = function callApi(url, options) {
-  const accessToken = localStorage.getItem(
-    `token_${window.SapoSocialApp.alias}`
-  );
+  
+  const accessToken = JSON.parse(sessionStorage.getItem("user"));
   if (!options.mode) {
     options.mode = "cors";
   }
@@ -20,14 +19,14 @@ const callApi = function callApi(url, options) {
     }
     if (!options.headers["X-SOCIAL-TIMESTAMP"]) {
       Object.assign(options.headers, {
-        "X-SOCIAL-TIMESTAMP": new Date().getTime(),
+        "X-ITSS-TIMESTAMP": new Date().getTime(),
       });
     }
   } else {
     options.headers = {
       Authorization: accessToken,
       "Content-Type": "application/json",
-      "X-SOCIAL-TIMESTAMP": new Date().getTime(),
+      "X-ITSS-TIMESTAMP": new Date().getTime(),
     };
   }
   options.url = url;

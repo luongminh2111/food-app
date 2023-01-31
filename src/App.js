@@ -16,6 +16,7 @@ import ChangePassword from "./pages/register/ChangePassword";
 import Recipe from "./pages/recipe";
 import Statistics from "./pages/statistics/Statistics";
 import { Provider, useSelector } from "react-redux";
+import Forum from "./pages/forum/components";
 
 function App() {
   const checkAuth = useSelector(state => state.auth.positionCallApiCheckAuth);
@@ -42,6 +43,7 @@ function App() {
           <Route exact path="/change-password" component={ChangePassword}></Route>
           <Route exact path="/forgot-password" component={ChangePassword}></Route>
           <Route exact path="/login" component={Login}></Route>
+          <Route exact path="/forum" component={Forum}></Route>
           <Route exact path="/forget-password" component={ForgetPassword}></Route>
           <Route exact path="/">
             {!user ?  <Redirect to="/login" /> : <Main /> } 

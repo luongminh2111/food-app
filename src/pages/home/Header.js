@@ -14,7 +14,7 @@ function Header() {
   return (
     <div className="header">
       <div className="header__logo" onClick={() => history.push("/")}>
-        <span className=""> ロゴ</span>
+        <span className=""> Logo</span>
       </div>
       <ul className="header__link">
         <li className="header__link-item" onClick={() => history.push("/")}>
@@ -33,9 +33,9 @@ function Header() {
            Công thức
           </span>
         </li>
-        {/* <li className="header__link-item ">
-          <span className="">フォーラム</span>
-        </li> */}
+        <li className="header__link-item ">
+          <span className="" onClick={() => history.push("/forum")}>Diễn đàn</span>
+        </li>
       </ul>
       <div
         className="header__icon "
