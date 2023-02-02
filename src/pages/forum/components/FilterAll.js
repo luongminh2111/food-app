@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import RecipeCard from "../../recipe/component/RecipeCard";
 
 function FilterAll() {
-  const dataForumFake = useSelector((state) => {
-    return state.recipe?.data;
-  });
-  console.log("check data :" ,dataForumFake);
+  const dataForum = useSelector(state => state.forum.listPost);
+  const [showDetail , setShowDetail] = useState(false);
+  const [isPost , setIsPost] = useState('');
+  
   return (
     <div className="list-post-wrapper">
-      {dataForumFake.map((item, index) => (
+      {dataForum?.map((item, index) => (
         <div className="post-item" key={index}>
-          <img src={item.img}></img>
-          <div className="title">{item.recipeName}</div>
+          <img src={item.photo}></img>
+          <div className="title">{item.title}</div>
         </div>
       ))}
     </div>

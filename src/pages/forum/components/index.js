@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useState} from "react";
 import Header from "../../home/Header";
 import { Box } from "@mui/material";
 import "../style/index.scss";
@@ -7,9 +7,20 @@ import FilterCook from "./FilterCook";
 import FilterCookingMode from "./FilterCookingMode";
 import FilterTips from "./FilterTips";
 import Guide from "./Guide";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getListPost } from "../actions/ForumActionCallApi";
 
 function Forum(props) {
-  const [value, setValue] = React.useState(1);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getListPost());
+  }, []);
+
+  const [showDetail , setShowDetail] = useState(false);
+  const [isPost , setIsPost] = useState('');
+  const [value, setValue] = useState(0);
 
   const handleChangeTab = (newValue) => {
     setValue(newValue);

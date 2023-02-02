@@ -3,6 +3,7 @@ import { fetchTarget } from "./TargetAction";
 import axios from "axios";
 import { changePositionCallAPi } from "../food/FoodAction";
 axios.defaults.headers.common["ngrok-skip-browser-warning"] = "6024";
+axios.defaults.headers.common["Authentication"] = JSON.parse(sessionStorage.getItem("user"));
 
 export const getTarget = (date) => (dispatch) => {
   axios
@@ -53,6 +54,7 @@ export const saveTargetItem = (targetItem, onclose, date) => (dispatch) => {
     headers: {
       "Content-Type": "application/json",
       "ngrok-skip-browser-warning": "6024",
+      "Authentication": JSON.parse(sessionStorage.getItem("user"))
     },
   }).then((res) => {
     if (res?.status === 200) {

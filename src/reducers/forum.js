@@ -2,12 +2,12 @@ const initState = {
   listPost: []
 };
 
-const food = (state = initState, action) => {
+const forum = (state = initState, action) => {
   switch (action.type) {
     case "GET_LIST_POST":
       return {
         ...state,
-        listPost: action.data.data,
+        listPost: action.data,
       };
     case "GET_LIST_FILTER_FOOD": {
       return {
@@ -20,4 +20,4 @@ const food = (state = initState, action) => {
   }
 };
 
-export default food;
+export default forum;

@@ -7,7 +7,6 @@ import {
 } from "./FoodAction";
 import axios from "axios";
 axios.defaults.headers.common["ngrok-skip-browser-warning"] = "6024";
-console.log("check : ", sessionStorage.getItem("user"));
 axios.defaults.headers.common["Authentication"] = JSON.parse(sessionStorage.getItem("user"));
 export const getListFood = () => (dispatch) => {
   axios
@@ -94,6 +93,7 @@ export const saveFoodItem = (menuItem, isUpdate, onclose) => (dispatch) => {
     headers: {
       "Content-Type": "application/json",
       "ngrok-skip-browser-warning": "6024",
+      "Authentication": JSON.parse(sessionStorage.getItem("user"))
     },
   }).then((res) => {
     if (res?.status === 200) {
