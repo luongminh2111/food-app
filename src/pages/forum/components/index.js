@@ -1,4 +1,4 @@
-import React , { useState} from "react";
+import React, { useState } from "react";
 import Header from "../../home/Header";
 import { Box } from "@mui/material";
 import "../style/index.scss";
@@ -10,6 +10,7 @@ import Guide from "./Guide";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getListPost } from "../actions/ForumActionCallApi";
+import Footer from "../../home/Footer";
 
 function Forum(props) {
   const dispatch = useDispatch();
@@ -18,28 +19,71 @@ function Forum(props) {
     dispatch(getListPost());
   }, []);
 
-  const [showDetail , setShowDetail] = useState(false);
-  const [isPost , setIsPost] = useState('');
   const [value, setValue] = useState(0);
+  const [itemSelected, setItemSelected] = useState({});
+  const [isPost, setIsPost] = useState("");
 
   const handleChangeTab = (newValue) => {
     setValue(newValue);
+    setIsPost('');
   };
 
   const renderTabContent = (value) => {
     switch (value) {
       case 0:
-        return <FilterAll />;
+        return (
+          <FilterAll
+            setIsPost={setIsPost}
+            isPost={isPost}
+            itemSelected={itemSelected}
+            setItemSelected={setItemSelected}
+          />
+        );
       case 1:
-        return <FilterCook />;
+        return (
+          <FilterCook
+            setIsPost={setIsPost}
+            isPost={isPost}
+            itemSelected={itemSelected}
+            setItemSelected={setItemSelected}
+          />
+        );
       case 2:
-        return <FilterCookingMode />;
+        return (
+          <FilterCookingMode
+            setIsPost={setIsPost}
+            isPost={isPost}
+            itemSelected={itemSelected}
+            setItemSelected={setItemSelected}
+          />
+        );
       case 3:
-        return <FilterTips />;
+        return (
+          <FilterTips
+            setIsPost={setIsPost}
+            isPost={isPost}
+            itemSelected={itemSelected}
+            setItemSelected={setItemSelected}
+          />
+        );
       case 4:
-        return <Guide />;
+        return (
+          <Guide
+            setIsPost={setIsPost}
+            isPost={isPost}
+            itemSelected={itemSelected}
+            setItemSelected={setItemSelected}
+          />
+        );
       default:
-        return <FilterAll />;
+        return (
+          <FilterAll
+            setIsPost={setIsPost}
+            isPost={isPost}
+            itemSelected={itemSelected}
+            setItemSelected={setItemSelected}
+          />
+        );
     }
   };
 
@@ -81,6 +125,7 @@ function Forum(props) {
         </div>
         <div className="tabs-content">{renderTabContent(value)}</div>
       </div>
+      <Footer />
     </div>
   );
 }

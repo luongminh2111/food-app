@@ -1,9 +1,14 @@
 .recipe-body {
-  margin-top: 120px;
-
+  padding-top: 120px;
+  background-image: url(../contains/background-recipe.jfif);
+  background-size: cover;
+  background-repeat: repeat-y;
+  width: 100%;
+  height: max-content;
   .search-bar {
     width: 70%;
     margin: 0 auto;
+  
   }
 
   .body-contents {
@@ -16,6 +21,11 @@
       grid-area: 1 / 1 / 1 / 5;
       font-size: 24px;
       font-weight: 700;
+      background-color: #FFFFFF;
+      width: 300px;
+      border-radius: 16px;
+      text-align: center;
+      border: 1px solid #EAEAEA;
     }
 
     .item_top {
@@ -82,7 +92,7 @@
   padding: 5px 8px;
   border: 3px solid #3ab19b;
   border-radius: 6px;
-
+  background-color: #FFFFFF;
   input {
     border: none;
     width: 700px;

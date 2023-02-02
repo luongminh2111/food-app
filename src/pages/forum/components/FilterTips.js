@@ -1,8 +1,12 @@
 import React from "react";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
+import { renderAllPost } from "../actions/ForumActions";
+import PostDetail from "./PostDetail";
 
-function FilterTips(){
+function FilterTips(props){
+  const {isPost, setIsPost, itemSelected, setItemSelected } = props;
+
   const dataForum = useSelector(state => state.forum.listPost);
   const listTipPost = useMemo(() => {
     return dataForum.filter(e => e.categoryId === 3);
@@ -10,12 +14,9 @@ function FilterTips(){
 
   return (
     <div className="list-post-wrapper">
-      {listTipPost?.map((item, index) => (
-        <div className="post-item" key={index}>
-          <img src={item.photo}></img>
-          <div className="title">{item.title}</div>
-        </div>
-      ))}
+      {
+        isPost > 0 ? <PostDetail data={itemSelected} /> : renderAllPost(listTipPost, setItemSelected, setIsPost)
+      }
     </div>
   );
 };
