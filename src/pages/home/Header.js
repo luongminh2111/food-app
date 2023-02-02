@@ -14,7 +14,7 @@ function Header() {
   return (
     <div className="header">
       <div className="header__logo" onClick={() => history.push("/")}>
-        <span className=""> Logo</span>
+        <span className="logo-app"> </span>
       </div>
       <ul className="header__link">
         <li className="header__link-item" onClick={() => history.push("/")}>
@@ -22,7 +22,7 @@ function Header() {
             className="header__link-item--underline"
             onClick={() => history.push("/daily")}
           >
-           Nhật ký
+            Nhật ký
           </span>
         </li>
         {/* <li className="header__link-item " onClick={()=> history.push("/statistic")}>
@@ -30,11 +30,13 @@ function Header() {
         </li> */}
         <li className="header__link-item ">
           <span className="" onClick={() => history.push("/recipe")}>
-           Công thức
+            Công thức
           </span>
         </li>
         <li className="header__link-item ">
-          <span className="" onClick={() => history.push("/forum")}>Diễn đàn</span>
+          <span className="" onClick={() => history.push("/forum")}>
+            Diễn đàn
+          </span>
         </li>
       </ul>
       <div
@@ -44,10 +46,7 @@ function Header() {
         <PersonIcon />
         {showDropList ? (
           <div className="dropdown-list">
-            <div
-              className="btn-list btn-logout"
-              onClick={() => handleLogout()}
-            >
+            <div className="btn-list btn-logout" onClick={() => handleLogout()}>
               Đăng xuất
             </div>
             <div

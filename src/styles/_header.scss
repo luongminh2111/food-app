@@ -24,9 +24,12 @@
     align-items: center;
     border-radius: 1rem;
     color: white;
-    background-color: #3ab19b;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("https://bcnh.co.uk/wp-content/uploads/2020/07/Eat-healthy-v2-1200x600.jpg");
   }
-
+  .logo-app {
+  }
   &__link {
     display: flex;
     justify-content: flex-start;
