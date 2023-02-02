@@ -22,6 +22,7 @@ import {
 } from "../../../contains/dataConst";
 function FoodForm(props) {
   const { type, date, onclose, isUpdate, listFood, foodSelected } = props;
+  console.log("check list food : ", listFood);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [index, setIndex] = useState(0);

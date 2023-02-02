@@ -3,7 +3,7 @@ import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActions } from "@mui/material";
+import { CardActions, CardMedia } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faX } from "@fortawesome/free-solid-svg-icons";
 import FoodForm from "./FoodForm";
@@ -21,18 +21,17 @@ const FoodCard = (props) => {
   const [isUpdate, setIsUpdate] = useState(false);
 
   useEffect(() => {
-    if(isSelect){
+    if (isSelect) {
       setFoodSelected(listFoodOfDay.find((e) => e.food.id === idFood));
       setOpen(true);
     }
-
   }, [isSelect]);
 
   const handleClickOpen = (id) => {
     setIsSelect(true);
     setIdFood(id);
   };
-  
+
   const handleDelete = (id) => {
     const itemDelete = listFoodOfDay.find((e) => e.food.id === id);
     setFoodSelected(itemDelete);
@@ -65,7 +64,16 @@ const FoodCard = (props) => {
               flexDirection: "column",
             }}
           >
-            <Typography
+            <div>
+              <CardMedia
+                component="img"
+                height="104"
+                image={item?.food?.image}
+                alt="Food Image"
+              />
+              <div className="card-title">{item?.food?.name}</div>
+            </div>
+            {/* <Typography
               gutterBottom
               variant="h5"
               component="div"
@@ -79,7 +87,7 @@ const FoodCard = (props) => {
               }}
             >
               {item?.food?.name}
-            </Typography>
+            </Typography> */}
             <Typography
               gutterBottom
               variant="h5"
@@ -134,7 +142,7 @@ const FoodCard = (props) => {
             setOpen={setOpenDeleteModal}
             id={idFood}
           />
-         <FoodForm
+          <FoodForm
             onclick={open}
             onclose={handleClose}
             type={type}
@@ -142,8 +150,7 @@ const FoodCard = (props) => {
             date={date}
             isUpdate={isUpdate}
             listFood={listFood}
-          /> 
-          
+          />
         </Card>
       ))
     : null;
