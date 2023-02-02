@@ -5,16 +5,16 @@ import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutl
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../actions/login/LoginActionCallApi";
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPass, setErrorPass] = useState(false);
-  const [messageMail, setMessageMail] = useState('');
-  const [messagePass, setMessagePass] = useState('');
+  const [messageMail, setMessageMail] = useState("");
+  const [messagePass, setMessagePass] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -29,21 +29,20 @@ function Login(props) {
     }
     return true;
   };
-  
+
   const [showSnackbar, setShowSnackbar] = useState(false);
   const onCloseClickHandler = (event) => {
-      setShowSnackbar(false);
+    setShowSnackbar(false);
   };
 
   const CustomSnackbar = (props) => (
     <Snackbar
-        autoHideDuration={2000}
-        open={showSnackbar}
-        onClose={onCloseClickHandler}
-        anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
-        children={props.children}
-    >
-    </Snackbar>
+      autoHideDuration={2000}
+      open={showSnackbar}
+      onClose={onCloseClickHandler}
+      anchorOrigin={{ horizontal: "center", vertical: "top" }}
+      children={props.children}
+    ></Snackbar>
   );
 
   const handleGoToRegister = () => {
@@ -51,51 +50,48 @@ function Login(props) {
   };
 
   const handleChangePass = (value) => {
-    if(value.length === 0){
+    if (value.length === 0) {
       setErrorPass(true);
       setMessagePass("Mật khẩu không được để trống");
-    } else
-    if(value?.length < 8) {
+    } else if (value?.length < 8) {
       setErrorPass(true);
       setMessagePass("Mật khẩu không được ít hơn 8 kí tự");
-    }else {
+    } else {
       setErrorPass(false);
-      setMessagePass('');
+      setMessagePass("");
       setPassword(value);
     }
   };
 
   const handleChangeEmail = (value) => {
-    if(value.length === 0){
+    if (value.length === 0) {
       setErrorEmail(true);
       setMessageMail("Email không được để trống");
-    } else
-    if(handleValidateEmail(value)){
+    } else if (handleValidateEmail(value)) {
       setErrorEmail(true);
       setMessageMail("Email không đúng định dạng");
-    } else{
+    } else {
       setErrorEmail(false);
-      setMessageMail('');
+      setMessageMail("");
     }
     setEmail(value);
-  }
+  };
 
   const handleLogin = () => {
-    if(email?.length === 0){
+    if (email?.length === 0) {
       setErrorEmail(true);
       setMessageMail("Email không được để trống");
-    } else if(password?.length === 0){
+    } else if (password?.length === 0) {
       setErrorPass(true);
       setMessagePass("Mật khẩu không được để trống");
-    } else
-    if (!errorEmail && !errorPass){
-      dispatch(login(email, password, history)).then(json => {
-        if(!json.data){
+    } else if (!errorEmail && !errorPass) {
+      dispatch(login(email, password, history)).then((json) => {
+        if (!json.data) {
           setShowSnackbar(true);
           setShowAlert(true);
-        }
-        else {
-          history.push('/');
+        } else {
+          history.push("/");
+          window.location.reload();
         }
       });
     }
@@ -168,12 +164,11 @@ function Login(props) {
           </Button>
         </Box>
       </Box>
-      {showAlert ?  <CustomSnackbar>
-        <Alert severity="error">
-            Đăng nhập thất bại, vui lòng thử lại
-        </Alert>
-      </CustomSnackbar> : null}
-
+      {showAlert ? (
+        <CustomSnackbar>
+          <Alert severity="error">Đăng nhập thất bại, vui lòng thử lại</Alert>
+        </CustomSnackbar>
+      ) : null}
     </div>
   );
 }
