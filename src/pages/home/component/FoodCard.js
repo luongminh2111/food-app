@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faX } from "@fortawesome/free-solid-svg-icons";
 import FoodForm from "./FoodForm";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
-import { borderColor } from "@material-ui/system";
 import "../styles/_foodCard.scss";
 const FoodCard = (props) => {
   const [open, setOpen] = React.useState(false);

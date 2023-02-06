@@ -39,7 +39,7 @@ export const deleteFoodItem = (id) => (dispatch) => {
     .catch((error) => console.log(error));
 };
 
-export const addFoodItem = (menuItem, isUpdate, onClose, date) => (dispatch) => {
+export const addFoodItem = (menuItem, date) => (dispatch) => {
   const options = {
     mode: "cors",
     headers: {
@@ -62,8 +62,8 @@ export const addFoodItem = (menuItem, isUpdate, onClose, date) => (dispatch) => 
   return axios
     .post(`${BASE_URL}/food/save`, body, options).then(json => {
       if (json.data?.code === 200) {
-        getFilterFood(date);
-        onClose();
+        dispatch(getListFood());
+        dispatch(getFilterFood(date));
       }
       return json.data;
     })

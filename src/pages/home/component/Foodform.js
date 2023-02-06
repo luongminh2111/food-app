@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Dialog from "@mui/material/Dialog";
@@ -8,21 +7,19 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
-import Autocomplete from "@mui/material/Autocomplete";
-import Box from "@mui/material/Box";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import { Select } from "@mui/material";
-import { saveFoodItem, addFoodItem } from "../../../actions/food/FoodActionCallApi";
 import {
-  modes,
-  genders,
-  types,
-  activityModes,
-} from "../../../contains/dataConst";
+  saveFoodItem,
+  addFoodItem,
+  getListFood,
+} from "../../../actions/food/FoodActionCallApi";
+import { modes } from "../../../contains/dataConst";
+import "../styles/FoodFormStyle.scss";
+
 function FoodForm(props) {
   const { type, date, onclose, isUpdate, listFood, foodSelected } = props;
-  console.log("check list food : ", listFood);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [index, setIndex] = useState(0);
@@ -35,8 +32,10 @@ function FoodForm(props) {
   const [fat, setFat] = useState(0);
   const [calo, setCalo] = useState(0);
   const [mode, setMode] = useState("Đề xuất");
-  const [image, setImage]= useState('');
-  
+  const [image, setImage] = useState("");
+  const [showFood, setShowFood] = useState(false);
+  const [foodChosen, setFoodChosen] = useState("");
+
   useEffect(() => {
     if (foodSelected?.food?.id > 0) {
       setName(foodSelected.food.name);
@@ -59,35 +58,33 @@ function FoodForm(props) {
       })
     );
   }, [name, index]);
+
   const handleChangeFoodName = (event) => {
     setName(event.target.value);
-    // dispatch(updatePropertiesTarget("calo", event.target.value));
   };
+
   const handleChangeCalo = (event) => {
     setCalo(event.target.value);
-    // dispatch(updatePropertiesTarget("calo", event.target.value));
   };
+
   const handleChangeWeight = (event) => {
     setWeight(event.target.value);
-    // dispatch(updatePropertiesTarget("weight", event.target.value));
   };
 
   const handleChangeImage = (event) => {
     setImage(event.target.value);
-    // dispatch(updatePropertiesTarget("weight", event.target.value));
   };
+
   const handleChangeCarb = (event) => {
     setCarb(event.target.value);
-    // dispatch(updatePropertiesTarget("carb", event.target.value));
   };
 
   const handleChangeProtein = (event) => {
     setProtein(event.target.value);
-    // dispatch(updatePropertiesTarget("protein", event.target.value));
   };
+
   const handleChangeFat = (event) => {
     setFat(event.target.value);
-    // dispatch(updatePropertiesTarget("fat", event.target.value));
   };
 
   const handleChangeQuantity = (event) => {
@@ -97,14 +94,10 @@ function FoodForm(props) {
     setCaloCustom(((value * foodItem.calo) / 100).toFixed(2));
   };
 
-  const handleChangeFood = (e, val) => {
-    setName(val.name);
-  };
-
   const handleSaveFoodItem = (e) => {
     e.preventDefault();
     let menuItem = {};
-    if(mode === "Tự nhập"){
+    if (mode === "Tự nhập") {
       menuItem = {
         weight,
         name,
@@ -112,92 +105,132 @@ function FoodForm(props) {
         carb,
         fat,
         image,
-        calo
+        calo,
       };
       dispatch(addFoodItem(menuItem, isUpdate, onclose, date));
+      setName("");
+      setWeight(0);
+      setCalo(0);
+      setFat(0);
+      setProtein(0);
+      setImage("");
+      setMode("Đề xuất");
     } else {
       menuItem = {
-        id: foodSelected?.id,
+        id: foodChosen?.id || foodSelected?.id,
         type,
         quantity,
-        foodId: foodItem.id,
+        foodId: foodChosen?.id || foodItem.id,
         date,
       };
       dispatch(saveFoodItem(menuItem, isUpdate, onclose));
     }
-   
+
     setQuantity(0);
     setCaloCustom(0);
     setName(listFood[0]?.name);
   };
   const handleMode = (event) => {
     setMode(event.target.value);
-    // dispatch(updatePropertiesTarget("type", "calo"));
-    // dispatch(updatePropertiesTarget("mode", event.target.value));
   };
+
+  const handleShowDropDownFood = () => {
+    setShowFood(!showFood);
+  };
+
+  const handleSelectFood = (item) => {
+    setFoodChosen(item);
+    setShowFood(false);
+  };
+
+  const handleCancelModal = () => {
+    setMode("Đề xuất");
+    onclose();
+  };
+
   const renderRecommend = () => {
     return (
-      <div className="main__statistics main__statistics--column">
-        <Autocomplete
-          defaultValue={listFood[foodSelected?.food?.id -1 >= 0 ? foodSelected?.food?.id -1 : 0] }
-          id="food-select"
-          sx={{ m: 1, width: "30ch" }}
-          options={listFood}
-          onChange={(e, val) => handleChangeFood(e, val)}
-          autoHighlight
-          getOptionLabel={(option) => option.name}
-          renderOption={(props, option) => (
-            <Box
-              component="li"
-              sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-              {...props}
-            >
-              {option.name}
-            </Box>
-          )}
-          renderInput={(params) => (
-            <TextField
-              defaultValue={name}
-              {...params}
-              inputProps={{
-                ...params.inputProps,
-                autoComplete: "new-password", // disable autocomplete and autofill
-              }}
+      <div className="food-select-form">
+        <div className="chosen-food">
+          <div className="food-image">
+            <img
+              src={
+                foodChosen
+                  ? foodChosen?.image
+                  : foodSelected
+                  ? foodSelected?.food?.image
+                  : listFood[0]?.image ||
+                    "../../../contains/IMAGE_FOOD_DEFAULT.jpg"
+              }
+              // src="../../../contains/IMAGE_FOOD_DEFAULT.jpg"
             />
-          )}
-        />
-
-        <div className="main__input main__input--flex">
-          <div>
-            <div className="main__input-title">Lượng (gam)</div>
-            <FormControl sx={{ m: 1, width: "30ch" }} variant="outlined">
-              <OutlinedInput
-                id="outlined-adornment-weight"
-                value={quantity}
-                type="number"
-                onChange={(e) => handleChangeQuantity(e)}
-                aria-describedby="outlined-weight-helper-text"
-                inputProps={{
-                  "aria-label": "weight",
-                }}
-              />
-            </FormControl>
           </div>
+          <Button
+            onClick={() => handleShowDropDownFood()}
+            className="food-name"
+            variant="outlined"
+          >
+            {foodChosen
+              ? foodChosen?.name
+              : foodSelected
+              ? foodSelected?.food?.name
+              : listFood[0]?.name}
+          </Button>
+          {showFood ? (
+            <div className="list-food-drop-down">
+              {listFood?.map((item, index) => (
+                <div
+                  className="drop-item"
+                  key={index}
+                  onClick={() => handleSelectFood(item)}
+                >
+                  <div className="item-food-image">
+                    <img
+                      src={
+                        item?.image ||
+                        "../../../contains/IMAGE_FOOD_DEFAULT.jpg"
+                      }
+                    />
+                  </div>
+                  <div className="item-food-name">{item?.name}</div>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
-        <div className="main__input main__input--flex">
-          <div>
-            <div className="main__input-title">calo</div>
-            <FormControl sx={{ m: 1, width: "30ch" }} variant="outlined">
-              <OutlinedInput
-                id="outlined-adornment-weight"
-                value={caloCustom}
-                aria-describedby="outlined-weight-helper-text"
-                disabled
-                inputProps={{
-                  "aria-label": "weight",
-                }}
-              />
-            </FormControl>
+        <div className="food-properties">
+          <div className="main__input main__input--flex">
+            <div>
+              <div className="main__input-title">Lượng (gam)</div>
+              <FormControl sx={{ m: 1, width: "30ch" }} variant="outlined">
+                <OutlinedInput
+                  id="outlined-adornment-weight"
+                  value={quantity}
+                  type="number"
+                  onChange={(e) => handleChangeQuantity(e)}
+                  aria-describedby="outlined-weight-helper-text"
+                  inputProps={{
+                    "aria-label": "weight",
+                  }}
+                />
+              </FormControl>
+            </div>
+          </div>
+          <div className="main__input main__input--flex">
+            <div>
+              <div className="main__input-title">calo</div>
+              <FormControl sx={{ m: 1, width: "30ch" }} variant="outlined">
+                <OutlinedInput
+                  id="outlined-adornment-weight"
+                  value={caloCustom}
+                  aria-describedby="outlined-weight-helper-text"
+                  disabled
+                  inputProps={{
+                    "aria-label": "weight",
+                  }}
+                />
+              </FormControl>
+            </div>
           </div>
         </div>
       </div>
@@ -205,16 +238,11 @@ function FoodForm(props) {
   };
 
   return (
-    <Dialog
-      open={props.onclick}
-      onClose={props.onclose}
-      sx={{ margin: "0 auto", width: "700px" }}
-    >
+    <Dialog open={props.onclick} onClose={props.onclose} id="add-food-modal">
       <DialogContent>
-        <div className="main__statistics main__statistics--column">
-          <div className="main__statistics-title">{type}</div>
-
-          <div className="main__selecter">
+        <div className="food-wrapper">
+          <div className="food-type">{type}</div>
+          <div className="food-mode">
             <Select
               displayEmpty
               value={mode}
@@ -229,29 +257,45 @@ function FoodForm(props) {
             </Select>
           </div>
           {mode === "Tự nhập" ? (
-            <div>
-              <>
-                <div className="main__selecter"></div>
-
-                <div className="main__input main__input--flex">
+            <div className="custom-form-food">
+              <div className="food-info">
+                <div className="name">
+                  <div className="main__input-title">Tên món ăn</div>
+                  <FormControl sx={{ m: 1, width: "30ch" }} variant="outlined">
+                    <OutlinedInput
+                      id="outlined-adornment-weight"
+                      value={name}
+                      onChange={(e) => handleChangeFoodName(e)}
+                      aria-describedby="outlined-weight-helper-text"
+                      inputProps={{
+                        "aria-label": "weight",
+                      }}
+                    />
+                  </FormControl>
+                </div>
+                <div className="image">
+                  <div className="image-preview">
+                    <img
+                      src={image || "../../../contains/IMAGE_FOOD_DEFAULT.jpg"}
+                    ></img>
+                  </div>
                   <div>
-                    <div className="main__input-title">Tên món ăn</div>
+                    <div className="main__input-title">Nhập link ảnh</div>
                     <FormControl
                       sx={{ m: 1, width: "30ch" }}
                       variant="outlined"
                     >
-                      <OutlinedInput
-                        id="outlined-adornment-weight"
-                        value={name}
-                        onChange={(e) => handleChangeFoodName(e)}
-                        aria-describedby="outlined-weight-helper-text"
-                        inputProps={{
-                          "aria-label": "weight",
+                      <TextField
+                        value={image}
+                        onChange={(e) => {
+                          handleChangeImage(e);
                         }}
-                      />
+                      ></TextField>
                     </FormControl>
                   </div>
                 </div>
+              </div>
+              <div className="food-properties">
                 <div className="main__input main__input--flex">
                   <div>
                     <div className="main__input-title">Khối lượng</div>
@@ -365,17 +409,8 @@ function FoodForm(props) {
                       />
                     </FormControl>
                   </div>
-                </div>
-                <div>
-                  <div className="main__input-title">Nhập link ảnh</div>
-                  <FormControl
-                      sx={{ m: 1, width: "30ch" }}
-                      variant="outlined"
-                    >
-                  <TextField value={image} onChange={(e) => {handleChangeImage(e)}}></TextField>
-                  </FormControl>
-                </div>
-              </>
+                </div>{" "}
+              </div>
             </div>
           ) : (
             renderRecommend()
@@ -384,10 +419,20 @@ function FoodForm(props) {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={props.onclose} xs={{}}>
+        <Button
+          onClick={() => {
+            handleCancelModal();
+          }}
+          variant="outlined"
+          color="error"
+        >
           HỦY
         </Button>
-        <Button onClick={(e) => handleSaveFoodItem(e)} autoFocus>
+        <Button
+          onClick={(e) => handleSaveFoodItem(e)}
+          variant="contained"
+          autoFocus
+        >
           LƯU
         </Button>
       </DialogActions>
