@@ -5,7 +5,7 @@ import PostDetail from "./PostDetail";
 
 function FilterAll(props) {
   const dataForum = useSelector(state => state.forum.listPost);
-  const {isPost, setIsPost, itemSelected, setItemSelected } = props;
+  const {isPost, setIsPost, itemSelected, setItemSelected } = props
   console.log("check data :", dataForum);
 
   return (

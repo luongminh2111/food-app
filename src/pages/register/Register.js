@@ -97,7 +97,7 @@ function Register(props) {
       setMessagePass("Mật khẩu không được để trống");
     } else
     if( !errorConfirmPass && !errorMail && !errorPass){
-      dispatch(register(email, password, history)).then(json =>
+      dispatch(register(email, password, username, history)).then(json =>
         {
           if(json.data?.code === 200){
             setShowSnackbar(true);

@@ -27,7 +27,7 @@ export const login = (email, password, history) => (dispatch) => {
 }
 
 
-export const register = (email, password, history) => (dispatch) => {
+export const register = (email, password, account, history) => (dispatch) => {
   const options = {
   mode: "cors",
   headers: {
@@ -39,6 +39,7 @@ export const register = (email, password, history) => (dispatch) => {
   const body = {
   account: email,
   password: password,
+  customerName: account
   };
 
   return axios
