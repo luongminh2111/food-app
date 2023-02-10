@@ -40,15 +40,14 @@ img {
   grid-area: main;
   padding-top: 100px;
   background-image: url("../contains/food-background-1.jpg");
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: 1fr;
 }
 .container {
   display: grid;
-
+  background-color: #eff5f9;
   grid-auto-rows: minmax(100px, auto);
   grid-template-areas:
     "main"

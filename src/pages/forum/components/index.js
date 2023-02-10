@@ -25,7 +25,7 @@ function Forum(props) {
 
   const handleChangeTab = (newValue) => {
     setValue(newValue);
-    setIsPost('');
+    setIsPost("");
   };
 
   const renderTabContent = (value) => {
@@ -89,43 +89,46 @@ function Forum(props) {
 
   return (
     <div className="forum-wrapper">
-      <Header />
-      <div className="forum-content">
-        <div className="tabs">
-          <div
-            className={`tab-item all ${value === 0 ? "active" : ""}`}
-            onClick={() => handleChangeTab(0)}
-          >
-            Tất cả
+      <div className="container">
+        {" "}
+        <Header />
+        <div className="forum-content">
+          <div className="tabs">
+            <div
+              className={`tab-item all ${value === 0 ? "active" : ""}`}
+              onClick={() => handleChangeTab(0)}
+            >
+              Tất cả
+            </div>
+            <div
+              className={`tab-item cook ${value === 1 ? "active" : ""}`}
+              onClick={() => handleChangeTab(1)}
+            >
+              Nấu nướng
+            </div>
+            <div
+              className={`tab-item cooking-mode ${value === 2 ? "active" : ""}`}
+              onClick={() => handleChangeTab(2)}
+            >
+              Chế độ ăn uống
+            </div>
+            <div
+              className={`tab-item tips ${value === 3 ? "active" : ""}`}
+              onClick={() => handleChangeTab(3)}
+            >
+              Mẹo vặt
+            </div>
+            <div
+              className={`tab-item guide ${value === 4 ? "active" : ""}`}
+              onClick={() => handleChangeTab(4)}
+            >
+              Hỏi đáp
+            </div>
           </div>
-          <div
-            className={`tab-item cook ${value === 1 ? "active" : ""}`}
-            onClick={() => handleChangeTab(1)}
-          >
-            Nấu nướng
-          </div>
-          <div
-            className={`tab-item cooking-mode ${value === 2 ? "active" : ""}`}
-            onClick={() => handleChangeTab(2)}
-          >
-            Chế độ ăn uống
-          </div>
-          <div
-            className={`tab-item tips ${value === 3 ? "active" : ""}`}
-            onClick={() => handleChangeTab(3)}
-          >
-            Mẹo vặt
-          </div>
-          <div
-            className={`tab-item guide ${value === 4 ? "active" : ""}`}
-            onClick={() => handleChangeTab(4)}
-          >
-            Hỏi đáp
-          </div>
+          <div className="tabs-content">{renderTabContent(value)}</div>
         </div>
-        <div className="tabs-content">{renderTabContent(value)}</div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }
