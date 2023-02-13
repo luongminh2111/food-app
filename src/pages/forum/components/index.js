@@ -28,6 +28,10 @@ function Forum(props) {
     setIsPost("");
   };
 
+  const hanldeSearchPost = ( e) => {
+    // dispatch(fetchPostByContent(e.target.value));
+  };
+
   const renderTabContent = (value) => {
     switch (value) {
       case 0:
@@ -90,7 +94,6 @@ function Forum(props) {
   return (
     <div className="forum-wrapper">
       <div className="container">
-        {" "}
         <Header />
         <div className="forum-content">
           <div className="tabs">
@@ -125,7 +128,12 @@ function Forum(props) {
               Hỏi đáp
             </div>
           </div>
-          <div className="tabs-content">{renderTabContent(value)}</div>
+          <div className="tabs-content">
+            <div className="search-bar" >
+              <input type="text" className="input-content" placeholder="Tìm kiếm theo món ăn" onChange={(value) => hanldeSearchPost(value)}></input>
+            </div>
+            {renderTabContent(value)}
+            </div>
         </div>
         <Footer />
       </div>

@@ -20,7 +20,7 @@ function PostDetail(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getListComment());
+    dispatch(getListComment(data.id));
   }, []);
 
   const handleChangeContent = (e) => {

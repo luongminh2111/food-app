@@ -21,7 +21,6 @@ function RecipeModal(props) {
 
   return (
     <div>
-      
       <Button variant="text" onClick={handleClickOpen}>
         {label}
       </Button>

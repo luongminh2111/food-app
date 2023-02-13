@@ -28,7 +28,7 @@ function RecipeInfo(props) {
           onClick={props.onclose}
         />
       </DialogActions>
-      <DialogContent>
+      <DialogContent className="card-wrapper">
         <div className="Info__container">
           <div className="Info__title">
             <h2>{props.recipeName}</h2>

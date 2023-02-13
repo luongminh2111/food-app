@@ -67,6 +67,37 @@
           }
         }
       }
+      .search-bar {
+        width: 100%;
+        height: 56px;
+        margin: 15px auto;
+        display: flex;
+        justify-content: center;
+        
+        input {
+          height: 40px;
+          padding: 5px 16px;
+          width: 80%;
+          display: block;
+          margin: 0;
+          color: inherit;
+          font-family: inherit;
+          font-size: var(--inputFontSize);
+          font-weight: inherit;
+          line-height: var(--inputLineHeight);
+          border: 1px solid #E5E5E5;
+          border-radius: 0.4rem;
+          transition: box-shadow var(--transitionDuration);
+          &::placeholder {
+            color: #B0BEC5;
+            padding: 5px 16px;
+          }
+          &:focus {
+            outline: none;
+            box-shadow: 0.2rem 0.8rem 1.6rem var(--colorPrimary600);
+          }
+        }
+      }
     }
     .post-content {
     }
