@@ -25,8 +25,26 @@ export const getListComment = (postId) => (dispatch) => {
     .catch((error) => console.log(error));
 };
 
+export const deleteComment = (id, postId) => (dispatch) => {
+  const options = {
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "6024",
+    },
+  };
+
+  return axios
+    .post(`${BASE_URL}/comment/delete/${id}`, options).then(json => {
+      if (json.data?.code === 200) {
+        dispatch(getListComment(postId));
+      }
+      return json.data;
+    })
+}
 
 export const saveComment = (data) => (dispatch) => {
+  const userId = localStorage.getItem("user_id");
   const options = {
     mode: "cors",
     headers: {
@@ -38,7 +56,7 @@ export const saveComment = (data) => (dispatch) => {
   const body = {
     content: data.content,
     postId: data.postId,
-    userId: 17
+    userId, 
   };
 
   return axios

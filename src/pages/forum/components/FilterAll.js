@@ -4,8 +4,7 @@ import { renderAllPost } from "../actions/ForumActions";
 import PostDetail from "./PostDetail";
 
 function FilterAll(props) {
-  const dataForum = useSelector(state => state.forum.listPost);
-  const {isPost, setIsPost, itemSelected, setItemSelected } = props
+  const {isPost, setIsPost, itemSelected, setItemSelected, dataForum } = props
 
   return (
     <div className="list-post-wrapper">

@@ -11,26 +11,38 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getListPost } from "../actions/ForumActionCallApi";
 import Footer from "../../home/Footer";
+import { useMemo } from "react";
+import PostDetail from "./PostDetail";
+import { renderAllPost } from "../actions/ForumActions";
 
 function Forum(props) {
   const dispatch = useDispatch();
-
+  const dataForum = useSelector((state) => state.forum.listPost);
   useEffect(() => {
     dispatch(getListPost());
   }, []);
-
+  // console.log("check data rom : ", dataForum);
   const [value, setValue] = useState(0);
   const [itemSelected, setItemSelected] = useState({});
   const [isPost, setIsPost] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
   const handleChangeTab = (newValue) => {
     setValue(newValue);
     setIsPost("");
   };
 
-  const hanldeSearchPost = ( e) => {
-    // dispatch(fetchPostByContent(e.target.value));
+  const handleSearchPost = (e) => {
+    setSearchValue(e.target.value);
   };
+
+  const listSearchPost = useMemo(() => {
+    if(searchValue?.length === 0){
+      return null;
+    }
+    const arr = dataForum?.filter((e) => e.title.includes(searchValue));
+    return arr;
+  }, [searchValue]);
 
   const renderTabContent = (value) => {
     switch (value) {
@@ -41,6 +53,7 @@ function Forum(props) {
             isPost={isPost}
             itemSelected={itemSelected}
             setItemSelected={setItemSelected}
+            dataForum={dataForum}
           />
         );
       case 1:
@@ -50,6 +63,7 @@ function Forum(props) {
             isPost={isPost}
             itemSelected={itemSelected}
             setItemSelected={setItemSelected}
+            dataForum={dataForum}
           />
         );
       case 2:
@@ -59,6 +73,7 @@ function Forum(props) {
             isPost={isPost}
             itemSelected={itemSelected}
             setItemSelected={setItemSelected}
+            dataForum={dataForum}
           />
         );
       case 3:
@@ -68,6 +83,7 @@ function Forum(props) {
             isPost={isPost}
             itemSelected={itemSelected}
             setItemSelected={setItemSelected}
+            dataForum={dataForum}
           />
         );
       case 4:
@@ -77,6 +93,7 @@ function Forum(props) {
             isPost={isPost}
             itemSelected={itemSelected}
             setItemSelected={setItemSelected}
+            dataForum={dataForum}
           />
         );
       default:
@@ -86,6 +103,7 @@ function Forum(props) {
             isPost={isPost}
             itemSelected={itemSelected}
             setItemSelected={setItemSelected}
+            dataForum={dataForum}
           />
         );
     }
@@ -129,11 +147,26 @@ function Forum(props) {
             </div>
           </div>
           <div className="tabs-content">
-            <div className="search-bar" >
-              <input type="text" className="input-content" placeholder="Tìm kiếm bài đăng" onChange={(value) => hanldeSearchPost(value)}></input>
+            <div className="search-bar">
+              <input
+                value={searchValue}
+                type="text"
+                className="input-content"
+                placeholder="Tìm kiếm bài đăng"
+                onChange={(value) => handleSearchPost(value)}
+              ></input>
             </div>
-            {renderTabContent(value)}
-            </div>
+
+            {listSearchPost?.length > 0 ? (
+               <div className="list-post-wrapper">
+               {
+                 isPost > 0 ? <PostDetail data={itemSelected} /> : renderAllPost(listSearchPost, setItemSelected, setIsPost)
+               }
+             </div>
+            ) : (
+              renderTabContent(value)
+            )}
+          </div>
         </div>
         <Footer />
       </div>

@@ -5,9 +5,7 @@ import { renderAllPost } from "../actions/ForumActions";
 import PostDetail from "./PostDetail";
 
 function FilterTips(props){
-  const {isPost, setIsPost, itemSelected, setItemSelected } = props;
-
-  const dataForum = useSelector(state => state.forum.listPost);
+  const {isPost, setIsPost, itemSelected, setItemSelected, dataForum } = props;
   const listTipPost = useMemo(() => {
     return dataForum.filter(e => e.categoryId === 3);
   }, [dataForum]);

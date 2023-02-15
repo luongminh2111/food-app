@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import store from './store/store';
 import {
   BrowserRouter as Router,
-  withRouter,
   Route,
   Switch,
   Redirect
@@ -20,8 +19,7 @@ import Forum from "./pages/forum/components";
 
 function App() {
   const checkAuth = useSelector(state => state.auth.positionCallApiCheckAuth);
-   const userStr = sessionStorage.getItem("user");
-
+  const userStr = sessionStorage.getItem("user");
   const [user, setUser] = useState(JSON.parse(userStr) || '');
 
   useEffect(() => {
@@ -32,7 +30,6 @@ function App() {
     }
   }, [checkAuth]);
 
-  console.log("check user :", user);
   return (
     <Provider store={store} >
       <Router> 
