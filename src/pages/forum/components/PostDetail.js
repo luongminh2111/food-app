@@ -9,14 +9,13 @@ import { getListComment, saveComment } from "../actions/ForumActionCallApi";
 function PostDetail(props) {
   const { data } = props;
   const [content, setContent] = useState("");
-  const dataComment = useSelector(state => state.forum.listComment);
-  console.log("check dataCom : ",dataComment);
-  console.log("check data pros : ",data);
+  const dataComment = useSelector((state) => state.forum.listComment);
+  console.log("check dataCom : ", dataComment);
+  console.log("check data pros : ", data);
   const listCommentInPost = useMemo(() => {
-    return dataComment.filter(e => e.postId === data.id);
-
+    return dataComment.filter((e) => e.postId === data.id);
   }, [dataComment]);
-  console.log("check dataCom 2: ",listCommentInPost);
+  console.log("check dataCom 2: ", listCommentInPost);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,7 +30,7 @@ function PostDetail(props) {
     const dataSave = {
       content,
       postId: data.id,
-    }
+    };
     dispatch(saveComment(dataSave));
   };
 
@@ -55,16 +54,17 @@ function PostDetail(props) {
           <div className="comment-item" key={index}>
             <PersonIcon />
             <div className="comment-content">
-              <p>{item?.customerName}</p>
-              <p>{item?.content}</p>
+              <p className="comment-auth">john</p>
+              <p className="comment-text">{item?.content}</p>
             </div>
           </div>
-        )) }
-        
+        ))}
+
         <div className="comment-item">
           <PersonIcon />
           <div className="comment-content">
             <input
+              className="comment-input"
               placeholder="Nhập bình luận"
               onChange={(e) => handleChangeContent(e)}
               onKeyDown={(event) => {
