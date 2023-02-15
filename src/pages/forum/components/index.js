@@ -130,7 +130,7 @@ function Forum(props) {
           </div>
           <div className="tabs-content">
             <div className="search-bar" >
-              <input type="text" className="input-content" placeholder="Tìm kiếm theo món ăn" onChange={(value) => hanldeSearchPost(value)}></input>
+              <input type="text" className="input-content" placeholder="Tìm kiếm bài đăng" onChange={(value) => hanldeSearchPost(value)}></input>
             </div>
             {renderTabContent(value)}
             </div>
