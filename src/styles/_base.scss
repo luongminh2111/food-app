@@ -40,10 +40,8 @@ img {
   grid-area: main;
   padding-top: 100px;
   background-image: url("../contains/food-background-1.jpg");
+  background-size: 1fr;
   background-repeat: repeat;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
 }
 .container {
   display: grid;
