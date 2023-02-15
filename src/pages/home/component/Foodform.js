@@ -19,7 +19,7 @@ import { modes } from "../../../contains/dataConst";
 import "../styles/FoodFormStyle.scss";
 
 function FoodForm(props) {
-  const { type, date, onclose, isUpdate, listFood, foodSelected } = props;
+  const { type, date, onclose, listFood, foodSelected } = props;
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [index, setIndex] = useState(0);
@@ -107,7 +107,7 @@ function FoodForm(props) {
         image,
         calo,
       };
-      dispatch(addFoodItem(menuItem, isUpdate, onclose, date));
+      dispatch(addFoodItem(menuItem, date));
       setName("");
       setWeight(0);
       setCalo(0);
@@ -123,7 +123,7 @@ function FoodForm(props) {
         foodId: foodChosen?.id || foodItem.id,
         date,
       };
-      dispatch(saveFoodItem(menuItem, isUpdate, onclose));
+      dispatch(saveFoodItem(menuItem, onclose));
     }
 
     setQuantity(0);

@@ -36,7 +36,6 @@ function Main() {
   const [dinnerFat, setDinnerFat] = useState(0);
   const [customCalo, setCustomCalo] = useState(0);
   const target = useSelector((state) => state.target?.data);
-
   const dispatch = useDispatch();
   const handleSumCalo = (arr) => {
     let sumCalo = 0;
@@ -236,7 +235,6 @@ function Main() {
         onclose={handleCloseFoodForm}
         type={Type}
         date={dateSelect}
-        isUpdate={false}
         listFood={listFood}
       />
       <TargetForm

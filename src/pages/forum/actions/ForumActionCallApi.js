@@ -20,7 +20,6 @@ export const getListComment = (postId) => (dispatch) => {
   axios
     .get(`${BASE_URL}/comment/list/${postId}`)
     .then((res) => {
-      console.log("check ress comment : ", res)
       dispatch(fetchListComment(res.data?.data));
     })
     .catch((error) => console.log(error));
@@ -28,7 +27,6 @@ export const getListComment = (postId) => (dispatch) => {
 
 
 export const saveComment = (data) => (dispatch) => {
-  console.log("check data cmt :", data);
   const options = {
     mode: "cors",
     headers: {

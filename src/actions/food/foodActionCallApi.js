@@ -69,7 +69,7 @@ export const addFoodItem = (menuItem, date) => (dispatch) => {
     })
 }
 
-export const saveFoodItem = (menuItem, isUpdate, onclose) => (dispatch) => {
+export const saveFoodItem = (menuItem, onclose) => (dispatch) => {
   let type;
   if (menuItem.type === "Bữa sáng") {
     type = "BREAK_FAST";

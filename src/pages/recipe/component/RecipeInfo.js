@@ -10,9 +10,9 @@ import "../../recipe/style/recipeInfo.scss";
 function RecipeInfo(props) {
   const [desc, setDesc] = React.useState([]);
   useEffect(() => {
-    const myArray = props.tutorial.split(".");
+    const myArray = props.tutorial?.split(".");
 
-    setDesc(myArray.filter((arr) => arr));
+    setDesc(myArray?.filter((arr) => arr));
   }, []);
   return (
     <Dialog
@@ -38,7 +38,7 @@ function RecipeInfo(props) {
           <div className="Info__ingredients">
             Nguyên liệu:
             <ul>
-              {props.ingredients.map((item, index) => {
+              {props?.ingredients?.map((item, index) => {
                 return <li className="Info__ingredients-item">{item.name}</li>;
               })}
             </ul>
@@ -47,7 +47,7 @@ function RecipeInfo(props) {
           <div className="Info__tutorial">
             Cách nấu:
             <ul>
-              {desc.map((item, index) => {
+              {desc?.map((item, index) => {
                 return <li className="Info__tutorial-item">{item}</li>;
               })}
             </ul>

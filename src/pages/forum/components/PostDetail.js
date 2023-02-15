@@ -5,19 +5,16 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getListComment, saveComment } from "../actions/ForumActionCallApi";
+import { convertTimeStamp } from "../actions/ForumActions";
 
 function PostDetail(props) {
   const { data } = props;
   const [content, setContent] = useState("");
   const dataComment = useSelector((state) => state.forum.listComment);
-  console.log("check dataCom : ", dataComment);
-  console.log("check data pros : ", data);
   const listCommentInPost = useMemo(() => {
     return dataComment.filter((e) => e.postId === data.id);
   }, [dataComment]);
-  console.log("check dataCom 2: ", listCommentInPost);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getListComment(data.id));
   }, []);
@@ -32,6 +29,7 @@ function PostDetail(props) {
       postId: data.id,
     };
     dispatch(saveComment(dataSave));
+    setContent('');
   };
 
   return (
@@ -42,7 +40,7 @@ function PostDetail(props) {
           <PersonIcon />
           <span className="name">Tác giả : {data?.customerName}</span>
           &nbsp; &nbsp;
-          <span className="date">/ {data?.createDate}</span>
+          <span className="date"> --- {convertTimeStamp(data?.createDate)}</span>
         </div>
         <div className="image-post">
           <img src={data?.photo}></img>
@@ -54,7 +52,7 @@ function PostDetail(props) {
           <div className="comment-item" key={index}>
             <PersonIcon />
             <div className="comment-content">
-              <p className="comment-auth">john</p>
+              <p className="comment-auth">{item?.customerName} ( {convertTimeStamp(item?.createDate)} )</p>
               <p className="comment-text">{item?.content}</p>
             </div>
           </div>
@@ -65,6 +63,7 @@ function PostDetail(props) {
           <div className="comment-content">
             <input
               className="comment-input"
+              value={content}
               placeholder="Nhập bình luận"
               onChange={(e) => handleChangeContent(e)}
               onKeyDown={(event) => {

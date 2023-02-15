@@ -8,10 +8,6 @@ const handleChangeIdPost = (value, setItemSelected, setIsPost) => {
 
 export const renderAllPost = (dataForum, setItemSelected, setIsPost) => {
   return dataForum?.map((item, index) => (
-    // <div className="post-item" key={index} onClick={() => handleChangeIdPost(item, setItemSelected, setIsPost)} >
-    //   <img src={item.photo}></img>
-    //   <div className="title">{item.title}</div>
-    // </div>
     <div>
       <Card
         sx={{
@@ -32,4 +28,21 @@ export const renderAllPost = (dataForum, setItemSelected, setIsPost) => {
       </Card>
     </div>
   ));
+};
+
+export const convertTimeStamp = (time) => {
+  const dateFormat = new Date(time);
+  const timeConvert =
+    dateFormat.getDate() +
+    "/" +
+    (dateFormat.getMonth() + 1) +
+    "/" +
+    dateFormat.getFullYear() +
+    " " +
+    dateFormat.getHours() +
+    ":" +
+    dateFormat.getMinutes() +
+    ":" +
+    dateFormat.getSeconds();
+  return timeConvert;
 };
