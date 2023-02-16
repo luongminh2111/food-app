@@ -19,6 +19,7 @@ function PostDetail(props) {
   const [content, setContent] = useState("");
   const [editContent, setEditContent] = useState("");
   const dataComment = useSelector((state) => state.forum.listComment);
+  const userId = localStorage.getItem("user_id");
   const listCommentInPost = useMemo(() => {
     return dataComment.filter((e) => e.postId === data.id);
   }, [dataComment]);
@@ -36,7 +37,6 @@ function PostDetail(props) {
   };
 
   const handleSaveComment = (cmtId) => {
-    console.log("check cmtID : ", cmtId);
     let dataSave;
     if (cmtId > 0) {
       dataSave = {
@@ -50,7 +50,6 @@ function PostDetail(props) {
         postId: data.id,
       };
     }
-    console.log("check dataSave  :", dataSave);
     dispatch(saveComment(dataSave));
     setContent("");
     setCmtIdEdit(0);
@@ -73,10 +72,7 @@ function PostDetail(props) {
           <PersonIcon />
           <span className="name">Tác giả : {data?.customerName}</span>
           &nbsp; &nbsp;
-          <span className="date">
-            {" "}
-            --- {convertTimeStamp(data?.createDate)}
-          </span>
+          <span className="date">({convertTimeStamp(data?.createDate)})</span>
         </div>
         <div className="image-post">
           <img src={data?.photo}></img>
@@ -89,12 +85,11 @@ function PostDetail(props) {
             <div className="user-icon">
               <PersonIcon />
             </div>
-
             <div className="comment-content">
               <p className="comment-auth">
-                {item?.customerName} ( {convertTimeStamp(item?.createDate)} )
+                {item?.customerName} ( {convertTimeStamp(item?.createDate || item?.modifyDate)} )
               </p>
-              {cmtIdEdit === item.id ? (
+              {cmtIdEdit === item.id && Number(userId) === item.userId ? (
                 <input
                   className="comment-input"
                   value={editContent}
@@ -110,22 +105,24 @@ function PostDetail(props) {
                 <p className="comment-text">{item?.content}</p>
               )}
             </div>
-            <div className="comment-action">
-              <div className="edit-icon">
-                <FontAwesomeIcon
-                  icon={faPen}
-                  className="foodCard-icon-item"
-                  onClick={() => handleEditCmt(item)}
-                />
+            {item?.userId === Number(userId) ? (
+              <div className="comment-action">
+                <div className="edit-icon">
+                  <FontAwesomeIcon
+                    icon={faPen}
+                    className="foodCard-icon-item"
+                    onClick={() => handleEditCmt(item)}
+                  />
+                </div>
+                <div className="delete-icon">
+                  <FontAwesomeIcon
+                    icon={faX}
+                    className="foodCard-icon-item"
+                    onClick={() => handleDeleteComment(item?.id, item?.postId)}
+                  />
+                </div>
               </div>
-              <div className="delete-icon">
-                <FontAwesomeIcon
-                  icon={faX}
-                  className="foodCard-icon-item"
-                  onClick={() => handleDeleteComment(item?.id, item?.postId)}
-                />
-              </div>
-            </div>
+            ) : null}
           </div>
         ))}
 

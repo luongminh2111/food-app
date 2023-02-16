@@ -54,7 +54,8 @@ export const saveComment = (data) => (dispatch) => {
   };
 
   const body = {
-    content: data.content,
+    id: data?.id,
+    content: data.content || data.editContent,
     postId: data.postId,
     userId, 
   };

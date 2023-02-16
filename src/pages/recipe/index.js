@@ -52,7 +52,7 @@ function Recipe(props) {
             <Box className="suggestion-list-1">
               <Box className="item__title">Gợi ý công thức</Box>
               {recipe.map((item, index) => (
-                <RecipeCard
+                <RecipeCard key={index}
                   id={item.id}
                   recipeName={item.recipeName}
                   img={item.img}

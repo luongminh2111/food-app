@@ -86,7 +86,7 @@
           font-size: var(--inputFontSize);
           font-weight: inherit;
           line-height: var(--inputLineHeight);
-          border: 1px solid #e5e5e5;
+          border: 2px solid #3ab19b;
           border-radius: 0.4rem;
           transition: box-shadow var(--transitionDuration);
           &::placeholder {
@@ -100,8 +100,7 @@
         }
       }
     }
-    .post-content {
-    }
+
     .post-detail-wrapper {
       width: 100%;
       background-color: #ffffff;
@@ -190,6 +189,11 @@
           margin-left: 15px;
           padding: 3px 10px;
           border-radius: 5px;
+          border: 1px solid #0f1824;
+          &:focus-visible {
+            border: 1px solid #3ab19b;
+            outline: none;
+          }
         }
         .comment-action{
           display: flex;
