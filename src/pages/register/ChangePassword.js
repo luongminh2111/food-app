@@ -5,17 +5,28 @@ import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutl
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updatePassw } from "../../actions/login/LoginActionCallApi";
+import { logout } from "../../actions/login/LoginAction";
 
 function ChangePassword(props) {
   const [email, setEmail] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [reNewpassword, setReNewPassword] = useState("");
+  const [message, setMessage] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
 
   const handleChangePasssw = () => {
-    dispatch(updatePassw(oldPassword, newPassword, reNewpassword));
+    dispatch(updatePassw(oldPassword, newPassword, reNewpassword)).then(
+      res => {
+        if(res){
+          logout();
+          history.push("/login");
+        } else {
+          setMessage("Thay đổi mật khẩu thất bại");
+        }
+      }
+    );
   };
 
   return (

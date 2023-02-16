@@ -64,10 +64,16 @@ export const updatePassw = ( oldPass, newPass, reNewPass) => (dispatch) => {
   
     const body = {
       oldPassword: oldPass,
-      password: newPass,
+      newPassword: newPass,
       rePassword: reNewPass
     };
   
     return axios
-    .post(`${BASE_URL}/account/updatePwd`, body, options).then(res => console.log("check res update :", res));
-  }
+    .post(`${BASE_URL}/account/updatePwd`, body, options).then(res => {
+      if(res.data?.message === "SUCCESS"){
+        return true;
+      }else{
+        return false;
+      } })
+    }
+      
