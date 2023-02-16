@@ -2,6 +2,9 @@ import axios from "axios";
 import { BASE_URL } from "../../contains/common";
 import { changePositionCallAPiAuth } from "./LoginActionRedux";
 import jwt_decode from "jwt-decode";
+axios.defaults.headers.common["ngrok-skip-browser-warning"] = "6024";
+
+axios.defaults.headers.common["Authentication"] = JSON.parse(sessionStorage.getItem("user"));
 
 
 export const login = (email, password, history) => (dispatch) => {
@@ -49,3 +52,22 @@ export const register = (email, password, account, history) => (dispatch) => {
   return axios
   .post(`${BASE_URL}/account/register`, body, options);
 }
+
+export const updatePassw = ( oldPass, newPass, reNewPass) => (dispatch) => { 
+  const options = {
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "6024",
+    },
+    };
+  
+    const body = {
+      oldPassword: oldPass,
+      password: newPass,
+      rePassword: reNewPass
+    };
+  
+    return axios
+    .post(`${BASE_URL}/account/updatePwd`, body, options).then(res => console.log("check res update :", res));
+  }
