@@ -236,6 +236,7 @@ function Main() {
         type={Type}
         date={dateSelect}
         listFood={listFood}
+        isCreate={true}
       />
       <TargetForm
         onclick={open}

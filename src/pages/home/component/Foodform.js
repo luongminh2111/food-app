@@ -19,7 +19,7 @@ import { modes } from "../../../contains/dataConst";
 import "../styles/FoodFormStyle.scss";
 
 function FoodForm(props) {
-  const { type, date, onclose, listFood, foodSelected } = props;
+  const { type, date, onclose, listFood, foodSelected , isCreate} = props;
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [index, setIndex] = useState(0);
@@ -116,13 +116,23 @@ function FoodForm(props) {
       setImage("");
       setMode("Đề xuất");
     } else {
-      menuItem = {
-        id: foodChosen?.id || foodSelected?.id,
-        type,
-        quantity,
-        foodId: foodChosen?.id || foodItem.id,
-        date,
-      };
+      if(isCreate){
+        menuItem = {
+          type,
+          quantity,
+          foodId: foodChosen?.id || foodItem.id,
+          date,
+        };
+      }else {
+        menuItem = {
+          id: foodChosen?.id || foodSelected?.id,
+          type,
+          quantity,
+          foodId: foodChosen?.id || foodItem.id,
+          date,
+        };
+      }
+      
       dispatch(saveFoodItem(menuItem, onclose));
     }
 

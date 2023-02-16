@@ -121,7 +121,7 @@ function Register(props) {
         <Box className="head">
           <ArrowCircleLeftOutlinedIcon
             style={{ color: "#21b6ae" }}
-            onClick={goHomePage}
+            onClick={handleGoToLogin}
           />
           <Box className="head_title">ĐĂNG KÝ</Box>
         </Box>
