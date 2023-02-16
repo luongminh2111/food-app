@@ -39,7 +39,7 @@ function RecipeInfo(props) {
             Nguyên liệu:
             <ul>
               {props?.ingredients?.map((item, index) => {
-                return <li className="Info__ingredients-item">{item.name}</li>;
+                return <li className="Info__ingredients-item" key={index}>{item.name}</li>;
               })}
             </ul>
           </div>
